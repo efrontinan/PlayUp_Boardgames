@@ -1,13 +1,16 @@
 import './App.css'
-import {Container, Nav, Navbar} from 'react-bootstrap'
+import { Container, Nav, Navbar } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import AppRoutes from './routes/AppRoutes'
+
+import GameList from './components/GameList/GameList'
 
 
 function App() {
 
   return (
     <div className="App">
-      
+
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">Frikis</Navbar.Brand>
@@ -20,10 +23,11 @@ function App() {
 
       <AppRoutes />
 
-      </div>
+      <GameList />
+    </div>
   )
 }
 
-import AppRoutes from './routes/AppRoutes'
+export default App
 
 
