@@ -1,7 +1,13 @@
+
+import GameList from "../../components/GameList/GameList"
+
 const GameGalleryPage = () => {
-    return(
+    return (
         <div className="GameGalleryPage">
             <p>soy la Gallery Page</p>
+
+            <GameList />
+
         </div>
     )
 }
