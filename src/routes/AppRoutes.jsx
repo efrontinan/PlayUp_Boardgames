@@ -1,15 +1,22 @@
 import { Routes, Route } from "react-router-dom"
+import GameGalleryPage from "./../pages/GameGalleryPage/GameGalleryPage"
+import HomePage from "./../pages/HomePage/HomePage"
+import CreateGamePage from "./../pages/CreateGamePage/CreateGamePage"
+import GameDetailsPage from "./../pages/GameDetailsPage/GameDetailsPage"
+import EditGamePage from "./../pages/EditGamePage/EditGamePage"
+import EditEventPage from "./../pages/EditEventPage/EditEventPage"
+
 
 const AppRoutes = () => {
     return (
         <div className="AppRoutes">
             <Routes>
-                <Route path="/" element={<h1>PRINCPAAAAL</h1>} />
-                <Route path="/juegos" element={<h1>Pagina de juegos</h1>} />
-                <Route path="/juegos/nuevo" element={<h1>Crear juego</h1>} />
-                <Route path="/juegos/editar/:id" element={<h1>Editar juego</h1>} />
-                <Route path="/juegos/detalles/:id" element={<h1>Detalles de juego y crear evento</h1>} />
-                <Route path="/eventos/editar/:id" element={<h1>Editar evento</h1>} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/juegos" element={<GameGalleryPage />} />
+                <Route path="/juegos/nuevo" element={<CreateGamePage/>} />
+                <Route path="/juegos/editar/:id" element={<EditGamePage />} />
+                <Route path="/juegos/detalles/:id" element={<GameDetailsPage />} />
+                <Route path="/eventos/editar/:id" element={<EditEventPage />} />
             </Routes>
         </div>
     )
