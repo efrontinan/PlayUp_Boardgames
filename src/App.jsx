@@ -7,6 +7,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">Frikis</Navbar.Brand>
@@ -17,8 +18,12 @@ function App() {
         </Container>
       </Navbar>
 
-    </div>
+      <AppRoutes />
+
+      </div>
   )
 }
 
-export default App
+import AppRoutes from './routes/AppRoutes'
+
+
