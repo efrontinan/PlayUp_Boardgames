@@ -2,7 +2,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { BreadcrumbItem, Col, Container, Row, Breadcrumb } from "react-bootstrap"
+import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup } from "react-bootstrap"
 
 const API_URL = "http://localhost:5005"
 
@@ -35,11 +35,11 @@ const GameDetailsPage = () => {
           <Container>
 
             <Row>
-              <Col md={{ span: 4 }}>
+              <Col md={{ span: 3 }}>
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
 
-              <Col md={{ span: 4 }}>
+              <Col md={{ span: 6 }}>
 
                 <h1>{game.title}</h1>
                 <hr />
@@ -88,32 +88,34 @@ const GameDetailsPage = () => {
                 </ul>
               </Col>
 
-              <Col md={{ span: 4 }}>
-
-                <h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5>
-                <p>Duración: {game.specs.duration} minutos</p>
-                <p>Edad mínima: {game.specs.minimumAge} años</p>
-                <p>{!game.oneTimePlay ?
-                  "Se puede jugar varias veces"
-                  :
-                  "Solo se puede jugar una vez"}</p>
-                <h5>Expansiones:</h5>
-                {
-                  !game.expansions ?
-                    "Este juego no tiene expansiones"
+              <Col md={{ span: 3 }}>
+                <ListGroup>
+                  <ListGroup.Item><h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5></ListGroup.Item>
+                  <ListGroup.Item><p>Duración: {game.specs.duration} minutos</p></ListGroup.Item>
+                  <ListGroup.Item><p>Edad mínima: {game.specs.minimumAge} años</p></ListGroup.Item>
+                  <ListGroup.Item><p>{!game.oneTimePlay ?
+                    "Se puede jugar varias veces"
                     :
-                    <ul>
-                      {
-                        game.expansions.map(elm => {
-                          return (
-                            <li>
-                              {elm}
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
-                }
+                    "Solo se puede jugar una vez"}</p>
+                  </ListGroup.Item>
+                  <ListGroup.Item><h5>Expansiones:</h5>
+                    {
+                      !game.expansions ?
+                        "Este juego no tiene expansiones"
+                        :
+                        <ul>
+                          {
+                            game.expansions.map(elm => {
+                              return (
+                                <li>
+                                  {elm}
+                                </li>
+                              )
+                            })
+                          }
+                        </ul>
+                    }</ListGroup.Item>
+                </ListGroup>
               </Col>
             </Row>
           </Container>
