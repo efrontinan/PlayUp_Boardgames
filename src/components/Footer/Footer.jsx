@@ -8,8 +8,8 @@ const Footer = () => {
     return (
 
         <div className="Footer">
-            <Nav className="justify-content-center" activeKey="/home">
-                <Container>
+            <Nav className="justify-content-center mx-auto" activeKey="/home">
+                <Container className="d-flex">
                     <Nav.Item>
                         <Nav.Link href="/home">Acerca de nosotros</Nav.Link>
                     </Nav.Item>

@@ -1,5 +1,10 @@
 .Footer {
-    background-color: bisque;
+    background-color: #111111;
     padding: 8px 8px;
     margin-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+    
+    color: #eeeeee;
 }
