@@ -5,10 +5,11 @@
 |`/juegos/detalles/:gameId`|Detalles del juego||
 |`/juegos/nuevo`|Crear juego||
 |`/juegos/editar/:gameId`|Editar juego||
-|`/juegos/detalles/:gameId`|Eliminar juego||
+|`/juegos`|Eliminar juego desde galería||
+|`/juegos/detalles/:gameId`|Eliminar juego desde detalles||
 |----------|----------|----------|
 |`/juegos/detalles/:id`|Crear evento||
-|`/eventos/editar/:id`|Editar evento||
+|`/eventos/editar/:eventId`|Editar evento||
 
 
 
