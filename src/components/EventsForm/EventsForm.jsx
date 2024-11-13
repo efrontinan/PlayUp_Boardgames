@@ -12,10 +12,9 @@ const EventsForm = ({ gameId }) => {
         contact: "",
         date: "",
         description: "",
-        contact: ""
     })
 
-    const [addressData, setAdress] = useState({
+    const [addressData, setAddress] = useState({
         country: "",
         city: "",
         street: "",
@@ -36,7 +35,7 @@ const EventsForm = ({ gameId }) => {
 
     const handleAddressChange = e => {
         const { name, value } = e.target
-        setAdress({ ...addressData, [name]: value })
+        setAddress({ ...addressData, [name]: value })
     }
 
     const handlePlayerChange = e => {
@@ -63,9 +62,8 @@ const EventsForm = ({ gameId }) => {
                 contact: "",
                 date: "",
                 description: "",
-                contact: ""
             })
-            setAdress({
+            setAddress({
                 country: "",
                 city: "",
                 street: "",
@@ -95,12 +93,12 @@ const EventsForm = ({ gameId }) => {
                     name={'author'} />
             </Form.Group>
 
-            <Form.Group controlId="emailField" className="mb-3">
+            <Form.Group controlId="contactField" className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                     type="email"
                     placeholder="Indícanos un email para apuntarse"
-                    value={eventData.email}
+                    value={eventData.contact}
                     onChange={handleEventChange}
                     name={'contact'} />
             </Form.Group>

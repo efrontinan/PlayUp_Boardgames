@@ -7,7 +7,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005"
 
-const GameForm = () => {
+const GameForm = ({ gameId }) => {
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -30,14 +30,39 @@ const GameForm = () => {
         max: 0
     })
 
-    const reqPayLoadSpecs = {
-        ...specs,
-        players: players
-    }
+    useEffect(() => {
+        fetchGameData()
+    }, [])
 
-    const reqPayLoad = {
-        ...gameData,
-        specs: reqPayLoadSpecs
+    const fetchGameData = () => {
+        axios
+            .get(`${API_URL}/games/${gameId}`)
+            .then(response => {
+
+                const { title, image, categories, description, howToPlay, expansions, oneTimePlay, content, specs } = response.data
+
+                setGameData({
+                    title: title,
+                    image: image,
+                    categories: categories,
+                    description: description,
+                    howToPlay: howToPlay,
+                    expansions: expansions,
+                    oneTimePlay: oneTimePlay,
+                    content: content
+                })
+
+                setSpecs({
+                    minimumAge: specs.minimumAge,
+                    duration: specs.duration
+                })
+
+                setPlayers({
+                    min: specs.players.min,
+                    max: specs.players.max
+                })
+
+            })
     }
 
     const handleGameChange = e => {
@@ -142,34 +167,21 @@ const GameForm = () => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
+
+        const reqPayLoadSpecs = {
+            ...specs,
+            players: players
+        }
+
+        const newGame = {
+            ...gameData,
+            specs: reqPayLoadSpecs
+        }
+
         axios
-            .post(`${API_URL}/games`, reqPayLoad)
+            .put(`${API_URL}/games/${gameId}`, newGame)
             .then(() => {
                 alert("Posted")
-                setGameData(
-                    {
-                        title: "",
-                        image: "",
-                        categories: [""],
-                        description: "",
-                        howToPlay: [""],
-                        expansions: [""],
-                        oneTimePlay: false,
-                        content: [""]
-                    }
-                )
-                setSpecs(
-                    {
-                        minimumAge: 0,
-                        duration: 0
-                    }
-                )
-                setPlayers(
-                    {
-                        min: 0,
-                        max: 0
-                    }
-                )
 
             })
             .catch(err => console.log(err))
@@ -327,6 +339,7 @@ const GameForm = () => {
                                                 </Col>
                                             </Row>
                                         </>
+
                                     )
                                 })
                             }
@@ -351,6 +364,7 @@ const GameForm = () => {
                             {
                                 gameData.content.map((elm, idx) => {
                                     return (
+
                                         <>
                                             <Row key={idx} >
                                                 <Col md={{ span: 9 }}>
@@ -366,6 +380,8 @@ const GameForm = () => {
                                                 </Col>
                                             </Row>
                                         </>
+
+
                                     )
                                 })
                             }
@@ -375,7 +391,7 @@ const GameForm = () => {
                         </Form.Group>
 
                         <Button variant="dark" type="submit">
-                            Añadir juego a la colección
+                            Guardar cambios
                         </Button>
                     </Form>
                 </Col>
