@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 
 import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup } from "react-bootstrap"
 
+import EventsList from "../../components/EventsList/EventsList"
+import EventsForm from "../../components/EventsForm/EventsForm"
+
 const API_URL = "http://localhost:5005"
 
 const GameDetailsPage = () => {
@@ -34,7 +37,7 @@ const GameDetailsPage = () => {
         <div className="GameDetailsPage">
           <Container>
 
-            <Row>
+            <Row >
               <Col md={{ span: 3 }}>
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
@@ -46,9 +49,9 @@ const GameDetailsPage = () => {
 
                 <Breadcrumb>
                   {
-                    game.categories.map(elm => {
+                    game.categories.map((elm) => {
                       return (
-                        <BreadcrumbItem active="false">
+                        <BreadcrumbItem active="false" key={elm}>
                           {elm}
                         </BreadcrumbItem>
                       )
@@ -65,7 +68,7 @@ const GameDetailsPage = () => {
                   {
                     game.howToPlay.map(elm => {
                       return (
-                        <li>
+                        <li key={elm}>
                           {elm}
                         </li>
                       )
@@ -79,7 +82,7 @@ const GameDetailsPage = () => {
                   {
                     game.content.map(elm => {
                       return (
-                        <li>
+                        <li key={elm}>
                           {elm}
                         </li>
                       )
@@ -107,7 +110,7 @@ const GameDetailsPage = () => {
                           {
                             game.expansions.map(elm => {
                               return (
-                                <li>
+                                <li key={elm}>
                                   {elm}
                                 </li>
                               )
@@ -118,6 +121,14 @@ const GameDetailsPage = () => {
                 </ListGroup>
               </Col>
             </Row>
+
+            <EventsList gameId={gameId} />
+
+        <h4>¿Quieres crear tu propia quedada?</h4>
+
+
+            <EventsForm gameId={gameId} />
+
           </Container>
 
         </div>
