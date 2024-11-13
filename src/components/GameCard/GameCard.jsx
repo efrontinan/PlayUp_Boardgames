@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-const GameCard = ({ image, title, categories, specs, id }) => {
+const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
     const { players } = specs
     const { min, max } = players
@@ -20,6 +20,7 @@ const GameCard = ({ image, title, categories, specs, id }) => {
                         {min}-{max} jugadores
                     </Card.Text>
                     <Button as={Link} to={`/juegos/detalles/${id}`} variant="dark">Ver detalles</Button>
+                    <Button onClick={() => removeGame(id)}>Eliminar juego</Button>
                 </Card.Body>
             </Card>
 

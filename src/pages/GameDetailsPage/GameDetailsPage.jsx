@@ -2,10 +2,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Form } from "react-bootstrap"
-
-import EventsList from "../../components/EventsList/EventsList"
-import EventsForm from "../../components/EventsForm/EventsForm"
+import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup } from "react-bootstrap"
 
 import EventsList from "../../components/EventsList/EventsList"
 import EventsForm from "../../components/EventsForm/EventsForm"
@@ -96,9 +93,15 @@ const GameDetailsPage = () => {
 
               <Col md={{ span: 3 }}>
                 <ListGroup>
-                  <ListGroup.Item><h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5></ListGroup.Item>
-                  <ListGroup.Item><p>Duración: {game.specs.duration} minutos</p></ListGroup.Item>
-                  <ListGroup.Item><p>Edad mínima: {game.specs.minimumAge} años</p></ListGroup.Item>
+                  <ListGroup.Item><h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item><p>Duración: {game.specs.duration} minutos</p>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item><p>Edad mínima: {game.specs.minimumAge} años</p>
+                  </ListGroup.Item>
+
                   <ListGroup.Item><p>{!game.oneTimePlay ?
                     "Se puede jugar varias veces"
                     :
@@ -106,7 +109,7 @@ const GameDetailsPage = () => {
                   </ListGroup.Item>
                   <ListGroup.Item><h5>Expansiones:</h5>
                     {
-                      !game.expansions ?
+                      !game.expansions || game.expansions[0] === "" ?
                         "Este juego no tiene expansiones"
                         :
                         <ul>
@@ -127,7 +130,7 @@ const GameDetailsPage = () => {
 
             <EventsList gameId={gameId} />
 
-        <h4>¿Quieres crear tu propia quedada?</h4>
+            <h4>¿Quieres crear tu propia quedada?</h4>
 
 
             <EventsForm gameId={gameId} />

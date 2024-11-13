@@ -11,6 +11,8 @@ const GameList = () => {
 
     const [games, setGames] = useState([])
 
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         fetchGames()
     }, [])
@@ -18,24 +20,34 @@ const GameList = () => {
     const fetchGames = () => {
         axios
             .get(`${API_URL}/games`)
-            .then(response => setGames(response.data))
+            .then(response => {
+                setGames(response.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }
 
-    return (
+    const removeGame = gameId => {
 
-        <div className="GameList">
-            <Row>
-                {
-                    games.map(elm => {
-                        return (
-                            <Col md={{ span: 3 }} key={elm.id} >
-                                <GameCard {...elm} />
-                            </Col>)
-                    })
-                }
-            </Row>
-        </div>
+        axios
+            .delete(`${API_URL}/games/${gameId}`)
+            .then(fetchGames())
+            .catch(err => console.log(err))
+    }
+    return (
+        isLoading ? <h1>CARGANDO</h1> :
+            <div className="GameList">
+                <Row>
+                    {
+                        games.map(elm => {
+                            return (
+                                <Col md={{ span: 3 }} key={elm.id} >
+                                    <GameCard {...elm} removeGame={removeGame} />
+                                </Col>)
+                        })
+                    }
+                </Row>
+            </div>
 
     )
 }
