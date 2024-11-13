@@ -1,14 +1,12 @@
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Form } from "react-bootstrap"
+import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Form, Button } from "react-bootstrap"
 
 import EventsList from "../../components/EventsList/EventsList"
 import EventsForm from "../../components/EventsForm/EventsForm"
 
-import EventsList from "../../components/EventsList/EventsList"
-import EventsForm from "../../components/EventsForm/EventsForm"
 
 const API_URL = "http://localhost:5005"
 
@@ -42,6 +40,7 @@ const GameDetailsPage = () => {
 
             <Row >
               <Col md={{ span: 3 }}>
+              <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
 
