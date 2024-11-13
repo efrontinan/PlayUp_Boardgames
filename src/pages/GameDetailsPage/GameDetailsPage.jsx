@@ -7,6 +7,9 @@ import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Form } from
 import EventsList from "../../components/EventsList/EventsList"
 import EventsForm from "../../components/EventsForm/EventsForm"
 
+import EventsList from "../../components/EventsList/EventsList"
+import EventsForm from "../../components/EventsForm/EventsForm"
+
 const API_URL = "http://localhost:5005"
 
 const GameDetailsPage = () => {
