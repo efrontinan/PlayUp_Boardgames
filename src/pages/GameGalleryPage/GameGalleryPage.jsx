@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom"
 
 import { Container } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import GameList from "../../components/GameList/GameList"
 
 const GameGalleryPage = () => {
@@ -8,8 +10,9 @@ const GameGalleryPage = () => {
             <Container>
                 <p>soy la Gallery Page</p>
                 <GameList />
-            </Container>
 
+            </Container>
+            <Button as={Link} to={"/juegos/nuevo"}>Crear</Button>
         </div>
     )
 }

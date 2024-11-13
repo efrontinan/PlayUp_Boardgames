@@ -1,7 +1,11 @@
+import { Button, Row } from "react-bootstrap"
+
 const NotFoundPage = () => {
     return (
         <div className="NotFoundPage">
-            <p>404 como una casa</p>
+            <Row>
+                <Button md={{ span: 12 }}>404 BIEN BUENO</Button>
+            </Row>
         </div>
     )
 }
