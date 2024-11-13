@@ -17,7 +17,7 @@ const AppRoutes = () => {
                 <Route path="/juegos/nuevo" element={<CreateGamePage />} />
                 <Route path="/juegos/editar/:gameId" element={<EditGamePage />} />
                 <Route path="/juegos/detalles/:gameId" element={<GameDetailsPage />} />
-                <Route path="/eventos/editar/:id" element={<EditEventPage />} />
+                <Route path="/eventos/editar/:eventId" element={<EditEventPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>
