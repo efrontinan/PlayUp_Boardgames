@@ -48,7 +48,6 @@ const GameList = () => {
                     }
                 </Row>
             </div>
-
     )
 }
 

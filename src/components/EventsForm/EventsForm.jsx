@@ -43,46 +43,47 @@ const EventsForm = ({ gameId }) => {
         setPlayer({ ...playerData, [name]: value })
     }
 
-    const handleFormSubmit =  e => {
+    const handleFormSubmit = e => {
 
         e.preventDefault()
 
         const newEvent = {
-            gameId:gameId,
+            gameId: gameId,
             ...eventData,
-            players: {...playerData},
-            address: {...addressData}
+            players: { ...playerData },
+            address: { ...addressData }
         }
-        
+
         axios
-        .post(`${API_URL}/events`, newEvent)
-        .then(() => {
-            setEventData({
-                author: "",
-                contact: "",
-                date: "",
-                description: "",
+            .post(`${API_URL}/events`, newEvent)
+            .then(() => {
+                setEventData({
+                    author: "",
+                    contact: "",
+                    date: "",
+                    description: "",
+                })
+                setAddress({
+                    country: "",
+                    city: "",
+                    street: "",
+                    name: "",
+                    zipcode: 0
+                })
+                setPlayer({
+                    min: 0,
+                    max: 0
+                })
+                alert('Formulario enviado')
             })
-            setAddress({
-                country: "",
-                city: "",
-                street: "",
-                name: "",
-                zipcode: 0
-            })
-            setPlayer({
-                min: 0,
-                max: 0
-            })
-            alert('Formulario enviado')
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
 
     }
 
 
     return (
         <Form onSubmit={handleFormSubmit}>
+
             <Form.Group controlId="authorField" className="mb-3">
                 <Form.Label>¿Cómo te llamas?</Form.Label>
                 <Form.Control

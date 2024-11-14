@@ -10,6 +10,8 @@ const EditEventForm = () => {
 
     const { eventId } = useParams()
 
+    const [isLoading, setIsLoading] = useState(true)
+
     const [eventData, setEventData] = useState({
         author: "",
         contact: "",
@@ -62,7 +64,7 @@ const EditEventForm = () => {
                     min: players.min,
                     max: players.max
                 })
-
+                setIsLoading(false)
             })
     }
 
@@ -84,141 +86,144 @@ const EditEventForm = () => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
-        const newEvent = {
+        const editEvent = {
             ...eventData,
             players: { ...playerData },
             address: { ...addressData }
         }
         axios
-            .patch(`${API_URL}/events/${eventId}`, newEvent)
+            .patch(`${API_URL}/events/${eventId}`, editEvent)
             .then(() => alert("editao"))
             .catch(err => console.log(err))
     }
 
     return (
-        <div className="EditEventForm">
-            <h1>EDITO EL EVENTO DE</h1>
-            <Form onSubmit={handleFormSubmit}>
-                <Form.Group controlId="authorField" className="mb-3">
-                    <Form.Label>¿Cómo te llamas?</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Introduce tu nombre"
-                        value={eventData.author}
-                        onChange={handleEventChange}
-                        name={'author'} />
-                </Form.Group>
+        isLoading ? <h1>CARGANDO</h1> :
+            <div className="EditEventForm">
 
-                <Form.Group controlId="emailField" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Indícanos un email para apuntarse"
-                        value={eventData.contact}
-                        onChange={handleEventChange}
-                        name={'contact'} />
-                </Form.Group>
+                <Form onSubmit={handleFormSubmit}>
 
-                <Form.Group controlId="dateField" className="mb-3">
-                    <Form.Label>¿Cuándo?</Form.Label>
-                    <Form.Control
-                        type="datetime-local"
-                        placeholder="Día/Mes/Año"
-                        value={eventData.date}
-                        onChange={handleEventChange}
-                        name={'date'} />
-                </Form.Group>
+                    <Form.Group controlId="authorField" className="mb-3">
+                        <Form.Label>¿Cómo te llamas?</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Introduce tu nombre"
+                            value={eventData.author}
+                            onChange={handleEventChange}
+                            name={'author'} />
+                    </Form.Group>
 
-                <Form.Group controlId="descriptionField" className="mb-3">
-                    <Form.Label>Descripción del evento</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Describe tu evento"
-                        as="textarea" rows={3}
-                        value={eventData.description}
-                        onChange={handleEventChange}
-                        name={'description'} />
-                </Form.Group>
+                    <Form.Group controlId="emailField" className="mb-3">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="Indícanos un email para apuntarse"
+                            value={eventData.contact}
+                            onChange={handleEventChange}
+                            name={'contact'} />
+                    </Form.Group>
 
-                <h5>Introduce la dirección</h5>
+                    <Form.Group controlId="dateField" className="mb-3">
+                        <Form.Label>¿Cuándo?</Form.Label>
+                        <Form.Control
+                            type="datetime-local"
+                            placeholder="Día/Mes/Año"
+                            value={eventData.date}
+                            onChange={handleEventChange}
+                            name={'date'} />
+                    </Form.Group>
 
-                <Form.Group controlId="directionNametField" className="mb-3">
-                    <Form.Label>¿Tiene un nombre el local?</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Por ejemplo: Bar La Manuela"
-                        value={addressData.name}
-                        onChange={handleAddressChange}
-                        name={'name'} />
-                </Form.Group>
+                    <Form.Group controlId="descriptionField" className="mb-3">
+                        <Form.Label>Descripción del evento</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Describe tu evento"
+                            as="textarea" rows={3}
+                            value={eventData.description}
+                            onChange={handleEventChange}
+                            name={'description'} />
+                    </Form.Group>
 
-                <Form.Group controlId="streetField" className="mb-3">
-                    <Form.Label>Calle</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Calle o avenida"
-                        value={addressData.street}
-                        onChange={handleAddressChange}
-                        name={'street'} />
-                </Form.Group>
+                    <h5>Introduce la dirección</h5>
 
-                <Form.Group controlId="cityField" className="mb-3">
-                    <Form.Label>Ciudad</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Ciudad"
-                        value={addressData.city}
-                        onChange={handleAddressChange}
-                        name={'city'} />
-                </Form.Group>
+                    <Form.Group controlId="directionNametField" className="mb-3">
+                        <Form.Label>¿Tiene un nombre el local?</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Por ejemplo: Bar La Manuela"
+                            value={addressData.name}
+                            onChange={handleAddressChange}
+                            name={'name'} />
+                    </Form.Group>
 
-                <Form.Group controlId="countryField" className="mb-3">
-                    <Form.Label>País</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="País"
-                        value={addressData.country}
-                        onChange={handleAddressChange}
-                        name={'country'} />
-                </Form.Group>
+                    <Form.Group controlId="streetField" className="mb-3">
+                        <Form.Label>Calle</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Calle o avenida"
+                            value={addressData.street}
+                            onChange={handleAddressChange}
+                            name={'street'} />
+                    </Form.Group>
 
-                <Form.Group controlId="ZIPField" className="mb-3">
-                    <Form.Label>Código postal</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="Código Postal"
-                        value={addressData.zipcode}
-                        onChange={handleAddressChange}
-                        name={'zipcode'} />
-                </Form.Group>
+                    <Form.Group controlId="cityField" className="mb-3">
+                        <Form.Label>Ciudad</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ciudad"
+                            value={addressData.city}
+                            onChange={handleAddressChange}
+                            name={'city'} />
+                    </Form.Group>
 
-                <h5>¿Cuántas personas seréis?</h5>
+                    <Form.Group controlId="countryField" className="mb-3">
+                        <Form.Label>País</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="País"
+                            value={addressData.country}
+                            onChange={handleAddressChange}
+                            name={'country'} />
+                    </Form.Group>
 
-                <Form.Group controlId="minPlayersField" className="mb-3">
-                    <Form.Label>Número mínimo de asistentes</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="0"
-                        value={playerData.min}
-                        onChange={handlePlayerChange}
-                        name={'min'} />
-                </Form.Group>
+                    <Form.Group controlId="ZIPField" className="mb-3">
+                        <Form.Label>Código postal</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="Código Postal"
+                            value={addressData.zipcode}
+                            onChange={handleAddressChange}
+                            name={'zipcode'} />
+                    </Form.Group>
 
-                <Form.Group controlId="maxPlayersFields" className="mb-3">
-                    <Form.Label>Número máximo de asistentes</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="0"
-                        value={playerData.max}
-                        onChange={handlePlayerChange}
-                        name={'max'} />
-                </Form.Group>
+                    <h5>¿Cuántas personas seréis?</h5>
 
-                <Button variant="dark" type="submit">
-                    Editar evento
-                </Button>
-            </Form>
-        </div>
+                    <Form.Group controlId="minPlayersField" className="mb-3">
+                        <Form.Label>Número mínimo de asistentes</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="0"
+                            value={playerData.min}
+                            onChange={handlePlayerChange}
+                            name={'min'} />
+                    </Form.Group>
+
+                    <Form.Group controlId="maxPlayersFields" className="mb-3">
+                        <Form.Label>Número máximo de asistentes</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="0"
+                            value={playerData.max}
+                            onChange={handlePlayerChange}
+                            name={'max'} />
+                    </Form.Group>
+
+                    <Button variant="dark" type="submit">
+                        Editar evento
+                    </Button>
+
+                </Form>
+            </div>
     )
 }
 

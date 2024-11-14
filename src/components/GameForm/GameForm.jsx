@@ -1,8 +1,10 @@
+import "../GameForm/GameForm.css"
+
 import { useEffect, useState } from "react"
 
-import Form from 'react-bootstrap/Form';
-import { Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
+import Form from 'react-bootstrap/Form'
+import { Button, Row, Col } from "react-bootstrap"
+import axios from "axios"
 
 
 const API_URL = "http://localhost:5005"
@@ -29,16 +31,6 @@ const GameForm = () => {
         min: 0,
         max: 0
     })
-
-    const reqPayLoadSpecs = {
-        ...specs,
-        players: players
-    }
-
-    const reqPayLoad = {
-        ...gameData,
-        specs: reqPayLoadSpecs
-    }
 
     const handleGameChange = e => {
         const { name, value, checked, type } = e.target
@@ -142,6 +134,16 @@ const GameForm = () => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
+        const reqPayLoadSpecs = {
+            ...specs,
+            players: players
+        }
+
+        const reqPayLoad = {
+            ...gameData,
+            specs: reqPayLoadSpecs
+        }
+
         axios
             .post(`${API_URL}/games`, reqPayLoad)
             .then(() => {
@@ -175,13 +177,10 @@ const GameForm = () => {
             .catch(err => console.log(err))
     }
 
-
-
     return (
         <div className="GameForm">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-
                     <Form onSubmit={handleFormSubmit}>
 
                         <Form.Group className="mb-3" controlId="formTitle">
@@ -202,36 +201,42 @@ const GameForm = () => {
                                 name={"image"} />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formCategories">
-                            <Form.Label>Categorías</Form.Label>
-                            {
-                                gameData.categories.map((elm, idx) => {
-                                    return (
-                                        <>
-                                            <Row key={idx}>
-                                                <Col md={{ span: 9 }}>
-                                                    <Form.Control type="text"
-                                                        className="mb-2"
-                                                        placeholder="Categoría"
-                                                        onChange={event => handleCategoriesChange(event, idx)}
-                                                        value={gameData.categories[idx]}
-                                                     />
-                                                </Col>
-                                                <Col>
-                                                    <Button variant="danger" onClick={() => deleteCategoryItem(idx)}> Eliminar</Button>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })
-                            }
+                        <Form.Group className="mb-3">
+                            <Row>
+                                <Form.Label>Categorías <hr />
+                                    {
+                                        gameData.categories.map((elm, idx) => {
+                                            return (
+                                                <Row key={`category-${idx}`}>
+                                                    <Col md={{ span: 9 }}>
+                                                        <Form.Control type="text"
+                                                            className="mb-2"
+                                                            placeholder="Categoría"
+                                                            onChange={e => handleCategoriesChange(e, idx)}
+                                                            value={elm}
+                                                            id={`formCategories-${idx}`}
+                                                        />
+                                                    </Col>
+
+                                                    <Col md={{ span: 3 }}>
+                                                        <Button className="delete-btn" variant="danger"
+                                                            onClick={() => deleteCategoryItem(idx)}
+                                                            disabled={gameData.categories.length <= 1}>
+                                                            Eliminar
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            )
+                                        })
+                                    }
+                                </Form.Label>
+                            </Row>
                             <Button variant="dark" onClick={addCategory}>
                                 Añadir categoría
                             </Button>
                         </Form.Group>
 
                         <Row>
-
                             <Col>
                                 <Form.Group className="mb-5" controlId="formMinPlayers">
                                     <Form.Label>Mínimo de jugadores</Form.Label>
@@ -279,62 +284,74 @@ const GameForm = () => {
                                 name={"description"} />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formHowToPlay">
-                            <Form.Label>Instrucciones</Form.Label>
-                            {
-                                gameData.howToPlay.map((elm, idx) => {
-                                    return (
-                                        <>
-                                            <Row key={idx}>
-                                                <Col md={{ span: 9 }}>
-                                                    <Form.Control type="text"
-                                                        className="mb-2"
-                                                        placeholder="Añade una instrucción"
-                                                        onChange={event => handleHowToPlayChange(event, idx)}
-                                                        value={gameData.howToPlay[idx]}
-                                                         />
-                                                </Col>
-                                                <Col>
-                                                    <Button variant="danger" onClick={() => deleteHowToPlayItem(idx)}> Eliminar</Button>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })
-                            }
-                            <Button variant="dark" onClick={addHowToPlay}>
-                                Añadir regla
-                            </Button>
+                        <Form.Group className="mb-3">
+                            <Row>
+                                <Form.Label>Instrucciones <hr />
+                                    {
+                                        gameData.howToPlay.map((elm, idx) => {
+                                            return (
+                                                <Row key={idx}>
+                                                    <Col md={{ span: 9 }}>
+                                                        <Form.Control type="text"
+                                                            className="mb-2"
+                                                            placeholder="Añade una instrucción"
+                                                            onChange={e => handleHowToPlayChange(e, idx)}
+                                                            value={elm}
+                                                            id={`formInstructions-${idx}`}
+                                                        />
+                                                    </Col>
 
+                                                    <Col md={{ span: 3 }}>
+                                                        <Button className="delete-btn" variant="danger"
+                                                            onClick={() => deleteHowToPlayItem(idx)}
+                                                            disabled={gameData.howToPlay.length <= 1}>
+                                                            Eliminar
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            )
+                                        })
+                                    }
+                                    <Button variant="dark" onClick={addHowToPlay}>
+                                        Añadir regla
+                                    </Button>
+                                </Form.Label>
+                            </Row>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formExpansions">
-                            <Form.Label>Expansiones</Form.Label>
-                            {
-                                gameData.expansions.map((elm, idx) => {
-                                    return (
-                                        <>
-                                            <Row key={idx}>
-                                                <Col md={{ span: 9 }}>
-                                                    <Form.Control type="text"
-                                                        className="mb-2"
-                                                        placeholder="Añade las expansiones del juego"
-                                                        onChange={event => handleExpansionsChange(event, idx)}
-                                                        value={gameData.expansions[idx]} />
-                                                </Col>
-                                                <Col>
-                                                    <Button variant="danger" onClick={() => deleteExpansionsItem(idx)}> Eliminar</Button>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })
-                            }
+                        <Form.Group className="mb-3">
+                            <Row>
+                                <Form.Label>Expansiones <hr />
+                                    {
+                                        gameData.expansions.map((elm, idx) => {
+                                            return (
 
+                                                <Row key={idx}>
+                                                    <Col md={{ span: 9 }}>
+                                                        <Form.Control type="text"
+                                                            className="mb-2"
+                                                            placeholder="Añade las expansiones del juego"
+                                                            onChange={e => handleExpansionsChange(e, idx)}
+                                                            value={elm}
+                                                            id={`formExpansions-${idx}`} />
+                                                    </Col>
+                                                    <Col md={{ span: 3 }}>
+                                                        <Button className="delete-btn" variant="danger"
+                                                            onClick={() => deleteExpansionsItem(idx)}
+                                                            disabled={gameData.expansions.length <= 1}>
+                                                            Eliminar
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+
+                                            )
+                                        })
+                                    }
+                                </Form.Label>
+                            </Row>
                             <Button variant="dark" onClick={addExpansions}>
                                 Añadir expansión
                             </Button>
-
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formCheckOneTime">
@@ -346,41 +363,52 @@ const GameForm = () => {
                                 name={"oneTimePlay"} />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formContent">
-                            <Form.Label>Contenido</Form.Label>
-                            {
-                                gameData.content.map((elm, idx) => {
-                                    return (
-                                        <>
-                                            <Row key={idx} >
-                                                <Col md={{ span: 9 }}>
-                                                    <Form.Control type="text"
-                                                        className="mb-2"
-                                                        placeholder="Añade el contenido incluido en el juego"
-                                                        onChange={event => handleContentChange(event, idx)}
-                                                        value={gameData.content[idx]}
+                        <Form.Group className="mb-3">
+                            <Row>
+                                <Form.Label>Contenido <hr />
+                                    {
+                                        gameData.content.map((elm, idx) => {
+                                            return (
+
+                                                <Row key={idx} >
+                                                    <Col md={{ span: 9 }}>
+                                                        <Form.Control type="text"
+                                                            className="mb-2"
+                                                            placeholder="Añade el contenido incluido en el juego"
+                                                            onChange={e => handleContentChange(e, idx)}
+                                                            value={elm}
+                                                            id={`formContent-${idx}`}
                                                         />
-                                                </Col>
-                                                <Col>
-                                                    <Button variant="danger" onClick={() => deleteContentItem(idx)}> Eliminar</Button>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })
-                            }
+                                                    </Col>
 
-                            <Button variant="dark" onClick={addContent}>Añadir contenido</Button>
+                                                    <Col md={{ span: 3 }}>
+                                                        <Button className="delete-btn" variant="danger"
+                                                            onClick={() => deleteContentItem(idx)}
+                                                            disabled={gameData.content.length <= 1} >
+                                                            Eliminar
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
 
+                                            )
+                                        })
+                                    }
+
+
+                                </Form.Label>
+                            </Row>
+                            <Button variant="dark"
+                                onClick={addContent}>Añadir contenido
+                            </Button>
                         </Form.Group>
 
                         <Button variant="dark" type="submit">
                             Añadir juego a la colección
                         </Button>
+
                     </Form>
                 </Col>
             </Row>
-
         </div>
     )
 }
