@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import Form from 'react-bootstrap/Form'
 import { Button, Row, Col } from "react-bootstrap"
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import Loader from "../Loader/Loader"
 
 
 const API_URL = "http://localhost:5005"
@@ -11,6 +12,8 @@ const API_URL = "http://localhost:5005"
 const GameForm = () => {
 
     const [isLoading, setIsLoading] = useState(true)
+
+    const navigate = useNavigate()
 
     const { gameId } = useParams()
 
@@ -196,17 +199,15 @@ const GameForm = () => {
 
         axios
             .put(`${API_URL}/games/${gameId}`, newGame)
-            .then(() => {
-                alert("NAVIGATE")
-
+            .then(response => {
+                navigate(`/juegos/detalles/${response.data.id}`)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        isLoading ? <h1>CARGANDO</h1> :
+        isLoading ? <Loader /> :
             <div className="GameForm">
-
 
                 <Form onSubmit={handleFormSubmit}>
 

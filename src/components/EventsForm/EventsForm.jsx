@@ -2,10 +2,13 @@ import axios from "axios"
 import { useState } from "react"
 
 import { Form, Button } from "react-bootstrap"
+import { useNavigate, useParams } from "react-router-dom"
 
 const API_URL = "http://localhost:5005"
 
-const EventsForm = ({ gameId }) => {
+const EventsForm = () => {
+
+    const { gameId } = useParams()
 
     const [eventData, setEventData] = useState({
         author: "",
@@ -56,25 +59,10 @@ const EventsForm = ({ gameId }) => {
 
         axios
             .post(`${API_URL}/events`, newEvent)
-            .then(() => {
-                setEventData({
-                    author: "",
-                    contact: "",
-                    date: "",
-                    description: "",
-                })
-                setAddress({
-                    country: "",
-                    city: "",
-                    street: "",
-                    name: "",
-                    zipcode: 0
-                })
-                setPlayer({
-                    min: 0,
-                    max: 0
-                })
+            .then(response => {
+                // toast
                 alert('Formulario enviado')
+                console.log(response.data)
             })
             .catch(err => console.log(err))
 

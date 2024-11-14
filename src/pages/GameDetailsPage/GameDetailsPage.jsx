@@ -6,6 +6,7 @@ import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Button } fr
 
 import EventsList from "../../components/EventsList/EventsList"
 import EventsForm from "../../components/EventsForm/EventsForm"
+import Loader from "../../components/Loader/Loader"
 
 
 const API_URL = "http://localhost:5005"
@@ -33,7 +34,7 @@ const GameDetailsPage = () => {
 
   return (
 
-    isLoading ? <h1>CARAGNDO</h1> :
+    isLoading ? <Loader /> :
       (
         <div className="GameDetailsPage">
           <Container>
@@ -130,12 +131,12 @@ const GameDetailsPage = () => {
               </Col>
             </Row>
 
-            <EventsList gameId={gameId} />
+            <EventsList />
 
             <h4>¿Quieres crear tu propia quedada?</h4>
 
 
-            <EventsForm gameId={gameId} />
+            <EventsForm />
 
           </Container>
 

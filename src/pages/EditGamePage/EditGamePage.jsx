@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
+import { Row, Col } from "react-bootstrap"
+
 import EditGameForm from "../../components/EditGameForm/EditGameForm"
 
 const API_URL = "http://localhost:5005"

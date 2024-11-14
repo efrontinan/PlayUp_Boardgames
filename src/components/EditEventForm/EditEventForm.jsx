@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { Form, Button } from "react-bootstrap"
 import { formatInputDate } from "../../utils/date-utils"
@@ -11,6 +11,8 @@ const API_URL = "http://localhost:5005"
 const EditEventForm = () => {
 
     const { eventId } = useParams()
+
+    const navigate = useNavigate()
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -44,7 +46,6 @@ const EditEventForm = () => {
             .then(response => {
                 const { author, contact, date, description,
                     players, address } = response.data
-                console.log(date)
                 setEventData({
                     author: author,
                     contact: contact,
@@ -91,7 +92,9 @@ const EditEventForm = () => {
         }
         axios
             .patch(`${API_URL}/events/${eventId}`, editEvent)
-            .then(() => alert("editao"))
+            .then(response => {
+                alert("editao")
+            })
             .catch(err => console.log(err))
     }
 
