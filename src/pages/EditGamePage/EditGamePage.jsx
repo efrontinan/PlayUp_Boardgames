@@ -8,7 +8,7 @@ const API_URL = "http://localhost:5005"
 
 const EditGamePage = () => {
 
-    const {gameId} = useParams()
+    const { gameId } = useParams()
 
     const [game, setGame] = useState({})
     const [isLoading, setIsLoading] = useState(true)
@@ -27,10 +27,14 @@ const EditGamePage = () => {
             .catch(err => console.log(err))
     }
 
-    return(isLoading ? <h1>CARAGNDO</h1> :
+    return (isLoading ? <h1>CARAGNDO</h1> :
         <div className="EditGamePage">
             <h1>Editar juego: {game.title}</h1>
-            <EditGameForm gameId={gameId} />
+            <Row>
+                <Col md={{ span: 6, offset: 3 }}>
+                    <EditGameForm />
+                </Col>
+            </Row >
         </div>
     )
 }

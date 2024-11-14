@@ -5,11 +5,14 @@ import { useEffect, useState } from "react"
 import Form from 'react-bootstrap/Form'
 import { Button, Row, Col } from "react-bootstrap"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 
 const API_URL = "http://localhost:5005"
 
 const GameForm = () => {
+
+    const navigate = useNavigate()
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -25,7 +28,7 @@ const GameForm = () => {
     const [specs, setSpecs] = useState({
         minimumAge: 0,
         duration: 0
-    },)
+    })
 
     const [players, setPlayers] = useState({
         min: 0,
@@ -146,33 +149,8 @@ const GameForm = () => {
 
         axios
             .post(`${API_URL}/games`, reqPayLoad)
-            .then(() => {
-                alert("Posted")
-                setGameData(
-                    {
-                        title: "",
-                        image: "",
-                        categories: [""],
-                        description: "",
-                        howToPlay: [""],
-                        expansions: [""],
-                        oneTimePlay: false,
-                        content: [""]
-                    }
-                )
-                setSpecs(
-                    {
-                        minimumAge: 0,
-                        duration: 0
-                    }
-                )
-                setPlayers(
-                    {
-                        min: 0,
-                        max: 0
-                    }
-                )
-
+            .then(response => {
+                navigate(`/juegos/detalles/${response.data.id}`)
             })
             .catch(err => console.log(err))
     }
@@ -240,9 +218,12 @@ const GameForm = () => {
                             <Col>
                                 <Form.Group className="mb-5" controlId="formMinPlayers">
                                     <Form.Label>Mínimo de jugadores</Form.Label>
-                                    <Form.Control type="number"
-                                        value={players.min} onChange={handlePlayersChange}
-                                        name={"min"} />
+                                    <Form.Control
+                                        type="number"
+                                        value={players.min}
+                                        onChange={handlePlayersChange}
+                                        name={"min"}
+                                    />
                                 </Form.Group>
                             </Col>
 

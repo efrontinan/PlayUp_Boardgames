@@ -40,7 +40,7 @@ const GameDetailsPage = () => {
 
             <Row >
               <Col md={{ span: 3 }}>
-              <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
+                <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
 
