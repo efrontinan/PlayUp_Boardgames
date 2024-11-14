@@ -5,6 +5,8 @@ import { Col, Container, Row } from "react-bootstrap"
 
 import GameCard from "../GameCard/GameCard"
 
+import './GameList.css'
+
 const API_URL = "http://localhost:5005"
 
 const GameList = () => {
@@ -37,11 +39,11 @@ const GameList = () => {
     return (
         isLoading ? <h1>CARGANDO</h1> :
             <div className="GameList">
-                <Row>
+                <Row className="p-0">
                     {
                         games.map(elm => {
                             return (
-                                <Col md={{ span: 3 }} key={elm.id} >
+                                <Col md={{ span: 3 }} key={elm.id} className="my-2 mx-0" >
                                     <GameCard {...elm} removeGame={removeGame} />
                                 </Col>)
                         })

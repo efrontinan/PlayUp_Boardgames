@@ -1,17 +1,23 @@
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+
+import './Navigation.css'
 
 const Navigation = () => {
 
     return (
-        <div className="Navigation mb-5">
-            <Navbar bg="dark" data-bs-theme="dark">
-                <Container>
-                    <Navbar.Brand to="/" as={Link} className='mr-5'> Frikis</Navbar.Brand>
-                    <Nav className="me-auto">
-                        <Nav.Link to="/juegos" as={Link}>Juegos de mesa</Nav.Link>
-                        <Nav.Link to="/juegos/nuevo" as={Link}>Nuevo juego</Nav.Link>
+        <div className="Navigation m-3 mb-5">
+            <Navbar bg="custom-dark" data-bs-theme="dark" className='rounded'>
+                <Container fluid>
+                    <Navbar.Brand to="/" as={Link} className='mr-5'> PlayUp</Navbar.Brand>
+                    
+                    <Nav className="justify-content-end">
+                        <NavLink to="/juegos" end className={({isActive}) => isActive? "nav-link selected" : "nav-link"} >
+                        Juegos de mesa
+                        </NavLink>
+                        <NavLink to="/juegos/nuevo"  className={({isActive}) => isActive? "nav-link selected" : "nav-link"}>
+                        Nuevo juego
+                        </NavLink>
                     </Nav>
                 </Container>
             </Navbar>
