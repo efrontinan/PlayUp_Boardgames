@@ -44,7 +44,7 @@ const GameList = () => {
                     {
                         games.map(elm => {
                             return (
-                                <Col md={{ span: 4 }} key={elm.id} className="my-2 mx-0" >
+                                <Col lg="4" md="6" s="12" key={elm.id} className="my-2 mx-0" >
                                     <GameCard {...elm} removeGame={removeGame} />
                                 </Col>)
                         })

@@ -12,7 +12,6 @@ const GameGalleryPage = () => {
         <div className="GameGalleryPage">
             <Container>
                 <GameList />
-                <Button as={Link} to={"/juegos/nuevo"}>Crear</Button>
             </Container>
         </div>
     )

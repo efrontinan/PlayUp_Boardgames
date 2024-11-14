@@ -26,6 +26,16 @@ h6 {
   font-style: normal;
 }
 
+/* .align-items-stretch {
+  display: flex;
+  align-items: stretch;
+} */
+
+.wrap{
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .bg-custom-dark {
   background-color: #17082e;
 }
@@ -34,4 +44,32 @@ h6 {
 .selected {
   color: #ffffff !important;
   font-weight: 500;
+}
+
+.btn-custom-transparent{
+  background-color: transparent;
+  color: #3571fe;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-custom-primary{
+  background-color: #3571fe ;
+}
+
+.btn-custom-error{
+  background-color: hsl(0, 40%, 70%) ;
+}
+
+.btn-custom-secondary-outline{
+  /* background-color: hsl(222, 10%, 60%) ; */
+  border: 1px solid #3571fe;
+  color: #3571fe;
+}
+
+.bg-badge-outline-primary{
+  border: 1px solid #3571fe;
+  color: #3571fe;
 }

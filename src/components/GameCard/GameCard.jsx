@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Card, Container, Row, Col, Badge, Stack } from 'react-bootstrap'
+import { Button, Card, Row, Col, Badge, Stack } from 'react-bootstrap'
+import { Trash3, Pencil,InfoCircle } from 'react-bootstrap-icons'
 
 import './GameCard.css'
 
@@ -16,21 +17,21 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
             <Card className='p-custom' >
                     <Card.Body>
-                        <Row>
-                            <Col>
+                        <Row className='align-items-stretch'>
+                            <Col sm="10" lg="4">
                                 <Card.Img variant="top" src={image} />
                             </Col>
-                            <Col>
+                            <Col sm="10" lg="8"> 
                                 <Card.Title>{title}</Card.Title>
                                 <Card.Text>
                                     {min}-{max} jugadores
                                 </Card.Text>
 
-                                <Stack direction="horizontal" gap={1} className='float-left'>
+                                <Stack gap={1} className='float-left wrap'>
                                     {categories.map(elm => {
                                         return (
 
-                                            <Col><Badge bg="secondary">{elm}</Badge></Col>
+                                            <Badge bg="badge-outline-primary">{elm}</Badge> 
                                         )
                                     })}
                                 </Stack>
@@ -38,17 +39,11 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                         </Row>
 
 
-                        <Row className='m-0'>
-                            <Col>
-                                <Button as={Link} to={`/juegos/detalles/${id}`} variant="dark">Ver detalles</Button>
-                            </Col>
-                            <Col>
-                                <Button onClick={() => removeGame(id)}>Eliminar</Button>
-                            </Col>
-                            <Col>
-                                <Button as={Link} to={`/juegos/editar/${id}`} variant="dark">Editar</Button>
-                            </Col>
-                        </Row>
+                        <Stack direction="horizontal" gap={1} className='m-0'>
+                                <Button as={Link} to={`/juegos/detalles/${id}`} variant="custom-transparent" className='me-auto'> <InfoCircle/>   Ver detalles</Button>
+                                <Button onClick={() => removeGame(id)} variant="custom-error"><Trash3/></Button>
+                                <Button as={Link} to={`/juegos/editar/${id}`} variant="custom-secondary-outline"><Pencil/></Button>
+                        </Stack>
 
                     </Card.Body>
             </Card>
