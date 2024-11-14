@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import { Form, Button } from "react-bootstrap"
+import { formatInputDate } from "../../utils/date-utils"
+import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
@@ -32,11 +34,6 @@ const EditEventForm = () => {
         max: 0
     })
 
-    const formatInputDate = (dateData) => {
-        const date = new Date(dateData)
-        return date.toISOString().slice(0, 16)
-    }
-
     useEffect(() => {
         fetchEventsData()
     }, [])
@@ -45,7 +42,8 @@ const EditEventForm = () => {
         axios
             .get(`${API_URL}/events/${eventId}`)
             .then(response => {
-                const { author, contact, date, description, players, address } = response.data
+                const { author, contact, date, description,
+                    players, address } = response.data
                 console.log(date)
                 setEventData({
                     author: author,
@@ -98,7 +96,7 @@ const EditEventForm = () => {
     }
 
     return (
-        isLoading ? <h1>CARGANDO</h1> :
+        isLoading ? <Loader /> :
             <div className="EditEventForm">
 
                 <Form onSubmit={handleFormSubmit}>

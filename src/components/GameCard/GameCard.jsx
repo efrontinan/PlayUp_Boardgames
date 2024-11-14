@@ -22,6 +22,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                         <Card.Text>
                             {min}-{max} jugadores
                         </Card.Text>
+
                         <Button as={Link} to={`/juegos/detalles/${id}`} variant="dark">Ver detalles</Button>
                         <Button onClick={() => removeGame(id)}>Eliminar juego</Button>
                         <Button as={Link} to={`/juegos/editar/${id}`} variant="dark">Editar información</Button>

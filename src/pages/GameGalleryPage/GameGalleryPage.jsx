@@ -7,13 +7,13 @@ import GameList from "../../components/GameList/GameList"
 import './GameGalleryPage.css'
 
 const GameGalleryPage = () => {
+
     return (
         <div className="GameGalleryPage">
             <Container>
                 <GameList />
-
+                <Button as={Link} to={"/juegos/nuevo"}>Crear</Button>
             </Container>
-            <Button as={Link} to={"/juegos/nuevo"}>Crear</Button>
         </div>
     )
 }

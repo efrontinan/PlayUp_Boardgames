@@ -6,6 +6,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import GameCard from "../GameCard/GameCard"
 
 import './GameList.css'
+import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
@@ -30,14 +31,14 @@ const GameList = () => {
     }
 
     const removeGame = gameId => {
-
         axios
             .delete(`${API_URL}/games/${gameId}`)
-            .then(fetchGames())
+            .then(() => fetchGames())
             .catch(err => console.log(err))
     }
+
     return (
-        isLoading ? <h1>CARGANDO</h1> :
+        isLoading ? <Loader /> :
             <div className="GameList">
                 <Row className="p-0">
                     {

@@ -29,11 +29,11 @@ const EventsList = ({ gameId }) => {
     const deleteEvent = (e, id) => {
         e.preventDefault()
         axios
-        .delete(`${API_URL}/events/${id}`)
-        .then(() => {
-            fetchEvents()
-        })
-        .catch(err => console.log(err))
+            .delete(`${API_URL}/events/${id}`)
+            .then(() => {
+                fetchEvents()
+            })
+            .catch(err => console.log(err))
     }
 
     return (isLoading ? <h1>CARAGNDO</h1> :
@@ -74,7 +74,7 @@ const EventsList = ({ gameId }) => {
 
                                         </Col>
                                         <Col>
-                                        <Button onClick={(e) => deleteEvent(e, elm.id)}>Borrar</Button>
+                                            <Button onClick={(e) => deleteEvent(e, elm.id)}>Borrar</Button>
                                         </Col>
                                     </Row>
                                 </Container>
