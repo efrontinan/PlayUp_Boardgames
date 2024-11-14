@@ -1,10 +1,25 @@
 .GameCard .card{
-    background-color: #0e051d;
+    background-color: #0c0418;
+    border: 1px solid #3571fe67;    
     color: #ffffff;
+    border-radius: 16px 50px 16px 50px;
+
+}
+.p-custom{
+    padding: 16px;
 }
 
-.GameCard .card .container{
-    /* background-color: #17082e; */
-    border: 1px solid #3571fe50;
+.GameCard .card {
+    border-radius: 16px 50px 16px 50px;
+}
+
+.GameCard img{
+    margin: 16px 0px;
+}
+
+.GameCard .h5{
+    font-size: 2rem;
+    color: #3571fe;
+    margin-bottom: 8px;
 }
 
