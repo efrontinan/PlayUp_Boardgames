@@ -1,0 +1,10 @@
+.GameCard .card{
+    background-color: #0e051d;
+    color: #ffffff;
+}
+
+.GameCard .card .container{
+    /* background-color: #17082e; */
+    border: 1px solid #3571fe50;
+}
+

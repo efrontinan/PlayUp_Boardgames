@@ -1,0 +1,37 @@
+body {
+  font-family: "Radio Canada", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+  background-color: #06020b;
+  color: #f5faf3;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Amatic SC", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.bg-custom-dark {
+  background-color: #17082e;
+}
+
+
+.selected {
+  color: #ffffff !important;
+  font-weight: 500;
+}
