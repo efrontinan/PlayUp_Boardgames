@@ -1,12 +1,12 @@
 import axios from "axios"
 import { useState } from "react"
+import { useParams } from "react-router-dom"
 
 import { Form, Button } from "react-bootstrap"
-import { useNavigate, useParams } from "react-router-dom"
 
 const API_URL = "http://localhost:5005"
 
-const EventsForm = () => {
+const EventsForm = ({ closeCreateModal }) => {
 
     const { gameId } = useParams()
 
@@ -62,7 +62,7 @@ const EventsForm = () => {
             .then(response => {
                 // toast
                 alert('Formulario enviado')
-                console.log(response.data)
+                closeCreateModal()
             })
             .catch(err => console.log(err))
 

@@ -1,9 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-import { Card, Badge, Row, Container, Col, Button } from "react-bootstrap"
-import { useParams } from "react-router-dom"
+import { Card, Badge, Row, Container, Col, Button, Modal } from "react-bootstrap"
+import { useParams, Link } from "react-router-dom"
 import Loader from "../Loader/Loader"
+
+import EventsForm from "../../components/EventsForm/EventsForm"
+import EditEventForm from "../../components/EditEventForm/EditEventForm"
 
 
 const API_URL = "http://localhost:5005"
@@ -14,6 +17,8 @@ const EventsList = () => {
 
     const [events, setEvents] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [showCreateModal, setShowCreateModal] = useState(false)
+    const [showEditModalById, setShowEditModalById] = useState(null)
 
     useEffect(() => {
         fetchEvents()
@@ -81,6 +86,14 @@ const EventsList = () => {
                                             </Col>
                                             <Col>
                                                 <Button onClick={(e) => deleteEvent(e, elm.id)}>Borrar</Button>
+                                                <Button onClick={() => setShowEditModalById(elm.id)}>Editar evento</Button>
+
+                                                <Modal show={showEditModalById !== null} onHide={() => setShowEditModalById(null)}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Editar evento</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body><EditEventForm eventId={showEditModalById} closeEditModal={() => { setShowEditModalById(elm.id), fetchEvents() }} /></Modal.Body>
+                                                </Modal>
                                             </Col>
                                         </Row>
                                     </Container>
@@ -89,10 +102,21 @@ const EventsList = () => {
                                 <Card.Footer>¿Te apuntas? Envía un email a {elm.contact}</Card.Footer>
 
                             </Card>
+
                         )
 
                     })
                 }
+                <h4>¿Quieres crear tu propia quedada?</h4>
+
+                <Button onClick={() => setShowCreateModal(true)}>Crear evento</Button>
+
+                <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Nuevo evento</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body><EventsForm closeCreateModal={() => { setShowCreateModal(false), fetchEvents() }} /></Modal.Body>
+                </Modal>
 
             </div>
     )
