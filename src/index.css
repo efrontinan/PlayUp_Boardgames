@@ -84,3 +84,9 @@ h6 {
   border: none;
 
 }
+
+.form-control::placeholder{
+
+  color: #ffffff;
+
+}
