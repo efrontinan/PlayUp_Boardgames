@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { Container } from "react-bootstrap"
-import { Button } from "react-bootstrap"
+import { Container, Form } from "react-bootstrap"
 import GameList from "../../components/GameList/GameList"
 
 import './GameGalleryPage.css'
@@ -9,9 +8,9 @@ import './GameGalleryPage.css'
 const GameGalleryPage = () => {
 
     return (
-        <div className="GameGalleryPage">
+        <div className="GameGalleryPage m-5">
             <Container>
-                <GameList />
+                     <GameList />
             </Container>
         </div>
     )

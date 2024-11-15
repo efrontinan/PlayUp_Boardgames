@@ -1,0 +1,4 @@
+.GlobalGamesFilter .list-group{
+    position: absolute;
+    z-index: 3;
+}

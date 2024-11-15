@@ -36,13 +36,17 @@ h6 {
   flex-wrap: wrap;
 }
 
+.g24{
+  gap: 24px;
+}
+
 .bg-custom-dark {
   background-color: #17082e;
 }
 
 
 .selected {
-  color: #ffffff !important;
+  color: #3571fe !important;
   font-weight: 500;
 }
 
@@ -65,11 +69,18 @@ h6 {
 
 .btn-custom-secondary-outline{
   /* background-color: hsl(222, 10%, 60%) ; */
-  border: 1px solid #3571fe;
-  color: #3571fe;
+  border: 1px solid #8591ad;
+  color: #8591ad;
 }
 
 .bg-badge-outline-primary{
-  border: 1px solid #3571fe;
-  color: #3571fe;
+  border: 1px solid #31293d;
+  color: #8591ad;
+}
+
+.form-control{
+
+  background-color: #292f3d;
+  border: none;
+
 }

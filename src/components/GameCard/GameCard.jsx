@@ -15,23 +15,23 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
         <div className="GameCard">
 
-            <Card className='p-custom' >
+            <Card className='p-custom' key={id} >
                     <Card.Body>
-                        <Row className='align-items-stretch'>
-                            <Col sm="10" lg="4">
+                        <Row className='mb-4'>
+                            <Col sm="10" lg="6">
                                 <Card.Img variant="top" src={image} />
                             </Col>
-                            <Col sm="10" lg="8"> 
+                            <Col sm="10" lg="6"> 
                                 <Card.Title>{title}</Card.Title>
                                 <Card.Text>
                                     {min}-{max} jugadores
                                 </Card.Text>
 
                                 <Stack gap={1} className='float-left wrap'>
-                                    {categories.map(elm => {
+                                    {categories.map((elm,idx) => {
                                         return (
 
-                                            <Badge bg="badge-outline-primary">{elm}</Badge> 
+                                            <Badge bg="badge-outline-primary" key={idx}>{elm}</Badge> 
                                         )
                                     })}
                                 </Stack>
@@ -41,7 +41,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
                         <Stack direction="horizontal" gap={1} className='m-0'>
                                 <Button as={Link} to={`/juegos/detalles/${id}`} variant="custom-transparent" className='me-auto'> <InfoCircle/>   Ver detalles</Button>
-                                <Button onClick={() => removeGame(id)} variant="custom-error"><Trash3/></Button>
+                                <Button onClick={() => removeGame(id)} variant="custom-secondary-outline"><Trash3/></Button>
                                 <Button as={Link} to={`/juegos/editar/${id}`} variant="custom-secondary-outline"><Pencil/></Button>
                         </Stack>
 
