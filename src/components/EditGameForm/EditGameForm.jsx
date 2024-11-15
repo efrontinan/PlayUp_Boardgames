@@ -9,13 +9,11 @@ import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
-const GameForm = () => {
+const GameForm = ({gameId}) => {
 
     const [isLoading, setIsLoading] = useState(true)
 
     const navigate = useNavigate()
-
-    const { gameId } = useParams()
 
     const [gameData, setGameData] = useState({
         title: "",
