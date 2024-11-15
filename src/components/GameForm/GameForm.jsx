@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import { Button, Row, Col } from "react-bootstrap"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { XLg } from "react-bootstrap-icons"
 
 
 const API_URL = "http://localhost:5005"
@@ -157,239 +158,253 @@ const GameForm = () => {
 
     return (
         <div className="GameForm">
-            <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    <Form onSubmit={handleFormSubmit}>
+            <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
 
-                        <Form.Group className="mb-3" controlId="formTitle">
-                            <Form.Label>Título</Form.Label>
-                            <Form.Control type="text" placeholder="Inserta el título"
-                                value={gameData.title} onChange={handleGameChange}
-                                name={"title"} />
-                            <Form.Text className="text-muted">
-                                ¡Añade un juego divertido!
-                            </Form.Text>
-                        </Form.Group>
+                <Form.Group className="mb-3" controlId="formTitle">
+                    <Form.Label>¿Cómo se llama el juego?</Form.Label>
+                    <Form.Control type="text" placeholder="Introduce el nombre del juego"
+                        value={gameData.title} onChange={handleGameChange}
+                        name={"title"} />
+                    <Form.Text className="text-muted">
+                        ¡Añade un juego divertido!
+                    </Form.Text>
+                </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formImage">
-                            <Form.Label>Imagen del juego</Form.Label>
-                            <Form.Control type="text"
-                                placeholder="Inserta el URL de la imagen"
-                                value={gameData.image} onChange={handleGameChange}
-                                name={"image"} />
-                        </Form.Group>
+                <Form.Group className="mb-3" controlId="formImage">
+                    <Form.Label>Imagen del juego</Form.Label>
+                    <Form.Control type="url"
+                        placeholder="Inserta el URL de la imagen"
+                        value={gameData.image} onChange={handleGameChange}
+                        name={"image"} />
+                </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Row>
-                                <Form.Label>Categorías <hr />
-                                    {
-                                        gameData.categories.map((elm, idx) => {
-                                            return (
-                                                <Row key={`category-${idx}`}>
-                                                    <Col md={{ span: 9 }}>
-                                                        <Form.Control type="text"
-                                                            className="mb-2"
-                                                            placeholder="Categoría"
-                                                            onChange={e => handleCategoriesChange(e, idx)}
-                                                            value={elm}
-                                                            id={`formCategories-${idx}`}
-                                                        />
-                                                    </Col>
+                <Form.Group className="mb-3">
+                    <Form.Label>Categorías</Form.Label>
+                    {
+                        gameData.categories.map((elm, idx) => {
+                            return (
+                                <Row key={`category-${idx}`} className="mb-2">
+                                    <Col md="11">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Categoría"
+                                            onChange={e => handleCategoriesChange(e, idx)}
+                                            value={elm}
+                                            id={`formCategories-${idx}`}
+                                        />
+                                    </Col>
 
-                                                    <Col md={{ span: 3 }}>
-                                                        <Button className="delete-btn" variant="danger"
-                                                            onClick={() => deleteCategoryItem(idx)}
-                                                            disabled={gameData.categories.length <= 1}>
-                                                            Eliminar
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            )
-                                        })
-                                    }
-                                </Form.Label>
-                            </Row>
-                            <Button variant="dark" onClick={addCategory}>
-                                Añadir categoría
-                            </Button>
-                        </Form.Group>
+                                    <Col md="1">
+                                        <Button
+                                            variant="custom-secondary-outline"
+                                            onClick={() => deleteCategoryItem(idx)}
+                                            disabled={gameData.categories.length <= 1}
+                                            size="sm"
+                                        >
+                                            <XLg />
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            )
+                        })
+                    }
 
-                        <Row>
-                            <Col>
-                                <Form.Group className="mb-5" controlId="formMinPlayers">
-                                    <Form.Label>Mínimo de jugadores</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={players.min}
-                                        onChange={handlePlayersChange}
-                                        name={"min"}
-                                    />
-                                </Form.Group>
-                            </Col>
+                    <Button variant="custom-transparent" onClick={addCategory} size="sm" className="mt-3">
+                        Añadir categoría
+                    </Button>
+                </Form.Group>
 
-                            <Col>
-                                <Form.Group className="mb-5" controlId="formMaxPlayers">
-                                    <Form.Label>Máximo de jugadores</Form.Label>
-                                    <Form.Control type="number"
-                                        value={players.max} onChange={handlePlayersChange}
-                                        name={"max"} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                <Form.Group className="mb-3" controlId="formPlayers">
+                    <Form.Label>Introduce los datos de jugador</Form.Label>
+                    <Row>
+                        <Col sm="6" md="4">
+                            <Form.Label className="d-none">Número mínimo de jugadores</Form.Label>
 
-                        <Row>
-                            <Col>
-                                <Form.Group className="mb-5" controlId="formMinimumAge">
-                                    <Form.Label>Edad mínima</Form.Label>
-                                    <Form.Control type="number" placeholder="Años"
-                                        value={specs.minimumAge} onChange={handleSpecsChange}
-                                        name={"minimumAge"} />
-                                </Form.Group>
-                            </Col>
+                            <Form.Text className="text-muted"> Número mínimo </Form.Text>
+                            <Form.Control
+                                type="number"
+                                value={players.min}
+                                onChange={handlePlayersChange}
+                                name={"min"}
+                            />
+                        </Col>
 
-                            <Col>
-                                <Form.Group className="mb-5" controlId="formDuration">
-                                    <Form.Label>Duración aproximada de partida</Form.Label>
-                                    <Form.Control type="number" placeholder="Minutos"
-                                        value={specs.duration} onChange={handleSpecsChange}
-                                        name={"duration"} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                        <Col sm="6" md="4">
+                            <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
 
-                        <Form.Group className="mb-3" controlId="formDescription">
-                            <Form.Label>Descripción</Form.Label>
-                            <Form.Control as="textarea" rows={3}
-                                type="text" placeholder="Inserta una descripción"
-                                value={gameData.description} onChange={handleGameChange}
-                                name={"description"} />
-                        </Form.Group>
+                            <Form.Text className="text-muted"> Número máximo </Form.Text>
+                            <Form.Control type="number"
+                                value={players.max} onChange={handlePlayersChange}
+                                name={"max"} />
+                        </Col>
+                        <Col sm="6" md="4">
+                            <Form.Label className="d-none">Edad mínima</Form.Label>
 
-                        <Form.Group className="mb-3">
-                            <Row>
-                                <Form.Label>Instrucciones <hr />
-                                    {
-                                        gameData.howToPlay.map((elm, idx) => {
-                                            return (
-                                                <Row key={idx}>
-                                                    <Col md={{ span: 9 }}>
-                                                        <Form.Control type="text"
-                                                            className="mb-2"
-                                                            placeholder="Añade una instrucción"
-                                                            onChange={e => handleHowToPlayChange(e, idx)}
-                                                            value={elm}
-                                                            id={`formInstructions-${idx}`}
-                                                        />
-                                                    </Col>
+                            <Form.Text className="text-muted">Edad mínima</Form.Text>
+                            <Form.Control
+                                type="number"
+                                placeholder="Años"
+                                value={specs.minimumAge}
+                                onChange={handleSpecsChange}
+                                name={"minimumAge"}
+                            />
+                        </Col>
+                    </Row>
+                </Form.Group>
 
-                                                    <Col md={{ span: 3 }}>
-                                                        <Button className="delete-btn" variant="danger"
-                                                            onClick={() => deleteHowToPlayItem(idx)}
-                                                            disabled={gameData.howToPlay.length <= 1}>
-                                                            Eliminar
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            )
-                                        })
-                                    }
-                                    <Button variant="dark" onClick={addHowToPlay}>
-                                        Añadir regla
-                                    </Button>
-                                </Form.Label>
-                            </Row>
-                        </Form.Group>
+                <Form.Group className="mb-3" controlId="formDescription">
+                    <Form.Label>Descripción</Form.Label>
+                    <Form.Control
+                        as="textarea" rows={3}
+                        type="text"
+                        placeholder="Inserta una descripción"
+                        value={gameData.description}
+                        onChange={handleGameChange}
+                        name={"description"}
+                    />
+                </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Row>
-                                <Form.Label>Expansiones <hr />
-                                    {
-                                        gameData.expansions.map((elm, idx) => {
-                                            return (
+                <Form.Group className="mb-3" controlId="formDuration">
+                    <Form.Label>Duración aproximada de partida en minutos</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Minutos"
+                        value={specs.duration}
+                        onChange={handleSpecsChange}
+                        name={"duration"}
+                    />
+                </Form.Group>
 
-                                                <Row key={idx}>
-                                                    <Col md={{ span: 9 }}>
-                                                        <Form.Control type="text"
-                                                            className="mb-2"
-                                                            placeholder="Añade las expansiones del juego"
-                                                            onChange={e => handleExpansionsChange(e, idx)}
-                                                            value={elm}
-                                                            id={`formExpansions-${idx}`} />
-                                                    </Col>
-                                                    <Col md={{ span: 3 }}>
-                                                        <Button className="delete-btn" variant="danger"
-                                                            onClick={() => deleteExpansionsItem(idx)}
-                                                            disabled={gameData.expansions.length <= 1}>
-                                                            Eliminar
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-
-                                            )
-                                        })
-                                    }
-                                </Form.Label>
-                            </Row>
-                            <Button variant="dark" onClick={addExpansions}>
-                                Añadir expansión
-                            </Button>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formCheckOneTime">
-                            <Form.Label>¿Es de partida única?</Form.Label>
-                            <Form.Check type="checkbox"
-                                label="Sí, su manera de jugar o contenido implica 
-                                una partida única en la vida"
-                                checked={gameData.oneTimePlay} onChange={handleGameChange}
-                                name={"oneTimePlay"} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Row>
-                                <Form.Label>Contenido <hr />
-                                    {
-                                        gameData.content.map((elm, idx) => {
-                                            return (
-
-                                                <Row key={idx} >
-                                                    <Col md={{ span: 9 }}>
-                                                        <Form.Control type="text"
-                                                            className="mb-2"
-                                                            placeholder="Añade el contenido incluido en el juego"
-                                                            onChange={e => handleContentChange(e, idx)}
-                                                            value={elm}
-                                                            id={`formContent-${idx}`}
-                                                        />
-                                                    </Col>
-
-                                                    <Col md={{ span: 3 }}>
-                                                        <Button className="delete-btn" variant="danger"
-                                                            onClick={() => deleteContentItem(idx)}
-                                                            disabled={gameData.content.length <= 1} >
-                                                            Eliminar
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-
-                                            )
-                                        })
-                                    }
+                <Form.Group className="mb-3">
+                    <Form.Label> Instrucciones </Form.Label>
+                    {
+                        gameData.howToPlay.map((elm, idx) => {
+                            return (
 
 
-                                </Form.Label>
-                            </Row>
-                            <Button variant="dark"
-                                onClick={addContent}>Añadir contenido
-                            </Button>
-                        </Form.Group>
+                                <Row key={idx}>
+                                    <Col md="11">
+                                        <Form.Control
+                                            type="text"
+                                            className="mb-2"
+                                            placeholder="Añade una instrucción"
+                                            onChange={e => handleHowToPlayChange(e, idx)}
+                                            value={elm}
+                                            id={`formInstructions-${idx}`}
+                                        />
+                                    </Col>
 
-                        <Button variant="dark" type="submit">
-                            Añadir juego a la colección
-                        </Button>
+                                    <Col md="1">
 
-                    </Form>
-                </Col>
-            </Row>
+                                        <Button
+                                            variant="custom-secondary-outline"
+                                            onClick={() => deleteHowToPlayItem(idx)}
+                                            size="sm"
+                                            disabled={gameData.howToPlay.length <= 1}
+                                        >
+                                            <XLg />
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            )
+                        })
+                    }
+                    <Button variant="custom-transparent" onClick={addHowToPlay} size="sm" className="mt-3">
+                        Añadir regla
+                    </Button>
+
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Expansiones </Form.Label>
+                    {
+                        gameData.expansions.map((elm, idx) => {
+                            return (
+
+                                <Row key={idx}>
+                                    <Col md="11">
+                                        <Form.Control
+                                            type="text"
+                                            className="mb-2"
+                                            placeholder="Añade las expansiones del juego"
+                                            onChange={e => handleExpansionsChange(e, idx)}
+                                            value={elm}
+                                            id={`formExpansions-${idx}`} />
+                                    </Col>
+                                    <Col md="1">
+                                        <Button
+                                            variant="custom-secondary-outline"
+                                            onClick={() => deleteExpansionsItem(idx)}
+                                            size="sm"
+                                            disabled={gameData.expansions.length <= 1}
+                                        >
+                                            <XLg />
+                                        </Button>
+                                    </Col>
+                                </Row>
+
+                            )
+                        })
+                    }
+
+                    <Button variant="custom-transparent" onClick={addExpansions} size="sm" className="mt-3">
+                        Añadir expansión
+                    </Button>
+
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formCheckOneTime">
+                    <Form.Label>¿Puedes jugarlo sólo una vez?</Form.Label>
+                    <Form.Check type="checkbox"
+                        label="Sí, su manera de jugar o contenido implica 
+                                una partida única"
+                        checked={gameData.oneTimePlay} onChange={handleGameChange}
+                        name={"oneTimePlay"} />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Contenido</Form.Label>
+                    {
+                        gameData.content.map((elm, idx) => {
+                            return (
+
+                                <Row key={idx} >
+                                    <Col md="11">
+                                        <Form.Control type="text"
+                                            className="mb-2"
+                                            placeholder="Añade el contenido incluido en el juego"
+                                            onChange={e => handleContentChange(e, idx)}
+                                            value={elm}
+                                            id={`formContent-${idx}`}
+                                        />
+                                    </Col>
+
+                                    <Col md="1">
+                                        <Button
+                                            variant="custom-secondary-outline"
+                                            size="sm"
+                                            disabled={gameData.content.length <= 1}
+                                            onClick={() => deleteContentItem(idx)}
+                                        >
+                                            <XLg />
+                                        </Button>
+                                    </Col>
+                                </Row>
+
+                            )
+                        })
+                    }
+                    <Button variant="custom-transparent" onClick={addContent} size="sm" className="mt-3">
+                        Añadir contenido
+                    </Button>
+
+                </Form.Group>
+
+                <Button variant="custom-primary" type="submit">
+                    Añadir juego a la colección
+                </Button>
+
+            </Form>
         </div>
     )
 }

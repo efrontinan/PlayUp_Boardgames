@@ -9,6 +9,11 @@ body {
   color: #f5faf3;
 }
 
+hr{
+  border-top: 1px solid #3571fe;
+  opacity: .7;
+}
+
 .h1,
 .h2,
 .h3,
@@ -24,6 +29,7 @@ h6 {
   font-family: "Amatic SC", serif;
   font-weight: 700;
   font-style: normal;
+  color: #ffffff;
 }
 
 /* .align-items-stretch {
@@ -59,8 +65,18 @@ h6 {
   align-items: center;
 }
 
+.btn-custom-transparent:hover {
+  color: #6794fe;
+}
+
 .btn-custom-primary {
   background-color: #3571fe;
+  color: #ffffff;
+}
+
+.btn-custom-primary:hover {
+  background-color: hsl(222, 99%, 40%);
+  color: #ffffff;
 }
 
 .btn-custom-error {
@@ -82,15 +98,76 @@ h6 {
 
   background-color: #292f3d;
   border: none;
+  color: #ffffff;
 
 }
 
-.modal-content {
-  background-color: #06020b;
+.form-control:focus {
+  color: #ffffff;
+  background-color: #292f3d;
+  border-color: hsl(222, 99%, 80%);
+  outline: 0;
+  box-shadow: 0 0 0 .05rem  hsl(222, 99%, 80%);
+}
+
+.form-label {
+  color: #ffffff;
+}
+
+.form-text {
+  color: #8591ad !important;
+}
+
+.form-check-label{
+  color: #8591ad;
+
 }
 
 .form-control::placeholder {
 
-  color: #ffffff;
+  color: #8591ad;
+  font-size: small;
 
+}
+
+.offcanvas {
+  background-color: hsl(222, 99%, 7%);
+  width: 20vw;
+}
+
+.offcanvas-backdrop {
+  background-color: #06020b;
+  color: #ffffff;
+}
+
+.offcanvas-backdrop.show {
+  opacity: .7;
+}
+
+.offcanvas-title {
+  font-size: 2rem;
+  color: #3571fe;
+}
+
+@media (max-width: 576px) {
+  .offcanvas.offcanvas-end {
+    width: 95vw;
+  }
+}
+
+@media (min-width: 576px) {
+  .offcanvas.offcanvas-end {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .offcanvas.offcanvas-end {
+    width: 45vw;
+  }
+}
+
+.vertical-form{
+  display: flex;
+  flex-direction: column;
 }
