@@ -88,3 +88,9 @@ h6 {
 .modal-content {
   background-color: #06020b;
 }
+
+.form-control::placeholder {
+
+  color: #ffffff;
+
+}
