@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 
 import { Form, Button } from "react-bootstrap"
 import { formatInputDate } from "../../utils/date-utils"
@@ -8,11 +8,9 @@ import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
-const EditEventForm = () => {
+const EditEventForm = ({ eventId }) => {
 
-    const { eventId } = useParams()
-
-    const navigate = useNavigate()
+    // const { eventId } = useParams()
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -96,6 +94,7 @@ const EditEventForm = () => {
                 alert("editao")
             })
             .catch(err => console.log(err))
+        closeEditModal()
     }
 
     return (

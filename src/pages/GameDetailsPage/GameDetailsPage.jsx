@@ -2,10 +2,9 @@ import axios from "axios"
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Button } from "react-bootstrap"
+import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Button, Modal } from "react-bootstrap"
 
 import EventsList from "../../components/EventsList/EventsList"
-import EventsForm from "../../components/EventsForm/EventsForm"
 import Loader from "../../components/Loader/Loader"
 
 
@@ -17,6 +16,7 @@ const GameDetailsPage = () => {
 
   const [game, setGame] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+
 
   useEffect(() => {
     fetchGameDetails()
@@ -132,11 +132,6 @@ const GameDetailsPage = () => {
             </Row>
 
             <EventsList />
-
-            <h4>¿Quieres crear tu propia quedada?</h4>
-
-
-            <EventsForm />
 
           </Container>
 
