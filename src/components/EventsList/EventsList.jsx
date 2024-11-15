@@ -88,12 +88,7 @@ const EventsList = () => {
                                                 <Button onClick={(e) => deleteEvent(e, elm.id)}>Borrar</Button>
                                                 <Button onClick={() => setShowEditModalById(elm.id)}>Editar evento</Button>
 
-                                                <Modal show={showEditModalById !== null} onHide={() => setShowEditModalById(null)}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Editar evento</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body><EditEventForm eventId={showEditModalById} closeEditModal={() => { setShowEditModalById(elm.id), fetchEvents() }} /></Modal.Body>
-                                                </Modal>
+
                                             </Col>
                                         </Row>
                                     </Container>
@@ -108,6 +103,13 @@ const EventsList = () => {
                     })
                 }
                 <h4>¿Quieres crear tu propia quedada?</h4>
+
+                <Modal bg="dark" show={showEditModalById !== null} onHide={() => setShowEditModalById(null)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Editar evento</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body><EditEventForm eventId={showEditModalById} closeEditModal={() => { setShowEditModalById(elm.id), fetchEvents() }} /></Modal.Body>
+                </Modal>
 
                 <Button onClick={() => setShowCreateModal(true)}>Crear evento</Button>
 
