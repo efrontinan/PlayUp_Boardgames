@@ -1,12 +1,13 @@
+import "../GameDetailsPage/GameDetailsPage.css"
+
 import axios from "axios"
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { BreadcrumbItem, Col, Container, Row, Breadcrumb, ListGroup, Button, Modal } from "react-bootstrap"
+import { Stack, Col, Container, Row, Badge, ListGroup, Button, Tabs, Tab } from "react-bootstrap"
 
 import EventsList from "../../components/EventsList/EventsList"
 import Loader from "../../components/Loader/Loader"
-
 
 const API_URL = "http://localhost:5005"
 
@@ -40,62 +41,31 @@ const GameDetailsPage = () => {
           <Container>
 
             <Row >
-              <Col md={{ span: 3 }}>
-                <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
+              <Col md="3">
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
 
-              <Col md={{ span: 6 }}>
+              <Col md="6">
 
                 <h1>{game.title}</h1>
                 <hr />
 
-                <Breadcrumb>
-                  {
-                    game.categories.map((elm) => {
-                      return (
-                        <BreadcrumbItem active="false" key={elm}>
-                          {elm}
-                        </BreadcrumbItem>
-                      )
-                    })
-                  }
-                </Breadcrumb>
+                <Stack gap={1} className='float-left wrap'>
+                  {game.categories.map((elm, idx) => {
+                    return (
+                      <Badge bg="badge-outline-primary" key={idx}>{elm}</Badge>
+                    )
+                  })}
+                </Stack>
 
+                <hr />
                 <p>{game.description}</p>
 
-                <hr />
-
-                <h2>Cómo jugar</h2>
-                <ul>
-                  {
-                    game.howToPlay.map(elm => {
-                      return (
-                        <li key={elm}>
-                          {elm}
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
-
-                <hr />
-                <h3>Contenido</h3>
-                <ul>
-                  {
-                    game.content.map(elm => {
-                      return (
-                        <li key={elm}>
-                          {elm}
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
+                <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
               </Col>
 
-              <Col md={{ span: 3 }}>
-                <ListGroup>
+              <Col md="3">
+                <ListGroup className="short-specs-chart">
                   <ListGroup.Item><h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5>
                   </ListGroup.Item>
 
@@ -110,30 +80,70 @@ const GameDetailsPage = () => {
                     :
                     "Solo se puede jugar una vez"}</p>
                   </ListGroup.Item>
-                  <ListGroup.Item><h5>Expansiones:</h5>
-                    {
-                      !game.expansions || game.expansions[0] === "" ?
-                        "Este juego no tiene expansiones"
-                        :
-                        <ul>
-                          {
-                            game.expansions.map(elm => {
-                              return (
-                                <li key={elm}>
-                                  {elm}
-                                </li>
-                              )
-                            })
-                          }
-                        </ul>
-                    }</ListGroup.Item>
                 </ListGroup>
+
               </Col>
             </Row>
+            <Tabs
+              defaultActiveKey="instructionsTab"
+              id="fill-tab-example"
+              className="mb-3"
+              fill
+            >
 
-            <EventsList />
+              <Tab eventKey="instructionsTab" title="Cómo jugar">
+                <ul>
+                  {
+                    game.howToPlay.map(elm => {
+                      return (
+                        <li key={elm}>
+                          {elm}
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              </Tab>
+
+              <Tab eventKey="contentTab" title="Contenido">
+                <ul>
+                  {
+                    game.content.map(elm => {
+                      return (
+                        <li key={elm}>
+                          {elm}
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              </Tab>
+              <Tab eventKey="expansionsTab" title="Expansiones">
+                {
+                  !game.expansions || game.expansions[0] === "" ?
+                    "Este juego no tiene expansiones"
+                    :
+                    <ul>
+                      {
+                        game.expansions.map(elm => {
+                          return (
+                            <li key={elm}>
+                              {elm}
+                            </li>
+                          )
+                        })
+                      }
+                    </ul>
+                }
+              </Tab>
+              <Tab eventKey="eventsTab" title="Eventos">
+                <EventsList />
+              </Tab>
+            </Tabs>
+
 
           </Container>
+
 
         </div>
       )

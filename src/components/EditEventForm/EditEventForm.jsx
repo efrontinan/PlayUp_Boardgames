@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
-const EditEventForm = ({ eventId }) => {
+const EditEventForm = ({ eventId, closeEditModal }) => {
 
     // const { eventId } = useParams()
 

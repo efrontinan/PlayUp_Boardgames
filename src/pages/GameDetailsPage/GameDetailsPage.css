@@ -1,0 +1,19 @@
+.list-group-item {
+    background-color: #0c0418;
+    color: white
+}
+
+.GameDetailsPage .nav-link {
+    color: white;
+    border: none;
+}
+
+.GameDetailsPage .nav-link:hover {
+    background-color: #3571fe67;
+    color: white;
+}
+
+.GameDetailsPage .nav-link.active {
+    background-color: #3571fe;
+    color: white;
+}
