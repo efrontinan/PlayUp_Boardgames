@@ -1,17 +1,16 @@
-import "../GameForm/GameForm.css"
+import "./CreateGameForm.css"
 
-import { useEffect, useState } from "react"
-
-import Form from 'react-bootstrap/Form'
-import { Button, Row, Col } from "react-bootstrap"
 import axios from "axios"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+
+import { Button, Row, Col, Form } from "react-bootstrap"
 import { XLg } from "react-bootstrap-icons"
 
 
 const API_URL = "http://localhost:5005"
 
-const GameForm = () => {
+const CreateGameForm = () => {
 
     const navigate = useNavigate()
 
@@ -151,20 +150,26 @@ const GameForm = () => {
         axios
             .post(`${API_URL}/games`, reqPayLoad)
             .then(response => {
+                // toast
                 navigate(`/juegos/detalles/${response.data.id}`)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        <div className="GameForm">
+        <div className="CreateGameForm">
+
             <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
 
                 <Form.Group className="mb-3" controlId="formTitle">
                     <Form.Label>¿Cómo se llama el juego?</Form.Label>
-                    <Form.Control type="text" placeholder="Introduce el nombre del juego"
-                        value={gameData.title} onChange={handleGameChange}
-                        name={"title"} />
+                    <Form.Control
+                        type="text"
+                        placeholder="Introduce el nombre del juego"
+                        value={gameData.title}
+                        onChange={handleGameChange}
+                        name={"title"}
+                    />
                     <Form.Text className="text-muted">
                         ¡Añade un juego divertido!
                     </Form.Text>
@@ -172,10 +177,13 @@ const GameForm = () => {
 
                 <Form.Group className="mb-3" controlId="formImage">
                     <Form.Label>Imagen del juego</Form.Label>
-                    <Form.Control type="url"
+                    <Form.Control
+                        type="url"
                         placeholder="Inserta el URL de la imagen"
-                        value={gameData.image} onChange={handleGameChange}
-                        name={"image"} />
+                        value={gameData.image}
+                        onChange={handleGameChange}
+                        name={"image"} 
+                        />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -219,7 +227,6 @@ const GameForm = () => {
                     <Row>
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Número mínimo de jugadores</Form.Label>
-
                             <Form.Text className="text-muted"> Número mínimo </Form.Text>
                             <Form.Control
                                 type="number"
@@ -231,7 +238,6 @@ const GameForm = () => {
 
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
-
                             <Form.Text className="text-muted"> Número máximo </Form.Text>
                             <Form.Control type="number"
                                 value={players.max} onChange={handlePlayersChange}
@@ -239,7 +245,6 @@ const GameForm = () => {
                         </Col>
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Edad mínima</Form.Label>
-
                             <Form.Text className="text-muted">Edad mínima</Form.Text>
                             <Form.Control
                                 type="number"
@@ -255,7 +260,8 @@ const GameForm = () => {
                 <Form.Group className="mb-3" controlId="formDescription">
                     <Form.Label>Descripción</Form.Label>
                     <Form.Control
-                        as="textarea" rows={3}
+                        as="textarea"
+                        rows={3}
                         type="text"
                         placeholder="Inserta una descripción"
                         value={gameData.description}
@@ -280,7 +286,6 @@ const GameForm = () => {
                     {
                         gameData.howToPlay.map((elm, idx) => {
                             return (
-
 
                                 <Row key={idx}>
                                     <Col md="11">
@@ -331,6 +336,7 @@ const GameForm = () => {
                                             value={elm}
                                             id={`formExpansions-${idx}`} />
                                     </Col>
+
                                     <Col md="1">
                                         <Button
                                             variant="custom-secondary-outline"
@@ -342,7 +348,6 @@ const GameForm = () => {
                                         </Button>
                                     </Col>
                                 </Row>
-
                             )
                         })
                     }
@@ -370,7 +375,8 @@ const GameForm = () => {
 
                                 <Row key={idx} >
                                     <Col md="11">
-                                        <Form.Control type="text"
+                                        <Form.Control
+                                            type="text"
                                             className="mb-2"
                                             placeholder="Añade el contenido incluido en el juego"
                                             onChange={e => handleContentChange(e, idx)}
@@ -409,4 +415,4 @@ const GameForm = () => {
     )
 }
 
-export default GameForm
+export default CreateGameForm

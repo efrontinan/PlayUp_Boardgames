@@ -2,11 +2,11 @@ import axios from "axios"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Row, Col } from "react-bootstrap"
 
 const API_URL = "http://localhost:5005"
 
-const EventsForm = ({ closeCreateModal }) => {
+const CreateEventsForm = ({ closeCreateModal }) => {
 
     const { gameId } = useParams()
 
@@ -59,7 +59,7 @@ const EventsForm = ({ closeCreateModal }) => {
 
         axios
             .post(`${API_URL}/events`, newEvent)
-            .then(response => {
+            .then(() => {
                 // toast
                 alert('Formulario enviado')
                 closeCreateModal()
@@ -70,8 +70,9 @@ const EventsForm = ({ closeCreateModal }) => {
 
 
     return (
-        <div className="EventsForm">
-            <Form onSubmit={handleFormSubmit}>
+        <div className="CreateEventsForm">
+
+            <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
 
                 <Form.Group controlId="authorField" className="mb-3">
                     <Form.Label>¿Cómo te llamas?</Form.Label>
@@ -80,7 +81,8 @@ const EventsForm = ({ closeCreateModal }) => {
                         placeholder="Introduce tu nombre"
                         value={eventData.author}
                         onChange={handleEventChange}
-                        name={'author'} />
+                        name={'author'}
+                    />
                 </Form.Group>
 
                 <Form.Group controlId="contactField" className="mb-3">
@@ -90,7 +92,8 @@ const EventsForm = ({ closeCreateModal }) => {
                         placeholder="Indícanos un email para apuntarse"
                         value={eventData.contact}
                         onChange={handleEventChange}
-                        name={'contact'} />
+                        name={'contact'}
+                    />
                 </Form.Group>
 
                 <Form.Group controlId="dateField" className="mb-3">
@@ -100,21 +103,23 @@ const EventsForm = ({ closeCreateModal }) => {
                         placeholder="Día/Mes/Año"
                         value={eventData.date}
                         onChange={handleEventChange}
-                        name={'date'} />
+                        name={'date'}
+                    />
                 </Form.Group>
 
                 <Form.Group controlId="descriptionField" className="mb-3">
-                    <Form.Label>Descripción del evento</Form.Label>
+                    <Form.Label>Descripción del planazo</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Describe tu evento"
-                        as="textarea" rows={3}
+                        placeholder="Describe tu planazo"
+                        as="textarea"
+                        rows={3}
                         value={eventData.description}
                         onChange={handleEventChange}
                         name={'description'} />
                 </Form.Group>
 
-                <h5>Introduce la dirección</h5>
+                <h5 className="my-3 text-primary">Introduce la dirección</h5>
 
                 <Form.Group controlId="directionNametField" className="mb-3">
                     <Form.Label>¿Tiene un nombre el local?</Form.Label>
@@ -166,7 +171,7 @@ const EventsForm = ({ closeCreateModal }) => {
                         name={'zipcode'} />
                 </Form.Group>
 
-                <h5>¿Cuántas personas seréis?</h5>
+                <h5 className="my-3 text-primary">¿Cuántas personas seréis?</h5>
 
                 <Form.Group controlId="minPlayersField" className="mb-3">
                     <Form.Label>Número mínimo de asistentes</Form.Label>
@@ -188,13 +193,14 @@ const EventsForm = ({ closeCreateModal }) => {
                         name={'max'} />
                 </Form.Group>
 
-                <Button variant="dark" type="submit">
-                    Crear evento
+                <Button variant="custom-primary" type="submit">
+                    Crear planazo
                 </Button>
+
             </Form>
         </div>
     )
 
 }
 
-export default EventsForm
+export default CreateEventsForm

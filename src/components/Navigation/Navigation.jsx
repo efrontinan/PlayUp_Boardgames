@@ -5,7 +5,7 @@ import { List } from 'react-bootstrap-icons'
 
 import './Navigation.css'
 import GlobalGamesFilter from "../../components/GlobalGamesFilter/GlobalGamesFilter"
-import GameForm from "../../components/GameForm/GameForm"
+import CreateGameForm from "../../components/CreateGameForm/CreateGameForm"
 
 
 const Navigation = () => {
@@ -21,23 +21,26 @@ const Navigation = () => {
                     <NavLink to="/juegos" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
                         Juegos de mesa
                     </NavLink>
-                    <Nav.Link  onClick={() => setShowOffcanvas(true)} >
+                    <NavLink to="/planes" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
+                        Planazos
+                    </NavLink>
+                    <Nav.Link onClick={() => setShowOffcanvas(true)} >
                         Nuevo juego
                     </Nav.Link>
                 </Nav>
                 <Form md="2" className='d-flex flex-row align-items-center'>
                     <GlobalGamesFilter />
                 </Form>
-                    <List className='d-block d-md-none'/>
+                <List className='d-block d-md-none' />
             </Navbar>
 
             <Offcanvas show={showOfcanvas} onHide={() => setShowOffcanvas(false)} placement="end" >
-                    <Offcanvas.Header closeButton>
-                        <Offcanvas.Title>Añadir juego </Offcanvas.Title>
-                    </Offcanvas.Header>
-                    <Offcanvas.Body>
-                        <GameForm />
-                    </Offcanvas.Body>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Añadir juego </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <CreateGameForm />
+                </Offcanvas.Body>
             </Offcanvas>
         </div>
     )

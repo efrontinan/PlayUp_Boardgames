@@ -8,8 +8,8 @@
 |`/juegos`|Eliminar juego desde galería||
 |`/juegos/detalles/:gameId`|Eliminar juego desde detalles||
 |----------|----------|----------|
-|`/juegos/detalles/:id`|Crear evento||
-|`/eventos/editar/:eventId`|Editar evento||
+|`/juegos/detalles/:id`|Crear plan||
+|`/planes/editar/:eventId`|Editar plan||
 
 
 

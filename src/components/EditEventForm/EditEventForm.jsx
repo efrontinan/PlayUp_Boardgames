@@ -1,16 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-// import { useParams } from "react-router-dom"
 
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Toast } from "react-bootstrap"
 import { formatInputDate } from "../../utils/date-utils"
 import Loader from "../Loader/Loader"
 
 const API_URL = "http://localhost:5005"
 
-const EditEventForm = ({ eventId, closeEditModal }) => {
-
-    // const { eventId } = useParams()
+const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -91,17 +88,20 @@ const EditEventForm = ({ eventId, closeEditModal }) => {
         axios
             .patch(`${API_URL}/events/${eventId}`, editEvent)
             .then(response => {
-                alert("editao")
+                // setShowToast(true)
+                alert('Se han guardado los cambios')
+                setShowEditOffcanvas(false)
+                fetchEvents()
             })
             .catch(err => console.log(err))
-        closeEditModal()
+
     }
 
     return (
         isLoading ? <Loader /> :
             <div className="EditEventForm">
 
-                <Form onSubmit={handleFormSubmit}>
+                <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
 
                     <Form.Group controlId="authorField" className="mb-3">
                         <Form.Label>¿Cómo te llamas?</Form.Label>
@@ -134,17 +134,18 @@ const EditEventForm = ({ eventId, closeEditModal }) => {
                     </Form.Group>
 
                     <Form.Group controlId="descriptionField" className="mb-3">
-                        <Form.Label>Descripción del evento</Form.Label>
+                        <Form.Label>Descripción del planazo</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Describe tu evento"
-                            as="textarea" rows={3}
+                            placeholder="Describe tu planazo"
+                            as="textarea"
+                            rows={3}
                             value={eventData.description}
                             onChange={handleEventChange}
                             name={'description'} />
                     </Form.Group>
 
-                    <h5>Introduce la dirección</h5>
+                    <h5 className="my-3 text-primary">Introduce la dirección</h5>
 
                     <Form.Group controlId="directionNametField" className="mb-3">
                         <Form.Label>¿Tiene un nombre el local?</Form.Label>
@@ -196,7 +197,7 @@ const EditEventForm = ({ eventId, closeEditModal }) => {
                             name={'zipcode'} />
                     </Form.Group>
 
-                    <h5>¿Cuántas personas seréis?</h5>
+                    <h5 className="my-3 text-primary">¿Cuántas personas seréis?</h5>
 
                     <Form.Group controlId="minPlayersField" className="mb-3">
                         <Form.Label>Número mínimo de asistentes</Form.Label>
@@ -219,10 +220,11 @@ const EditEventForm = ({ eventId, closeEditModal }) => {
                     </Form.Group>
 
                     <Button variant="dark" type="submit">
-                        Editar evento
+                        Guardar cambios
                     </Button>
 
                 </Form>
+
             </div>
     )
 }

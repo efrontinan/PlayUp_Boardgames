@@ -8,6 +8,7 @@ import { Stack, Col, Container, Row, Badge, ListGroup, Button, Tabs, Tab } from 
 
 import EventsList from "../../components/EventsList/EventsList"
 import Loader from "../../components/Loader/Loader"
+import ReviewsList from "../../components/ReviewsList/ReviewsList"
 
 const API_URL = "http://localhost:5005"
 
@@ -136,11 +137,13 @@ const GameDetailsPage = () => {
                     </ul>
                 }
               </Tab>
-              <Tab eventKey="eventsTab" title="Eventos">
+              <Tab eventKey="eventsTab" title="Planazos">
                 <EventsList />
               </Tab>
+              <Tab eventKey="reviewsTab" title="Reviews">
+                <ReviewsList />
+              </Tab>
             </Tabs>
-
 
           </Container>
 

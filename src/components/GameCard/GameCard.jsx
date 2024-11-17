@@ -33,7 +33,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                                 {categories.map((elm, idx) => {
                                     return (
 
-                                        <Badge bg="badge-outline-primary" key={idx}>{elm}</Badge>
+                                        <Badge bg="badge-outline-primary" key={idx} className='fit-content'>{elm}</Badge>
                                     )
                                 })}
                             </Stack>

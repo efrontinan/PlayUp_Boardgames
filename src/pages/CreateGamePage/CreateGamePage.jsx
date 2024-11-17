@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 
-import GameForm from "../../components/GameForm/GameForm";
+import CreateGameForm from "../../components/CreateGameForm/CreateGameForm";
 
 const CreateGamePage = () => {
 
     return (
         <div className="CreateGamePage">
-            <GameForm />
+            <CreateGameForm />
             <Button variant="dark" as={Link} to={"/juegos"}>Volver a inicio</Button>
         </div>
     )
