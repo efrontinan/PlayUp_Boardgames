@@ -211,8 +211,11 @@ const EditGameForm = ({ gameId }) => {
 
                 <Form.Group className="mb-3" controlId="formTitle">
                     <Form.Label>¿Cómo se llama el juego?</Form.Label>
-                    <Form.Control type="text" placeholder="Introduce el nombre del juego"
-                        value={gameData.title} onChange={handleGameChange}
+                    <Form.Control
+                        type="text"
+                        placeholder="Introduce el nombre del juego"
+                        value={gameData.title}
+                        onChange={handleGameChange}
                         name={"title"} />
                     <Form.Text className="text-muted">
                         ¡Añade un juego divertido!
@@ -273,6 +276,7 @@ const EditGameForm = ({ gameId }) => {
                             <Form.Text className="text-muted"> Número mínimo </Form.Text>
                             <Form.Control
                                 type="number"
+                                min={0}
                                 value={players.min}
                                 onChange={handlePlayersChange}
                                 name={"min"}
@@ -284,6 +288,7 @@ const EditGameForm = ({ gameId }) => {
                             <Form.Text className="text-muted"> Número máximo </Form.Text>
                             <Form.Control
                                 type="number"
+                                min={0}
                                 value={players.max}
                                 onChange={handlePlayersChange}
                                 name={"max"}
@@ -295,6 +300,7 @@ const EditGameForm = ({ gameId }) => {
                             <Form.Text className="text-muted">Edad mínima</Form.Text>
                             <Form.Control
                                 type="number"
+                                min={0}
                                 placeholder="Años"
                                 value={specs.minimumAge}
                                 onChange={handleSpecsChange}
@@ -321,6 +327,7 @@ const EditGameForm = ({ gameId }) => {
                     <Form.Label>Duración aproximada de partida en minutos</Form.Label>
                     <Form.Control
                         type="number"
+                        min={0}
                         placeholder="Minutos"
                         value={specs.duration}
                         onChange={handleSpecsChange}

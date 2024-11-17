@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
-import { Button, Offcanvas, Stack, Toast, Row, Col } from "react-bootstrap"
+import { Button, Offcanvas, Stack, Toast, ToastContainer, Row, Col } from "react-bootstrap"
 import Loader from "../Loader/Loader"
 
 import CreateEventsForm from "../../components/CreateEventsForm/CreateEventsForm"
@@ -18,7 +18,7 @@ const EventsList = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const [showCreateModal, setShowCreateModal] = useState(false)
-    // const [showToast, setShowToast] = useState(false)
+    const [showToast, setShowToast] = useState(false)
 
 
     useEffect(() => {
@@ -31,6 +31,7 @@ const EventsList = () => {
             .then(response => {
                 setEvents(response.data)
                 setIsLoading(false)
+                setShowToast(true)
             })
             .catch(err => console.log(err))
     }
@@ -75,9 +76,19 @@ const EventsList = () => {
                     </Offcanvas.Body>
                 </Offcanvas>
 
-                {/* <Toast show={showToast} position="middle-center">
-                    <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-                </Toast> */}
+                <ToastContainer position="middle-center">
+                    <Toast onClose={() => setShowToast(false)} show={showToast} delay={3000}>
+                        <Toast.Header closeButton={true}>
+                            <img
+                                src="holder.js/20x20?text=%20"
+                                className="rounded me-2"
+                                alt=""
+                            />
+                            <strong className="me-auto">¡Éxito!</strong>
+                        </Toast.Header>
+                        <Toast.Body>¡Evento publicado!</Toast.Body>
+                    </Toast>
+                </ToastContainer>
 
             </div>
     )

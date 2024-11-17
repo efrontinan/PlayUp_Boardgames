@@ -88,7 +88,7 @@ const GameDetailsPage = () => {
             <Tabs
               defaultActiveKey="instructionsTab"
               id="fill-tab-example"
-              className="mb-3"
+              className="mb-3 mx-2"
               fill
             >
 

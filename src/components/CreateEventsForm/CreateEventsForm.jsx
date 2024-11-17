@@ -165,6 +165,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                     <Form.Label>Código postal</Form.Label>
                     <Form.Control
                         type="number"
+                        min={0}
                         placeholder="Código Postal"
                         value={addressData.zipcode}
                         onChange={handleAddressChange}
@@ -177,7 +178,8 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                     <Form.Label>Número mínimo de asistentes</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="0"
+                        min={1}
+                        placeholder="1"
                         value={playerData.min}
                         onChange={handlePlayerChange}
                         name={'min'} />
@@ -187,7 +189,8 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                     <Form.Label>Número máximo de asistentes</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="0"
+                        min={1}
+                        placeholder="1"
                         value={playerData.max}
                         onChange={handlePlayerChange}
                         name={'max'} />

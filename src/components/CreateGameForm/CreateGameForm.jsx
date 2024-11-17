@@ -4,7 +4,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { Button, Row, Col, Form } from "react-bootstrap"
+import { Button, Row, Col, Form, Toast, ToastContainer } from "react-bootstrap"
 import { XLg } from "react-bootstrap-icons"
 
 
@@ -13,6 +13,11 @@ const API_URL = "http://localhost:5005"
 const CreateGameForm = () => {
 
     const navigate = useNavigate()
+
+    const [showCategoriesToast, setShowCategoriesToast] = useState(false)
+    const [showHowToPlayToast, setShowHowToPlayToast] = useState(false)
+    const [showContentToast, setShowContentToast] = useState(false)
+    const [showPostToast, setShowPostToast] = useState(false)
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -137,6 +142,7 @@ const CreateGameForm = () => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
+
         const reqPayLoadSpecs = {
             ...specs,
             players: players
@@ -147,13 +153,29 @@ const CreateGameForm = () => {
             specs: reqPayLoadSpecs
         }
 
+        if (gameData.categories.length === 1 && gameData.categories[0] === "") {
+            setShowCategoriesToast(true)
+            return
+        }
+
+        if (gameData.howToPlay.length === 1 && gameData.howToPlay[0] === "") {
+            setShowHowToPlayToast(true)
+            return
+        }
+
+        if (gameData.content.length === 1 && gameData.content[0] === "") {
+            setShowContentToast(true)
+            return
+        }
+
         axios
             .post(`${API_URL}/games`, reqPayLoad)
             .then(response => {
-                // toast
+                setShowPostToast(true)
                 navigate(`/juegos/detalles/${response.data.id}`)
             })
             .catch(err => console.log(err))
+
     }
 
     return (
@@ -182,8 +204,8 @@ const CreateGameForm = () => {
                         placeholder="Inserta el URL de la imagen"
                         value={gameData.image}
                         onChange={handleGameChange}
-                        name={"image"} 
-                        />
+                        name={"image"}
+                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -217,7 +239,8 @@ const CreateGameForm = () => {
                         })
                     }
 
-                    <Button variant="custom-transparent" onClick={addCategory} size="sm" className="mt-3">
+                    <Button variant="custom-transparent"
+                        onClick={addCategory} size="sm" className="mt-3">
                         Añadir categoría
                     </Button>
                 </Form.Group>
@@ -230,6 +253,8 @@ const CreateGameForm = () => {
                             <Form.Text className="text-muted"> Número mínimo </Form.Text>
                             <Form.Control
                                 type="number"
+                                min={1}
+                                placeholder="1"
                                 value={players.min}
                                 onChange={handlePlayersChange}
                                 name={"min"}
@@ -239,15 +264,21 @@ const CreateGameForm = () => {
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
                             <Form.Text className="text-muted"> Número máximo </Form.Text>
-                            <Form.Control type="number"
-                                value={players.max} onChange={handlePlayersChange}
-                                name={"max"} />
+                            <Form.Control
+                                type="number"
+                                min={1}
+                                placeholder="1"
+                                value={players.max}
+                                onChange={handlePlayersChange}
+                                name={"max"}
+                            />
                         </Col>
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Edad mínima</Form.Label>
                             <Form.Text className="text-muted">Edad mínima</Form.Text>
                             <Form.Control
                                 type="number"
+                                min={0}
                                 placeholder="Años"
                                 value={specs.minimumAge}
                                 onChange={handleSpecsChange}
@@ -274,6 +305,7 @@ const CreateGameForm = () => {
                     <Form.Label>Duración aproximada de partida en minutos</Form.Label>
                     <Form.Control
                         type="number"
+                        min={0}
                         placeholder="Minutos"
                         value={specs.duration}
                         onChange={handleSpecsChange}
@@ -342,8 +374,7 @@ const CreateGameForm = () => {
                                             variant="custom-secondary-outline"
                                             onClick={() => deleteExpansionsItem(idx)}
                                             size="sm"
-                                            disabled={gameData.expansions.length <= 1}
-                                        >
+                                            disabled={gameData.expansions.length <= 1}>
                                             <XLg />
                                         </Button>
                                     </Col>
@@ -360,7 +391,8 @@ const CreateGameForm = () => {
 
                 <Form.Group className="mb-3" controlId="formCheckOneTime">
                     <Form.Label>¿Puedes jugarlo sólo una vez?</Form.Label>
-                    <Form.Check type="checkbox"
+                    <Form.Check
+                        type="checkbox"
                         label="Sí, su manera de jugar o contenido implica 
                                 una partida única"
                         checked={gameData.oneTimePlay} onChange={handleGameChange}
@@ -411,6 +443,62 @@ const CreateGameForm = () => {
                 </Button>
 
             </Form>
+
+            <ToastContainer position="middle-center">
+                <Toast onClose={() => setShowCategoriesToast(false)} show={showCategoriesToast} delay={3000}>
+                    <Toast.Header closeButton={true}>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">Aviso</strong>
+                    </Toast.Header>
+                    <Toast.Body>Tienes que añadir al menos una categoría</Toast.Body>
+                </Toast>
+            </ToastContainer>
+
+            <ToastContainer position="middle-center">
+                <Toast onClose={() => setShowHowToPlayToast(false)} show={showHowToPlayToast} delay={3000}>
+                    <Toast.Header closeButton={true}>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">Aviso</strong>
+                    </Toast.Header>
+                    <Toast.Body>Tienes que añadir al menos una instrucción</Toast.Body>
+                </Toast>
+            </ToastContainer>
+
+            <ToastContainer position="middle-center">
+                <Toast onClose={() => setShowContentToast(false)} show={showContentToast} delay={3000}>
+                    <Toast.Header closeButton={true}>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">Aviso</strong>
+                    </Toast.Header>
+                    <Toast.Body>Tienes que añadir al menos un contenido</Toast.Body>
+                </Toast>
+            </ToastContainer>
+
+            <ToastContainer position="middle-center">
+                <Toast onClose={() => setShowPostToast(false)} show={showPostToast} delay={3000}>
+                    <Toast.Header closeButton={true}>
+                        <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                        />
+                        <strong className="me-auto">¡Éxito!</strong>
+                    </Toast.Header>
+                    <Toast.Body>El juego se ha añadido correctamente a la colección</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </div>
     )
 }
