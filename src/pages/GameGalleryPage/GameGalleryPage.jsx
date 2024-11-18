@@ -10,7 +10,7 @@ const GameGalleryPage = () => {
 
     return (
         <div className="GameGalleryPage m-5">
-            <Container>
+            <Container className="full-heigth-min">
                 <GameList />
             </Container>
 

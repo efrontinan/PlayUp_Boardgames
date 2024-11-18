@@ -37,6 +37,10 @@ h6 {
   flex-wrap: wrap;
 }
 
+.full-heigth-min{
+  min-height: 80vh;
+}
+
 .g24 {
   gap: 24px;
 }
@@ -114,7 +118,7 @@ h6 {
   height: 100%;
 }
 
-.form-control {
+.form-control  {
   background-color: #292f3d;
   border: none;
   color: #ffffff;
@@ -151,6 +155,20 @@ h6 {
 .vertical-form {
   display: flex;
   flex-direction: column;
+}
+
+.css-13cymwt-control {
+  background-color: #292f3d !important;
+  border: none;
+  color: #ffffff !important;
+}
+
+.css-t3ipsp-control {
+  color: #ffffff !important;
+  background-color: #292f3d !important;
+  border-color: #9ab8fe;
+  outline: 0;
+  box-shadow: 0 0 0 .05rem #9ab8fe;
 }
 
 .card {

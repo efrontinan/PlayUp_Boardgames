@@ -6,7 +6,7 @@ const AboutUsPage = () => {
 
     return (
         <div className="AboutUsPage m-5">
-            <Container>
+            <Container className="full-heigth-min">
                 <Row>
                     <Col md="5" className='image'>
                     </Col>

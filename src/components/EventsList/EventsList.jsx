@@ -27,11 +27,11 @@ const EventsList = () => {
 
     const fetchEvents = () => {
         axios
-            .get(`${API_URL}/events/?gameId=${gameId}`)
+            .get( gameId? `${API_URL}/events/?gameId=${gameId}` : `${API_URL}/events` )
             .then(response => {
                 setEvents(response.data)
                 setIsLoading(false)
-                setShowToast(true)
+                // setShowToast(true)
             })
             .catch(err => console.log(err))
     }

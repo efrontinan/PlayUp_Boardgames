@@ -6,3 +6,37 @@
 .carousel-item {
     text-align: center;
 }
+
+.HomePage .myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1000;
+  }
+
+.HomePage .image{
+    background-color: transparent;
+    background-image: url("https://res.cloudinary.com/dt9pviq34/image/upload/v1731955393/PlayUp/etvj5alvypue29c5stdx.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 60vh;
+    border-radius: 0px 50px 0px 50px;
+    filter: grayscale(100%);
+}
+
+.HomePage .card-body {
+    height: 20vh;
+}
+
+.HomePage .card-title{
+    font-size: 40px;
+    text-align: center;
+}
+
+.HomePage .card-text {
+    text-align: center;
+}
+

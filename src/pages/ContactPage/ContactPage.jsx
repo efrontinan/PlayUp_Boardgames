@@ -1,4 +1,4 @@
-import { Row,Col } from 'react-bootstrap'
+import { Row,Col, Container } from 'react-bootstrap'
 
 import './ContactPage.css'
 import ContactForm from '../../components/ContactForm/ContactForm'
@@ -7,11 +7,13 @@ const ContactPage = () => {
 
     return (
         <div className="ContactPage m-5">
-            <Row>
+            <Container className="full-heigth-min">
+            <Row > 
                 <Col>
                 <ContactForm />
                 </Col>
             </Row>
+            </Container>
 
         </div>
     )

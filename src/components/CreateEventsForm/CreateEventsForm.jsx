@@ -1,6 +1,9 @@
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import {geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import axios from "axios"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
+
 
 import { Form, Button, Toast } from "react-bootstrap"
 
@@ -24,6 +27,8 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         name: "",
         zipcode: 0
     })
+
+    const [addressValue, setAddressValue] = useState()
 
     const [playerData, setPlayer] = useState({
         min: 0,
@@ -149,6 +154,17 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         name={'name'} />
                 </Form.Group>
 
+                <Form.Group controlId="autocompleteAddress" className="mb-3">
+                    <GooglePlacesAutocomplete
+                        selectProps={{
+                            addressValue,
+                            placeholder: "Buscar dirección...",
+                            onChange: setAddressValue
+                        }}
+                        apiKey="AIzaSyDKOESwdtbPID8SoPVI_cK9Wq7dxPmd3D4"
+                    />
+                </Form.Group>
+
                 <Form.Group controlId="streetField" className="mb-3">
                     <Form.Label>Calle</Form.Label>
                     <Form.Control
@@ -223,6 +239,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         onChange={handlePlayerChange}
                         name={'max'} />
                 </Form.Group>
+
 
                 <Button variant="custom-primary" type="submit">
                     Crear planazo
