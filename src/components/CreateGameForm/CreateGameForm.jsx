@@ -1,7 +1,7 @@
 import "./CreateGameForm.css"
 
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { Button, Row, Col, Form, Toast, ToastContainer } from "react-bootstrap"
@@ -14,10 +14,12 @@ const CreateGameForm = () => {
 
     const navigate = useNavigate()
 
-    const [showCategoriesToast, setShowCategoriesToast] = useState(false)
-    const [showHowToPlayToast, setShowHowToPlayToast] = useState(false)
-    const [showContentToast, setShowContentToast] = useState(false)
+    // const [showCategoriesToast, setShowCategoriesToast] = useState(false)
+    // const [showHowToPlayToast, setShowHowToPlayToast] = useState(false)
+    // const [showContentToast, setShowContentToast] = useState(false)
     const [showPostToast, setShowPostToast] = useState(false)
+
+    const [isFormValid, setIsFormValid] = useState(false)
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -43,7 +45,11 @@ const CreateGameForm = () => {
     const handleGameChange = e => {
         const { name, value, checked, type } = e.target
         const result = type === "checkbox" ? checked : value
-        setGameData({ ...gameData, [name]: result })
+        setGameData(prevData => {
+            const newData = { ...prevData, [name]: result }
+            checkFormValidity()
+            return newData
+        })
     }
 
     const handleSpecsChange = e => {
@@ -58,9 +64,13 @@ const CreateGameForm = () => {
 
     const handleCategoriesChange = (e, idx) => {
         const { value } = e.target
-        const categoriesCopy = [...gameData.categories]
-        categoriesCopy[idx] = value
-        setGameData({ ...gameData, categories: categoriesCopy })
+        setGameData(prevData => {
+            const categoriesCopy = [...prevData.categories]
+            categoriesCopy[idx] = value
+            const newData = { ...prevData, categories: categoriesCopy }
+            checkFormValidity()
+            return newData
+        })
     }
 
     const addCategory = () => {
@@ -79,9 +89,13 @@ const CreateGameForm = () => {
 
     const handleHowToPlayChange = (e, idx) => {
         const { value } = e.target
-        const howToPlayCopy = [...gameData.howToPlay]
-        howToPlayCopy[idx] = value
-        setGameData({ ...gameData, howToPlay: howToPlayCopy })
+        setGameData(prevData => {
+            const howToPlayCopy = [...prevData.howToPlay]
+            howToPlayCopy[idx] = value
+            const newData = { ...prevData, howToPlay: howToPlayCopy }
+            checkFormValidity()
+            return newData
+        })
     }
 
     const addHowToPlay = () => {
@@ -121,9 +135,14 @@ const CreateGameForm = () => {
 
     const handleContentChange = (e, idx) => {
         const { value } = e.target
-        const contentCopy = [...gameData.content]
-        contentCopy[idx] = value
-        setGameData({ ...gameData, content: contentCopy })
+        setGameData(prevData => {
+            const contentCopy = [...prevData.content]
+            contentCopy[idx] = value
+            const newData = { ...prevData, content: contentCopy }
+            checkFormValidity()
+            return newData
+        })
+
     }
 
     const addContent = () => {
@@ -140,6 +159,18 @@ const CreateGameForm = () => {
         }
     }
 
+    const checkFormValidity = () => {
+        const isValid =
+            gameData.title.length > 0 &&
+            gameData.image.length > 0 &&
+            gameData.categories.some(elm => elm.length > 0) &&
+            gameData.description.length > 0 &&
+            gameData.howToPlay.some(elm => elm.length > 0) &&
+            gameData.content.some(elm => elm.length > 0)
+        console.log(isValid)
+        setIsFormValid(isValid)
+    }
+
     const handleFormSubmit = e => {
         e.preventDefault()
 
@@ -153,20 +184,20 @@ const CreateGameForm = () => {
             specs: reqPayLoadSpecs
         }
 
-        if (gameData.categories.length === 1 && gameData.categories[0] === "") {
-            setShowCategoriesToast(true)
-            return
-        }
+        // if (gameData.categories.length === 1 && gameData.categories[0] === "") {
+        //     setShowCategoriesToast(true)
+        //     return
+        // }
 
-        if (gameData.howToPlay.length === 1 && gameData.howToPlay[0] === "") {
-            setShowHowToPlayToast(true)
-            return
-        }
+        // if (gameData.howToPlay.length === 1 && gameData.howToPlay[0] === "") {
+        //     setShowHowToPlayToast(true)
+        //     return
+        // }
 
-        if (gameData.content.length === 1 && gameData.content[0] === "") {
-            setShowContentToast(true)
-            return
-        }
+        // if (gameData.content.length === 1 && gameData.content[0] === "") {
+        //     setShowContentToast(true)
+        //     return
+        // }
 
         axios
             .post(`${API_URL}/games`, reqPayLoad)
@@ -432,19 +463,25 @@ const CreateGameForm = () => {
                             )
                         })
                     }
-                    <Button variant="custom-transparent" onClick={addContent} size="sm" className="mt-3">
+                    <Button variant="custom-transparent"
+                        onClick={addContent}
+                        size="sm"
+                        className="mt-3">
                         Añadir contenido
                     </Button>
 
                 </Form.Group>
 
-                <Button variant="custom-primary" type="submit">
+                <Button
+                    variant="custom-primary"
+                    type="submit"
+                    disabled={!isFormValid}>
                     Añadir juego a la colección
                 </Button>
 
             </Form>
 
-            <ToastContainer position="middle-center">
+            {/* <ToastContainer position="middle-center">
                 <Toast onClose={() => setShowCategoriesToast(false)} show={showCategoriesToast} delay={3000}>
                     <Toast.Header closeButton={true}>
                         <img
@@ -484,7 +521,7 @@ const CreateGameForm = () => {
                     </Toast.Header>
                     <Toast.Body>Tienes que añadir al menos un contenido</Toast.Body>
                 </Toast>
-            </ToastContainer>
+            </ToastContainer> */}
 
             <ToastContainer position="middle-center">
                 <Toast onClose={() => setShowPostToast(false)} show={showPostToast} delay={3000}>
