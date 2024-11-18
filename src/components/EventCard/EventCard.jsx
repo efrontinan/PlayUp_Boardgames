@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-import { Card, Badge, Row, Container, Col, Button, Offcanvas } from "react-bootstrap"
+import { Card, Badge, Row, Col, Button, Offcanvas, Modal, ModalBody } from "react-bootstrap"
 import { Trash3, Pencil } from 'react-bootstrap-icons'
 
 import EditEventForm from "../EditEventForm/EditEventForm"
@@ -16,6 +16,7 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
     const { country, city, street, name, zipcode } = address
 
     const [showEditOffcanvas, setShowEditOffcanvas] = useState(false)
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
     const deleteEvent = e => {
         e.preventDefault()
@@ -83,7 +84,7 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
 
                         <Col md="1">
                             <div className="d-flex d-sm-grid gap-2">
-                                <Button  onClick={deleteEvent} variant="custom-secondary-outline"><Trash3 /></Button>
+                                <Button  onClick={() => setShowConfirmationModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>
                                 <Button onClick={() => setShowEditOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>
                             </div>
                         </Col>
@@ -104,6 +105,17 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
                     <EditEventForm eventId={id} setShowEditOffcanvas={setShowEditOffcanvas} fetchEvents={fetchEvents} />
                 </Offcanvas.Body>
             </Offcanvas>
+
+            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}  centered>
+                <Modal.Header closeButton>
+                <Modal.Title>¿Estas seguro?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body> ¿Estás seguro de que quieres borrar este planazo?</Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={deleteEvent} variant="custom-primary">Sí, eliminar</Button>
+                    <Button onClick={() => setShowConfirmationModal(false)} variant="custom-secondary-outline">Cancelar</Button>
+                </Modal.Footer>
+            </Modal>
 
 
         </div>

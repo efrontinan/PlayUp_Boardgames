@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
+import { useLocation } from "react-router-dom"
 
 import { Form, Row, Col, ListGroup } from "react-bootstrap"
 import { Search } from "react-bootstrap-icons"
@@ -14,6 +15,12 @@ const GlobalGamesFilter = () => {
 
     const [filterValue, setFilter] = useState("")
     const [filterResults, setFilterResults] = useState([])
+    const location = useLocation()
+
+    useEffect(() => {
+        setFilter("")
+        setFilterResults([])
+      }, [location.pathname])
 
     const handleFilterChange = e => {
         const { value } = e.target

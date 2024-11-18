@@ -22,7 +22,7 @@ const GameDetailsPage = () => {
 
   useEffect(() => {
     fetchGameDetails()
-  }, [])
+  }, [gameId])
 
   const fetchGameDetails = () => {
     axios

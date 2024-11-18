@@ -7,7 +7,7 @@ const API_URL = "http://localhost:5005"
 
 const ReviewsList = () => {
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         isLoading ? <Loader /> :

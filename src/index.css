@@ -255,4 +255,21 @@ h6 {
   font-size: 1rem;
 }
 
+.modal-content{
+  background-color: hsl(222, 99%, 7%);
+  border: 1px solid #3571fe;
+}
+
+.modal-backdrop .show{
+  opacity: .7;
+}
+
+.modal-header{
+  border-bottom: none;
+}
+
+.modal-footer{
+  border-top: none;
+}
+
 
