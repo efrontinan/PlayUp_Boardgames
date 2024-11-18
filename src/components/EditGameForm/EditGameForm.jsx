@@ -13,6 +13,7 @@ const API_URL = "http://localhost:5005"
 const EditGameForm = ({ gameId }) => {
 
     const [isLoading, setIsLoading] = useState(true)
+    const [validated, setValidated] = useState(false)
 
     const navigate = useNavigate()
 
@@ -185,6 +186,12 @@ const EditGameForm = ({ gameId }) => {
 
     const handleFormSubmit = e => {
         e.preventDefault()
+        const form = e.target
+        if (form.checkValidity() === false) {
+            e.stopPropagation()
+            setValidated(true)
+            return
+        }
 
         const reqPayLoadSpecs = {
             ...specs,
@@ -207,29 +214,39 @@ const EditGameForm = ({ gameId }) => {
     return (isLoading ? <Loader /> :
         <div className="EditGameForm">
 
-            <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
+            <Form
+                noValidate
+                validated={validated}
+                onSubmit={handleFormSubmit}
+                className="vertical-form p-3">
 
                 <Form.Group className="mb-3" controlId="formTitle">
                     <Form.Label>¿Cómo se llama el juego?</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="Introduce el nombre del juego"
                         value={gameData.title}
                         onChange={handleGameChange}
                         name={"title"} />
-                    <Form.Text className="text-muted">
-                        ¡Añade un juego divertido!
-                    </Form.Text>
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
+
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formImage">
                     <Form.Label>Imagen del juego</Form.Label>
                     <Form.Control
+                        required
                         type="url"
                         placeholder="Inserta el URL de la imagen"
                         value={gameData.image}
                         onChange={handleGameChange}
                         name={"image"} />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -240,12 +257,16 @@ const EditGameForm = ({ gameId }) => {
                                 <Row key={`category-${idx}`} className="mb-2">
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             placeholder="Categoría"
                                             onChange={e => handleCategoriesChange(e, idx)}
                                             value={elm}
                                             id={`formCategories-${idx}`}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
@@ -275,37 +296,48 @@ const EditGameForm = ({ gameId }) => {
                             <Form.Label className="d-none">Número mínimo de jugadores</Form.Label>
                             <Form.Text className="text-muted"> Número mínimo </Form.Text>
                             <Form.Control
+                                required
                                 type="number"
-                                min={0}
+                                min={1}
+                                placeholder="1"
                                 value={players.min}
                                 onChange={handlePlayersChange}
-                                name={"min"}
-                            />
+                                name={"min"} />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
 
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
                             <Form.Text className="text-muted"> Número máximo </Form.Text>
                             <Form.Control
+                                required
                                 type="number"
-                                min={0}
+                                min={1}
+                                placeholder="1"
                                 value={players.max}
                                 onChange={handlePlayersChange}
-                                name={"max"}
-                            />
+                                name={"max"} />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
 
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Edad mínima</Form.Label>
                             <Form.Text className="text-muted">Edad mínima</Form.Text>
                             <Form.Control
+                                required
                                 type="number"
                                 min={0}
                                 placeholder="Años"
                                 value={specs.minimumAge}
                                 onChange={handleSpecsChange}
-                                name={"minimumAge"}
-                            />
+                                name={"minimumAge"} />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
                     </Row>
                 </Form.Group>
@@ -313,26 +345,32 @@ const EditGameForm = ({ gameId }) => {
                 <Form.Group className="mb-3" controlId="formDescription">
                     <Form.Label>Descripción</Form.Label>
                     <Form.Control
+                        required
                         as="textarea"
                         rows={3}
                         type="text"
                         placeholder="Inserta una descripción"
                         value={gameData.description}
                         onChange={handleGameChange}
-                        name={"description"}
-                    />
+                        name={"description"} />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-5" controlId="formDuration">
                     <Form.Label>Duración aproximada de partida en minutos</Form.Label>
                     <Form.Control
+                        required
                         type="number"
                         min={0}
                         placeholder="Minutos"
                         value={specs.duration}
                         onChange={handleSpecsChange}
-                        name={"duration"}
-                    />
+                        name={"duration"} />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -344,6 +382,7 @@ const EditGameForm = ({ gameId }) => {
                                 <Row key={idx}>
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             className="mb-2"
                                             placeholder="Añade una instrucción"
@@ -351,6 +390,9 @@ const EditGameForm = ({ gameId }) => {
                                             value={elm}
                                             id={`formInstructions-${idx}`}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
@@ -395,8 +437,8 @@ const EditGameForm = ({ gameId }) => {
                                             variant="custom-secondary-outline"
                                             onClick={() => deleteExpansionsItem(idx)}
                                             size="sm"
-                                            disabled={gameData.expansions.length <= 1}
-                                        >                                  <XLg />
+                                            disabled={gameData.expansions.length <= 1}>
+                                            <XLg />
                                         </Button>
                                     </Col>
                                 </Row>
@@ -428,13 +470,16 @@ const EditGameForm = ({ gameId }) => {
                                 <Row key={idx} >
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             className="mb-2"
                                             placeholder="Añade el contenido incluido en el juego"
                                             onChange={e => handleContentChange(e, idx)}
                                             value={elm}
-                                            id={`formContent-${idx}`}
-                                        />
+                                            id={`formContent-${idx}`} />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
