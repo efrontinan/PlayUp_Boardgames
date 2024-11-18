@@ -13,7 +13,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
     const { min, max } = players
     const [showOfcanvas, setShowOffcanvas] = useState(false)
 
-    // const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
 
     return (
 
@@ -45,7 +45,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
                     <Stack direction="horizontal" gap={1} className='m-0'>
                         <Button as={Link} to={`/juegos/detalles/${id}`} variant="custom-transparent" className='me-auto'> <InfoCircle />   Ver detalles</Button>
-                        {/* <Button onClick={() => setShowDeleteModal(true)} variant="custom-secondary-outline"><Trash3 /></Button> */}
+                        <Button onClick={() => setShowDeleteModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>
                         <Button onClick={() => setShowOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>
                     </Stack>
 
@@ -61,20 +61,20 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            {/* <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+            <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Advertencia</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>¿Estás seguro/a de que quieres eliminar este juego?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={setShowDeleteModal(false)}>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
                         No
                     </Button>
                     <Button variant="primary" onClick={() => removeGame(id)}>
                         Sí
                     </Button>
                 </Modal.Footer>
-            </Modal> */}
+            </Modal>
         </div>
 
     )

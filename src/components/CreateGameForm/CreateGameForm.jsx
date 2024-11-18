@@ -1,10 +1,10 @@
 import "./CreateGameForm.css"
 
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Link } from "react-router-dom"
 
-import { Button, Row, Col, Form, Toast, ToastContainer } from "react-bootstrap"
+import { Button, Row, Col, Form, Toast } from "react-bootstrap"
 import { XLg } from "react-bootstrap-icons"
 
 
@@ -12,14 +12,9 @@ const API_URL = "http://localhost:5005"
 
 const CreateGameForm = () => {
 
-    const navigate = useNavigate()
-
-    // const [showCategoriesToast, setShowCategoriesToast] = useState(false)
-    // const [showHowToPlayToast, setShowHowToPlayToast] = useState(false)
-    // const [showContentToast, setShowContentToast] = useState(false)
     const [showPostToast, setShowPostToast] = useState(false)
-
-    const [isFormValid, setIsFormValid] = useState(false)
+    const [newGameId, setNewGameId] = useState(null)
+    const [validated, setValidated] = useState(false)
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -45,11 +40,7 @@ const CreateGameForm = () => {
     const handleGameChange = e => {
         const { name, value, checked, type } = e.target
         const result = type === "checkbox" ? checked : value
-        setGameData(prevData => {
-            const newData = { ...prevData, [name]: result }
-            checkFormValidity()
-            return newData
-        })
+        setGameData({ ...prevData, [name]: result })
     }
 
     const handleSpecsChange = e => {
@@ -64,13 +55,9 @@ const CreateGameForm = () => {
 
     const handleCategoriesChange = (e, idx) => {
         const { value } = e.target
-        setGameData(prevData => {
-            const categoriesCopy = [...prevData.categories]
-            categoriesCopy[idx] = value
-            const newData = { ...prevData, categories: categoriesCopy }
-            checkFormValidity()
-            return newData
-        })
+        const categoriesCopy = [...gameData.categories]
+        categoriesCopy[idx] = value
+        setGameData({ ...gameData, categories: categoriesCopy })
     }
 
     const addCategory = () => {
@@ -89,13 +76,9 @@ const CreateGameForm = () => {
 
     const handleHowToPlayChange = (e, idx) => {
         const { value } = e.target
-        setGameData(prevData => {
-            const howToPlayCopy = [...prevData.howToPlay]
-            howToPlayCopy[idx] = value
-            const newData = { ...prevData, howToPlay: howToPlayCopy }
-            checkFormValidity()
-            return newData
-        })
+        const howToPlayCopy = [...gameData.howToPlay]
+        howToPlayCopy[idx] = value
+        setGameData({ ...gameData, howToPlay: howToPlayCopy })
     }
 
     const addHowToPlay = () => {
@@ -135,13 +118,9 @@ const CreateGameForm = () => {
 
     const handleContentChange = (e, idx) => {
         const { value } = e.target
-        setGameData(prevData => {
-            const contentCopy = [...prevData.content]
-            contentCopy[idx] = value
-            const newData = { ...prevData, content: contentCopy }
-            checkFormValidity()
-            return newData
-        })
+        const contentCopy = [...gameData.content]
+        contentCopy[idx] = value
+        setGameData({ ...gameData, content: contentCopy })
 
     }
 
@@ -159,20 +138,15 @@ const CreateGameForm = () => {
         }
     }
 
-    const checkFormValidity = () => {
-        const isValid =
-            gameData.title.length > 0 &&
-            gameData.image.length > 0 &&
-            gameData.categories.some(elm => elm.length > 0) &&
-            gameData.description.length > 0 &&
-            gameData.howToPlay.some(elm => elm.length > 0) &&
-            gameData.content.some(elm => elm.length > 0)
-        console.log(isValid)
-        setIsFormValid(isValid)
-    }
-
     const handleFormSubmit = e => {
         e.preventDefault()
+        const form = e.target
+        if (form.checkValidity() === false) {
+            e.stopPropagation()
+            setValidated(true)
+            return
+        }
+
 
         const reqPayLoadSpecs = {
             ...specs,
@@ -184,26 +158,11 @@ const CreateGameForm = () => {
             specs: reqPayLoadSpecs
         }
 
-        // if (gameData.categories.length === 1 && gameData.categories[0] === "") {
-        //     setShowCategoriesToast(true)
-        //     return
-        // }
-
-        // if (gameData.howToPlay.length === 1 && gameData.howToPlay[0] === "") {
-        //     setShowHowToPlayToast(true)
-        //     return
-        // }
-
-        // if (gameData.content.length === 1 && gameData.content[0] === "") {
-        //     setShowContentToast(true)
-        //     return
-        // }
-
         axios
             .post(`${API_URL}/games`, reqPayLoad)
             .then(response => {
+                setNewGameId(response.data.id)
                 setShowPostToast(true)
-                navigate(`/juegos/detalles/${response.data.id}`)
             })
             .catch(err => console.log(err))
 
@@ -212,17 +171,24 @@ const CreateGameForm = () => {
     return (
         <div className="CreateGameForm">
 
-            <Form onSubmit={handleFormSubmit} className="vertical-form p-3">
+            <Form noValidate
+                validated={validated}
+                onSubmit={handleFormSubmit}
+                className="vertical-form p-3">
 
                 <Form.Group className="mb-3" controlId="formTitle">
                     <Form.Label>¿Cómo se llama el juego?</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="Introduce el nombre del juego"
                         value={gameData.title}
                         onChange={handleGameChange}
                         name={"title"}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                     <Form.Text className="text-muted">
                         ¡Añade un juego divertido!
                     </Form.Text>
@@ -231,12 +197,16 @@ const CreateGameForm = () => {
                 <Form.Group className="mb-3" controlId="formImage">
                     <Form.Label>Imagen del juego</Form.Label>
                     <Form.Control
+                        required
                         type="url"
                         placeholder="Inserta el URL de la imagen"
                         value={gameData.image}
                         onChange={handleGameChange}
                         name={"image"}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -247,12 +217,16 @@ const CreateGameForm = () => {
                                 <Row key={`category-${idx}`} className="mb-2">
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             placeholder="Categoría"
                                             onChange={e => handleCategoriesChange(e, idx)}
                                             value={elm}
                                             id={`formCategories-${idx}`}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
@@ -283,6 +257,7 @@ const CreateGameForm = () => {
                             <Form.Label className="d-none">Número mínimo de jugadores</Form.Label>
                             <Form.Text className="text-muted"> Número mínimo </Form.Text>
                             <Form.Control
+                                required
                                 type="number"
                                 min={1}
                                 placeholder="1"
@@ -290,12 +265,16 @@ const CreateGameForm = () => {
                                 onChange={handlePlayersChange}
                                 name={"min"}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
 
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
                             <Form.Text className="text-muted"> Número máximo </Form.Text>
                             <Form.Control
+                                required
                                 type="number"
                                 min={1}
                                 placeholder="1"
@@ -303,11 +282,15 @@ const CreateGameForm = () => {
                                 onChange={handlePlayersChange}
                                 name={"max"}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
                         <Col sm="6" md="4">
                             <Form.Label className="d-none">Edad mínima</Form.Label>
                             <Form.Text className="text-muted">Edad mínima</Form.Text>
                             <Form.Control
+                                required
                                 type="number"
                                 min={0}
                                 placeholder="Años"
@@ -315,6 +298,9 @@ const CreateGameForm = () => {
                                 onChange={handleSpecsChange}
                                 name={"minimumAge"}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                Este campo es obligatorio
+                            </Form.Control.Feedback>
                         </Col>
                     </Row>
                 </Form.Group>
@@ -322,6 +308,7 @@ const CreateGameForm = () => {
                 <Form.Group className="mb-3" controlId="formDescription">
                     <Form.Label>Descripción</Form.Label>
                     <Form.Control
+                        required
                         as="textarea"
                         rows={3}
                         type="text"
@@ -330,11 +317,15 @@ const CreateGameForm = () => {
                         onChange={handleGameChange}
                         name={"description"}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formDuration">
                     <Form.Label>Duración aproximada de partida en minutos</Form.Label>
                     <Form.Control
+                        required
                         type="number"
                         min={0}
                         placeholder="Minutos"
@@ -342,6 +333,9 @@ const CreateGameForm = () => {
                         onChange={handleSpecsChange}
                         name={"duration"}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -353,6 +347,7 @@ const CreateGameForm = () => {
                                 <Row key={idx}>
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             className="mb-2"
                                             placeholder="Añade una instrucción"
@@ -360,6 +355,9 @@ const CreateGameForm = () => {
                                             value={elm}
                                             id={`formInstructions-${idx}`}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
@@ -439,13 +437,16 @@ const CreateGameForm = () => {
                                 <Row key={idx} >
                                     <Col md="11">
                                         <Form.Control
+                                            required
                                             type="text"
                                             className="mb-2"
                                             placeholder="Añade el contenido incluido en el juego"
                                             onChange={e => handleContentChange(e, idx)}
                                             value={elm}
-                                            id={`formContent-${idx}`}
-                                        />
+                                            id={`formContent-${idx}`} />
+                                        <Form.Control.Feedback type="invalid">
+                                            Este campo es obligatorio
+                                        </Form.Control.Feedback>
                                     </Col>
 
                                     <Col md="1">
@@ -453,8 +454,7 @@ const CreateGameForm = () => {
                                             variant="custom-secondary-outline"
                                             size="sm"
                                             disabled={gameData.content.length <= 1}
-                                            onClick={() => deleteContentItem(idx)}
-                                        >
+                                            onClick={() => deleteContentItem(idx)}>
                                             <XLg />
                                         </Button>
                                     </Col>
@@ -474,68 +474,24 @@ const CreateGameForm = () => {
 
                 <Button
                     variant="custom-primary"
-                    type="submit"
-                    disabled={!isFormValid}>
+                    type="submit">
                     Añadir juego a la colección
                 </Button>
 
             </Form>
 
-            {/* <ToastContainer position="middle-center">
-                <Toast onClose={() => setShowCategoriesToast(false)} show={showCategoriesToast} delay={3000}>
-                    <Toast.Header closeButton={true}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Aviso</strong>
-                    </Toast.Header>
-                    <Toast.Body>Tienes que añadir al menos una categoría</Toast.Body>
-                </Toast>
-            </ToastContainer>
+            <Toast onClose={() => setShowPostToast(false)} show={showPostToast} delay="5000">
+                <Toast.Header
+                    className="justify-content-between">
+                    ¡Éxito!
+                </Toast.Header>
+                <Toast.Body>
+                    <Button as={Link} to={(`/juegos/detalles/${newGameId}`)}>
+                        Ir a los detalles del juego
+                    </Button>
+                </Toast.Body>
+            </Toast>
 
-            <ToastContainer position="middle-center">
-                <Toast onClose={() => setShowHowToPlayToast(false)} show={showHowToPlayToast} delay={3000}>
-                    <Toast.Header closeButton={true}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Aviso</strong>
-                    </Toast.Header>
-                    <Toast.Body>Tienes que añadir al menos una instrucción</Toast.Body>
-                </Toast>
-            </ToastContainer>
-
-            <ToastContainer position="middle-center">
-                <Toast onClose={() => setShowContentToast(false)} show={showContentToast} delay={3000}>
-                    <Toast.Header closeButton={true}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">Aviso</strong>
-                    </Toast.Header>
-                    <Toast.Body>Tienes que añadir al menos un contenido</Toast.Body>
-                </Toast>
-            </ToastContainer> */}
-
-            <ToastContainer position="middle-center">
-                <Toast onClose={() => setShowPostToast(false)} show={showPostToast} delay={3000}>
-                    <Toast.Header closeButton={true}>
-                        <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                        />
-                        <strong className="me-auto">¡Éxito!</strong>
-                    </Toast.Header>
-                    <Toast.Body>El juego se ha añadido correctamente a la colección</Toast.Body>
-                </Toast>
-            </ToastContainer>
         </div>
     )
 }
