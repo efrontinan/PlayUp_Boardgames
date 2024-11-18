@@ -230,4 +230,29 @@ h6 {
   }
 }
 
+.toast{
+  background-color: #3571fe;
+  position: absolute;
+  bottom: 24px;
+  left: 40px;
+  width: 50vw;
+  z-index: 1400;
+}
+
+.toast-header{
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toast-header .btn-close{
+  background-color: #ffffff; 
+}
+
+.toast-body{
+  color: #06020b;
+  font-size: 1rem;
+}
+
 

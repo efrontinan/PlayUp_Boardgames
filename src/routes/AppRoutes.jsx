@@ -8,6 +8,8 @@ import EditGamePage from "./../pages/EditGamePage/EditGamePage"
 import EditEventPage from "./../pages/EditEventPage/EditEventPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import EventsGalleryPage from "../pages/EventsGalleryPage/EventsGalleryPage"
+import AboutUsPage from "../pages/AboutUsPage/AboutUsPage"
+import ContactPage from "../pages/ContactPage/ContactPage"
 
 const AppRoutes = () => {
     return (
@@ -20,6 +22,8 @@ const AppRoutes = () => {
                 <Route path="/juegos/detalles/:gameId" element={<GameDetailsPage />} />
                 <Route path="/planes" element={<EventsGalleryPage />} />
                 <Route path="/planes/editar/:eventId" element={<EditEventPage />} />
+                <Route path="/sobre-nosotros" element={<AboutUsPage />} />
+                <Route path="/contacto" element={<ContactPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>
