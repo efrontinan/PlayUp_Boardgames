@@ -1,7 +1,7 @@
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
-import {geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 
@@ -25,10 +25,33 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         city: "",
         street: "",
         name: "",
-        zipcode: 0
+        zipcode: 0,
+        label: "",
+        lat: "",
+        lng: ""
     })
 
     const [addressValue, setAddressValue] = useState()
+
+    useEffect(() => {
+        handleAutocomplete()
+    }, [addressValue])
+
+    const handleAutocomplete = () => {
+
+        geocodeByAddress(addressValue?.label)
+            .then(([addressDetails]) => {
+                setAddress({ ...addressData, label: addressValue.label })
+                return getLatLng(addressDetails)
+            })
+            .then((coordinates) => {
+                console.log('LAS COORDENADAS', coordinates)
+                setAddress({ ...addressData, lat: coordinates.lat, lng: coordinates.lng })
+                console.log(addressValue, addressData)
+            })
+            .catch(error => console.error(error))
+
+    }
 
     const [playerData, setPlayer] = useState({
         min: 0,
@@ -154,7 +177,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         name={'name'} />
                 </Form.Group>
 
-                <Form.Group controlId="autocompleteAddress" className="mb-3">
+                <Form.Group controlId="autocompleteAddress" className="mb-3 places-input">
                     <GooglePlacesAutocomplete
                         selectProps={{
                             addressValue,
@@ -162,6 +185,20 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                             onChange: setAddressValue
                         }}
                         apiKey="AIzaSyDKOESwdtbPID8SoPVI_cK9Wq7dxPmd3D4"
+                        styles={
+                            {input: (provided) => ({
+                                ...provided,
+                                color: 'red',
+                              }),
+                              option: (provided) => ({
+                                ...provided,
+                                color: 'red',
+                              }),
+                              singleValue: (provided) => ({
+                                ...provided,
+                                color: 'red',
+                              })}
+                          }
                     />
                 </Form.Group>
 

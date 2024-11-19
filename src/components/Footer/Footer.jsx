@@ -9,7 +9,7 @@ const Footer = () => {
 
         <div className="Footer">
             <Row>
-                <Col md="6">
+                <Col xs="12" md="6">
                     <Stack direction="horizontal" gap={3}>
                         <NavLink
                             to="/sobre-nosotros"
@@ -24,8 +24,8 @@ const Footer = () => {
                     </Stack>
 
                 </Col>
-                <Col md="6">
-                    <p className="text-end">® Developed by Iván Blanco & Elena Frontiñán</p>
+                <Col md="6" className="mt-3">
+                    <p className="text-md-end">® Developed by Iván Blanco & Elena Frontiñán</p>
                 </Col>
             </Row>
         </div>

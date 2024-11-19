@@ -45,7 +45,7 @@ const GlobalGamesFilter = () => {
                     <Col sm="1" align="right">
                         <Form.Label><Search /></Form.Label>
                     </Col>
-                    <Col>
+                    <Col className="d-none d-md-flex">
                         <Form.Control
                             type="text"
                             placeholder="Busca tu juego"

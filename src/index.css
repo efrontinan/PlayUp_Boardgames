@@ -49,6 +49,7 @@ h6 {
   width: fit-content;
 }
 
+
 .bg-custom-dark {
   background-color: #17082e;
 }
@@ -157,18 +158,19 @@ h6 {
   flex-direction: column;
 }
 
-.css-13cymwt-control {
-  background-color: #292f3d !important;
+
+.places-input > div > div {
+  background-color: #292f3d;
   border: none;
-  color: #ffffff !important;
 }
 
-.css-t3ipsp-control {
-  color: #ffffff !important;
-  background-color: #292f3d !important;
-  border-color: #9ab8fe;
-  outline: 0;
-  box-shadow: 0 0 0 .05rem #9ab8fe;
+.places-input > div > div > div > div {
+  color: #8591ad;
+  font-size: small;
+}
+
+#react-select-3-input {
+  color: #8591ad;
 }
 
 .card {
@@ -237,17 +239,27 @@ h6 {
   .offcanvas.offcanvas-end {
     width: 95vw;
   }
+  .w-custom-100{
+    width: 100%;
+  }
+  
 }
 
 @media (min-width: 576px) {
   .offcanvas.offcanvas-end {
     width: 70vw;
   }
+  .w-custom-100{
+    width: 100%;
+  }
 }
 
 @media (min-width: 992px) {
   .offcanvas.offcanvas-end {
     width: 45vw;
+  }
+  .w-custom-100{
+    width: auto;
   }
 }
 
