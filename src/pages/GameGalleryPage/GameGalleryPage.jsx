@@ -6,14 +6,11 @@ import './GameGalleryPage.css'
 
 const GameGalleryPage = () => {
 
-    const [showOfcanvas, setShowOffcanvas] = useState(false)
-
     return (
         <div className="GameGalleryPage m-3 m-md-5">
             <Container className="full-heigth-min">
                 <GameList />
             </Container>
-
         </div>
     )
 }

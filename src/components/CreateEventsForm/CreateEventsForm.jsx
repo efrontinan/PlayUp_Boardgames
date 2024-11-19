@@ -31,26 +31,24 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         lng: ""
     })
 
-    const [addressValue, setAddressValue] = useState()
+    const [addressValue, setAddressValue] = useState({})
 
     useEffect(() => {
         handleAutocomplete()
     }, [addressValue])
 
+
+
     const handleAutocomplete = () => {
 
-        geocodeByAddress(addressValue?.label)
+        addressValue?.label && geocodeByAddress(addressValue?.label)
             .then(([addressDetails]) => {
-                setAddress({ ...addressData, label: addressValue.label })
                 return getLatLng(addressDetails)
             })
             .then((coordinates) => {
-                console.log('LAS COORDENADAS', coordinates)
-                setAddress({ ...addressData, lat: coordinates.lat, lng: coordinates.lng })
-                console.log(addressValue, addressData)
+                setAddress({ ...addressData,  label: addressValue?.label, lat: coordinates.lat, lng: coordinates.lng })
             })
             .catch(error => console.error(error))
-
     }
 
     const [playerData, setPlayer] = useState({
@@ -186,19 +184,21 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         }}
                         apiKey="AIzaSyDKOESwdtbPID8SoPVI_cK9Wq7dxPmd3D4"
                         styles={
-                            {input: (provided) => ({
-                                ...provided,
-                                color: 'red',
-                              }),
-                              option: (provided) => ({
-                                ...provided,
-                                color: 'red',
-                              }),
-                              singleValue: (provided) => ({
-                                ...provided,
-                                color: 'red',
-                              })}
-                          }
+                            {
+                                input: (provided) => ({
+                                    ...provided,
+                                    color: 'red',
+                                }),
+                                option: (provided) => ({
+                                    ...provided,
+                                    color: 'red',
+                                }),
+                                singleValue: (provided) => ({
+                                    ...provided,
+                                    color: 'red',
+                                })
+                            }
+                        }
                     />
                 </Form.Group>
 

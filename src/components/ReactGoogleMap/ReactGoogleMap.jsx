@@ -15,7 +15,7 @@ const ReactGoogleMap = () => {
 
     return (isLoaded && (
         <GoogleMap
-            mapContainerStyle={{ height: '50vh' }}
+            mapContainerStyle={{ height: '50vh', borderRadius: '0px 50px 0px 50px' }}
             zoom={5.5}
             onLoad={onLoad}
             center={{ lat: 40.41769976820468, lng: -3.684093875138128 }}

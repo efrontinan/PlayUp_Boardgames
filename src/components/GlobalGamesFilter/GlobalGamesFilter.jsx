@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useLocation } from "react-router-dom"
 
-import { Form, Row, Col, ListGroup } from "react-bootstrap"
+import { Form, Row, Col, ListGroup, Button, Offcanvas } from "react-bootstrap"
 import { Search } from "react-bootstrap-icons"
 
 import SearchListElement from "../SearchListElement/SearchListElement"
@@ -17,10 +17,12 @@ const GlobalGamesFilter = () => {
     const [filterResults, setFilterResults] = useState([])
     const location = useLocation()
 
+    const [showMenu, setShowMenu] = useState(false)
+
     useEffect(() => {
         setFilter("")
         setFilterResults([])
-      }, [location.pathname])
+    }, [location.pathname])
 
     const handleFilterChange = e => {
         const { value } = e.target
@@ -42,8 +44,13 @@ const GlobalGamesFilter = () => {
         <div className="GlobalGamesFilter">
             <Form.Group controlId="formHorizontalEmail">
                 <Row direction="horizontal" gap={3} className="align-items-center">
-                    <Col sm="1" align="right">
+                    <Col sm="1" align="right" className="d-none d-md-block">
                         <Form.Label><Search /></Form.Label>
+                    </Col>
+                    <Col sm="1" align="right" className="d-md-none">
+                        <Button variant="custom-transparent" onClick={() => setShowMenu(true)}>
+                            <Search />
+                        </Button >
                     </Col>
                     <Col className="d-none d-md-flex">
                         <Form.Control
@@ -65,6 +72,28 @@ const GlobalGamesFilter = () => {
                 </Row>
 
             </Form.Group>
+
+            <Offcanvas show={showMenu} onHide={() => setShowMenu(false)} placement='end' className="py-3 px-2" >
+                <Offcanvas.Header closeButton />
+                <Offcanvas.Body >
+                <Form.Control
+                            type="text"
+                            placeholder="Busca tu juego"
+                            value={filterValue}
+                            onChange={handleFilterChange}
+                        />
+                        <ListGroup variant="">
+                            {filterValue.length > 0 ?
+                                filterResults.map(elm => {
+                                    return (
+                                        <SearchListElement {...elm} key={elm.id} setShowMenu={setShowMenu} />
+                                    )
+                                }) : ""
+                            }
+                        </ListGroup>
+                </Offcanvas.Body>
+            </Offcanvas>
+
         </div>
     )
 

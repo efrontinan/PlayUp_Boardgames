@@ -6,3 +6,14 @@
     font-size: 2.5rem;
     padding-left: 24px;
   }
+
+.menu .offcanvas-body{
+  color: #c2c8d6 ;
+  font-size: 1.6rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -46,18 +46,22 @@ const Navigation = () => {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <Offcanvas show={showMenu} onHide={() => setShowMenu(false) } placement='end' className="menu" >
-                <Nav className='g24 d-none d-md-flex'>
-                    <NavLink to="/juegos" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
+            <Offcanvas show={showMenu} onHide={() => setShowMenu(false)} placement='end' className="menu p-5" >
+                <Offcanvas.Header closeButton />
+                <Offcanvas.Body>
+                    <NavLink
+                        to="/juegos"
+                        onClick={() => setShowMenu(false)}
+                        className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"}>
                         Juegos de mesa
                     </NavLink>
-                    <NavLink to="/planes" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
+                    <NavLink to="/planes" onClick={() => setShowMenu(false)} className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"} >
                         Planazos
                     </NavLink>
-                    <Nav.Link onClick={() => setShowOffcanvas(true)} >
+                    <Nav.Link onClick={() => { setShowMenu(false), setShowOffcanvas(true) }} className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"} >
                         Nuevo juego
                     </Nav.Link>
-                </Nav>
+                </Offcanvas.Body>
             </Offcanvas>
         </div>
     )
