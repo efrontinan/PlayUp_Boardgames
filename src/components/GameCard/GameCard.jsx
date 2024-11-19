@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 import { Button, Card, Row, Col, Badge, Stack, Offcanvas, Modal } from 'react-bootstrap'
 import { Trash3, Pencil, InfoCircle } from 'react-bootstrap-icons'
 
 import './GameCard.css'
 import EditGameForm from "../../components/EditGameForm/EditGameForm"
+import { AuthContext } from '../../contexts/auth.context'
 
 const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
@@ -14,6 +15,8 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
     const [showOfcanvas, setShowOffcanvas] = useState(false)
 
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+    const { loggedAdmin } = useContext(AuthContext)
 
     return (
 
@@ -45,8 +48,8 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
                     <Stack direction="horizontal" gap={1} className='m-0'>
                         <Button as={Link} to={`/juegos/detalles/${id}`} variant="custom-transparent" className='me-auto'> <InfoCircle />   Ver detalles</Button>
-                        <Button onClick={() => setShowDeleteModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>
-                        <Button onClick={() => setShowOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>
+                        {loggedAdmin && <Button onClick={() => setShowDeleteModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>}
+                        {loggedAdmin && <Button onClick={() => setShowOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>}
                     </Stack>
 
                 </Card.Body>

@@ -5,11 +5,14 @@ import './index.css'
 import App from './App.jsx'
 
 import { BrowserRouter as Router } from 'react-router-dom'
+import { AuthorProviderWrapper } from './contexts/auth.context.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <AuthorProviderWrapper>
+      <Router>
+        <App />
+      </Router>
+    </AuthorProviderWrapper>
   </StrictMode>,
 )
