@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
 
 import { Card, Badge, Row, Col, Button, Offcanvas, Modal, ModalBody } from "react-bootstrap"
@@ -7,6 +7,7 @@ import { Trash3, Pencil } from 'react-bootstrap-icons'
 import EditEventForm from "../EditEventForm/EditEventForm"
 import { exitingDateformat } from "../../utils/date-utils"
 import './EventCard.css'
+import { AuthContext } from "../../contexts/auth.context"
 
 const API_URL = "http://localhost:5005"
 
@@ -17,6 +18,8 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
 
     const [showEditOffcanvas, setShowEditOffcanvas] = useState(false)
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+
+    const { loggedAdmin } = useContext(AuthContext)
 
     const deleteEvent = e => {
         e.preventDefault()
@@ -84,7 +87,7 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
 
                         <Col md="1">
                             <div className="d-flex d-sm-grid gap-2">
-                                <Button  onClick={() => setShowConfirmationModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>
+                                {loggedAdmin && <Button onClick={() => setShowConfirmationModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>}
                                 <Button onClick={() => setShowEditOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>
                             </div>
                         </Col>
@@ -106,9 +109,9 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}  centered>
+            <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)} centered>
                 <Modal.Header closeButton>
-                <Modal.Title>¿Estas seguro?</Modal.Title>
+                    <Modal.Title>¿Estas seguro?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body> ¿Estás seguro de que quieres borrar este planazo?</Modal.Body>
                 <Modal.Footer>

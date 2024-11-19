@@ -9,6 +9,7 @@ import { Stack, Col, Container, Row, Badge, ListGroup, Button, Tabs, Tab } from 
 import EventsList from "../../components/EventsList/EventsList"
 import Loader from "../../components/Loader/Loader"
 import ReviewsList from "../../components/ReviewsList/ReviewsList"
+import StarRatingItem from "../../components/StarRatingItem/StarRatingItem"
 
 const API_URL = "http://localhost:5005"
 
@@ -18,10 +19,11 @@ const GameDetailsPage = () => {
 
   const [game, setGame] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-
+  const [ratingAverage, setAverageRating] = useState(0)
 
   useEffect(() => {
     fetchGameDetails()
+    fetchReviewRating()
   }, [gameId])
 
   const fetchGameDetails = () => {
@@ -34,12 +36,32 @@ const GameDetailsPage = () => {
       .catch(err => console.log(err))
   }
 
+  const fetchReviewRating = () => {
+    axios
+      .get(`${API_URL}/reviews/?gameId=${gameId}`)
+      .then(response => {
+        calculateAverageRating(response.data)
+      })
+      .catch(err => console.log(err))
+  }
+
+  const calculateAverageRating = (reviews) => {
+    if (reviews.length > 0) {
+      const total = reviews.reduce((acc, elm) => acc + Number(elm.rating), 0);
+      setAverageRating(total / reviews.length);
+    } else {
+      setAverageRating(0);
+    }
+  }
+
+  console.log(ratingAverage)
+
   return (
 
     isLoading ? <Loader /> :
       (
-        <div className="GameDetailsPage">
-          <Container>
+        <div className="GameDetailsPage m-3 m-md-5">
+          <Container className="full-height-min">
 
             <Row >
               <Col md="3">
@@ -50,7 +72,7 @@ const GameDetailsPage = () => {
 
                 <h1>{game.title}</h1>
                 <hr />
-
+                <StarRatingItem rating={ratingAverage} />
                 <Stack gap={1} className='float-left wrap'>
                   {game.categories.map((elm, idx) => {
                     return (

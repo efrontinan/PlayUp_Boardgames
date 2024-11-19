@@ -1,11 +1,12 @@
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 import { Card, Row, Col, Button, Offcanvas, Modal } from "react-bootstrap"
 import { Trash3, Pencil, Star } from 'react-bootstrap-icons'
 
 import EditReviewForm from "../EditReviewForm/EditReviewForm"
 import StarRatingItem from "../StarRatingItem/StarRatingItem"
+import { AuthContext } from "../../contexts/auth.context"
 
 const API_URL = "http://localhost:5005"
 
@@ -13,6 +14,8 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
 
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
     const [showEditOffcanvas, setShowEditOffcanvas] = useState(false)
+
+    const { loggedAdmin } = useContext(AuthContext)
 
     const deleteReview = e => {
         e.preventDefault()
@@ -52,7 +55,7 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
 
                         <Col md="1">
                             <div className="d-flex d-sm-grid gap-2">
-                                <Button onClick={() => setShowConfirmationModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>
+                                {loggedAdmin && <Button onClick={() => setShowConfirmationModal(true)} variant="custom-secondary-outline"><Trash3 /></Button>}
                                 <Button onClick={() => setShowEditOffcanvas(true)} variant="custom-secondary-outline"><Pencil /></Button>
                             </div>
                         </Col>
