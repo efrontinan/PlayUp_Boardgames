@@ -45,6 +45,7 @@ const HomePage = () => {
                 <Container className="full-heigth-min">
                     <video autoPlay={true} muted loop={true} className="myVideo"
                         src="https://res.cloudinary.com/dt9pviq34/video/upload/v1732011024/5151202-hd_1280_720_30fps_qavkza.mp4 " />
+                    <div className="myVideo" id="fade"></div>
 
                     <Row className="p-5 align-items-end">
                         <Col md="5" className="image" >

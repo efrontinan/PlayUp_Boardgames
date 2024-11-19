@@ -1,6 +1,7 @@
 .AboutUsPage .image{
     border-radius: 0px 50px 0px 50px;
     filter: grayscale(100%);
+    min-height: 45vh;
     max-height: 80vh;
     background-size:cover; 
     background-position:center center; 

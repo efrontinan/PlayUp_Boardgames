@@ -14,11 +14,18 @@
     min-width: 100%;
     min-height: 100%;
     z-index: -1000;
-  }
+}
 
-.HomePage .image{
+#fade {
+    z-index: -800;
+    background-color: #06020b ;
+    background-image: radial-gradient(circle, rgba(53,113,254,1) 0%, rgba(6,2,11,1) 100%);
+    opacity: .6;
+}
+
+.HomePage .image {
     background-color: transparent;
-    background-image: url("https://res.cloudinary.com/dt9pviq34/image/upload/v1731955393/PlayUp/etvj5alvypue29c5stdx.jpg");
+    /* background-image: url("https://res.cloudinary.com/dt9pviq34/image/upload/v1731955393/PlayUp/etvj5alvypue29c5stdx.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,7 +38,7 @@
     height: 20vh;
 }
 
-.HomePage .card-title{
+.HomePage .card-title {
     font-size: 40px;
     text-align: center;
 }
@@ -39,4 +46,3 @@
 .HomePage .card-text {
     text-align: center;
 }
-
