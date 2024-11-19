@@ -1,0 +1,8 @@
+.star {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.star.filled {
+    color: gold;
+}

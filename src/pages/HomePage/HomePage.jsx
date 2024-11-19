@@ -43,8 +43,9 @@ const HomePage = () => {
         isLoading ? <Loader /> :
             <div className="HomePage">
                 <Container className="full-heigth-min">
-                    {/* <video autoplay muted loop className="myVideo" src="https://res.cloudinary.com/dt9pviq34/video/upload/v1731957118/5151202-hd_1280_720_30fps_qavkza.mp4">
-                    </video> */}
+                    <video autoPlay={true} muted loop={true} className="myVideo"
+                        src="https://res.cloudinary.com/dt9pviq34/video/upload/v1732011024/5151202-hd_1280_720_30fps_qavkza.mp4 " />
+
                     <Row className="p-5 align-items-end">
                         <Col md="5" className="image" >
                         </Col>
@@ -77,7 +78,7 @@ const HomePage = () => {
                                         </Card.Body>
                                     </Card>
                                 </Col>
-                                
+
                             </Row>
                         </Col>
                     </Row>

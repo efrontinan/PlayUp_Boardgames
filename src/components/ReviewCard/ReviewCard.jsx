@@ -1,9 +1,11 @@
 import axios from "axios"
 import { useState } from "react"
 
-import { Card, Badge, Row, Col, Button, Offcanvas, Modal, ModalBody } from "react-bootstrap"
-import { Trash3, Pencil } from 'react-bootstrap-icons'
+import { Card, Row, Col, Button, Offcanvas, Modal } from "react-bootstrap"
+import { Trash3, Pencil, Star } from 'react-bootstrap-icons'
+
 import EditReviewForm from "../EditReviewForm/EditReviewForm"
+import StarRatingItem from "../StarRatingItem/StarRatingItem"
 
 const API_URL = "http://localhost:5005"
 
@@ -34,8 +36,8 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
                                     <Col md="6" sm="3" className="h3 text-primary">
                                         {author}
                                     </Col>
-                                    <Col md="6" sm="9" className="date" >
-                                        {rating}
+                                    <Col md="6" sm="9" className="rating" >
+                                        <StarRatingItem rating={rating} />
                                     </Col>
                                 </Row>
 
