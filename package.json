@@ -18,9 +18,11 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-bootstrap-icons": "^1.11.4",
+    "react-bootstrap-star-rating": "^3.5.5-alpha.0.3",
     "react-dom": "^18.3.1",
     "react-google-places-autocomplete": "^4.1.0",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "star-ratings-react": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
