@@ -1,14 +1,17 @@
 import { Nav, Navbar, Form, Button, Offcanvas } from 'react-bootstrap'
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, NavLink } from 'react-router-dom'
 import { List } from 'react-bootstrap-icons'
 
 import './Navigation.css'
 import GlobalGamesFilter from "../../components/GlobalGamesFilter/GlobalGamesFilter"
 import CreateGameForm from "../../components/CreateGameForm/CreateGameForm"
+import { AuthContext } from '../../contexts/auth.context'
 
 
 const Navigation = () => {
+
+    const { loggedAdmin } = useContext(AuthContext)
 
     const [showOfcanvas, setShowOffcanvas] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
@@ -25,9 +28,9 @@ const Navigation = () => {
                     <NavLink to="/planes" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
                         Planazos
                     </NavLink>
-                    <Nav.Link onClick={() => setShowOffcanvas(true)} >
+                    {loggedAdmin && <Nav.Link onClick={() => setShowOffcanvas(true)} >
                         Nuevo juego
-                    </Nav.Link>
+                    </Nav.Link>}
                 </Nav>
                 <Form md="2" className='d-flex flex-row align-items-center'>
                     <GlobalGamesFilter />

@@ -10,6 +10,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import EventsGalleryPage from "../pages/EventsGalleryPage/EventsGalleryPage"
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage"
 import ContactPage from "../pages/ContactPage/ContactPage"
+import LoginPage from "../pages/LoginPage/LoginPage"
 
 const AppRoutes = () => {
     return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
                 <Route path="/planes/editar/:eventId" element={<EditEventPage />} />
                 <Route path="/sobre-nosotros" element={<AboutUsPage />} />
                 <Route path="/contacto" element={<ContactPage />} />
+                <Route path="/iniciar-sesion" element={<LoginPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>
