@@ -1,9 +1,9 @@
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
+
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-
 
 import { Form, Button, Toast } from "react-bootstrap"
 
@@ -13,11 +13,25 @@ const CreateEventsForm = ({ closeCreateModal }) => {
 
     const { gameId } = useParams()
 
+    const [gameData, setGameData] = useState([])
+
+    useEffect(() => {
+        fetchGameDetails()
+    }, [])
+
+    const fetchGameDetails = () => {
+        axios
+            .get(`${API_URL}/games`)
+            .then(response => setGameData(response.data))
+            .catch(err => console.log(err))
+    }
+
     const [eventData, setEventData] = useState({
         author: "",
         contact: "",
         date: "",
         description: "",
+        gameId: gameId,
     })
 
     const [addressData, setAddress] = useState({
@@ -37,8 +51,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         handleAutocomplete()
     }, [addressValue])
 
-
-
     const handleAutocomplete = () => {
 
         addressValue?.label && geocodeByAddress(addressValue?.label)
@@ -46,7 +58,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                 return getLatLng(addressDetails)
             })
             .then((coordinates) => {
-                setAddress({ ...addressData,  label: addressValue?.label, lat: coordinates.lat, lng: coordinates.lng })
+                setAddress({ ...addressData, label: addressValue?.label, lat: coordinates.lat, lng: coordinates.lng })
             })
             .catch(error => console.error(error))
     }
@@ -88,7 +100,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         }
 
         const newEvent = {
-            gameId: gameId,
             ...eventData,
             players: playerData,
             address: addressData
@@ -105,11 +116,22 @@ const CreateEventsForm = ({ closeCreateModal }) => {
 
     }
 
-
     return (
         <div className="CreateEventsForm">
 
             <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="vertical-form p-3">
+
+                {!gameId && <Form.Group controlId="gameIdField" className="mb-3">
+                    <Form.Label>Elige el juego</Form.Label>
+                    <Form.Select onChange={handleEventChange} name={"gameId"}>
+                        {gameData.map(elm => {
+                            return (
+                                <option value={elm.id} key={elm.id} >{elm.title}</option>
+                            )
+                        })}
+                    </Form.Select>
+
+                </Form.Group>}
 
                 <Form.Group controlId="authorField" className="mb-3">
                     <Form.Label>¿Cómo te llamas?</Form.Label>
