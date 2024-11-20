@@ -1,5 +1,7 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+
+import { UserMessageContext } from "../../contexts/userMessage.context"
 
 import { Form, Button, Toast } from "react-bootstrap"
 import { formatInputDate } from "../../utils/date-utils"
@@ -9,6 +11,8 @@ const API_URL = "http://localhost:5005"
 
 const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
 
+    const {createAlert} = useContext(UserMessageContext)
+
     const [isLoading, setIsLoading] = useState(true)
 
     const [eventData, setEventData] = useState({
@@ -16,6 +20,7 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
         contact: "",
         date: "",
         description: "",
+        gameId: "",
     })
 
     const [addressData, setAddress] = useState({
@@ -42,12 +47,13 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
             .get(`${API_URL}/events/${eventId}`)
             .then(response => {
                 const { author, contact, date, description,
-                    players, address } = response.data
+                    players, address, gameId } = response.data
                 setEventData({
                     author: author,
                     contact: contact,
                     date: formatInputDate(date),
                     description: description,
+                    gameId: gameId
                 })
                 setAddress({
                     country: address.country,
@@ -98,8 +104,7 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
         axios
             .patch(`${API_URL}/events/${eventId}`, editEvent)
             .then(response => {
-                // setShowToast(true)
-                alert('Se han guardado los cambios')
+                createAlert('Evento editado', `/juegos/detalles/${response.data.gameId}`)
                 setShowEditOffcanvas(false)
                 fetchEvents()
                 setValidated(false)

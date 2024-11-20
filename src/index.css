@@ -288,7 +288,7 @@ h6 {
 
 .toast {
   background-color: #3571fe;
-  position: absolute;
+  position: fixed;
   bottom: 24px;
   left: 40px;
   width: 50vw;

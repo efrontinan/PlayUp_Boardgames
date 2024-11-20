@@ -1,13 +1,17 @@
-
-
 import axios from "axios"
-import { useState } from "react"
-import { Form, Button } from "react-bootstrap"
+import { useState, useContext } from "react"
 import { useParams } from "react-router-dom"
+
+import { Form, Button } from "react-bootstrap"
+
+import { UserMessageContext } from "../../contexts/userMessage.context"
+
 
 const API_URL = "http://localhost:5005"
 
 const CreateReviewForm = ({ closeCreateModal }) => {
+
+    const { createAlert } = useContext(UserMessageContext)
 
     const { gameId } = useParams()
 
@@ -44,6 +48,7 @@ const CreateReviewForm = ({ closeCreateModal }) => {
             .then(() => {
                 setValidated(false)
                 closeCreateModal()
+                createAlert('Review creada')
             }
             )
     }

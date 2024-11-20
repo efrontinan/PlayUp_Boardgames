@@ -45,7 +45,7 @@ const Navigation = () => {
                     <Offcanvas.Title>Añadir juego </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <CreateGameForm />
+                    <CreateGameForm setShowOffcanvas={setShowOffcanvas} />
                 </Offcanvas.Body>
             </Offcanvas>
 

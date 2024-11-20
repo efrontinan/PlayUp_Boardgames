@@ -1,19 +1,19 @@
 import "./CreateGameForm.css"
 
 import axios from "axios"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useState } from "react"
 
-import { Button, Row, Col, Form, Toast } from "react-bootstrap"
+import { Button, Row, Col, Form } from "react-bootstrap"
 import { XLg } from "react-bootstrap-icons"
+import { UserMessageContext } from "../../contexts/userMessage.context"
 
 
 const API_URL = "http://localhost:5005"
 
-const CreateGameForm = () => {
+const CreateGameForm = ({ setShowOffcanvas }) => {
 
-    const [showPostToast, setShowPostToast] = useState(false)
-    const [newGameId, setNewGameId] = useState(null)
+    const { createAlert } = useContext(UserMessageContext)
+
     const [validated, setValidated] = useState(false)
 
     const [gameData, setGameData] = useState({
@@ -40,7 +40,7 @@ const CreateGameForm = () => {
     const handleGameChange = e => {
         const { name, value, checked, type } = e.target
         const result = type === "checkbox" ? checked : value
-        setGameData({ ...prevData, [name]: result })
+        setGameData({ ...gameData, [name]: result })
     }
 
     const handleSpecsChange = e => {
@@ -161,8 +161,8 @@ const CreateGameForm = () => {
         axios
             .post(`${API_URL}/games`, reqPayLoad)
             .then(response => {
-                setNewGameId(response.data.id)
-                setShowPostToast(true)
+                createAlert('Nuevo juego añadido', `juegos/detalles/${response.data.id}`)
+                setShowOffcanvas(false)
             })
             .catch(err => console.log(err))
 
@@ -479,18 +479,6 @@ const CreateGameForm = () => {
                 </Button>
 
             </Form>
-
-            <Toast onClose={() => setShowPostToast(false)} show={showPostToast} delay="5000">
-                <Toast.Header
-                    className="justify-content-between">
-                    ¡Éxito!
-                </Toast.Header>
-                <Toast.Body>
-                    <Button as={Link} to={(`/juegos/detalles/${newGameId}`)}>
-                        Ir a los detalles del juego
-                    </Button>
-                </Toast.Body>
-            </Toast>
 
         </div>
     )

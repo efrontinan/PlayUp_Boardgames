@@ -1,16 +1,19 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
-import { Col, Container, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 
 import GameCard from "../GameCard/GameCard"
 
 import './GameList.css'
 import Loader from "../Loader/Loader"
+import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
 const GameList = () => {
+
+    const { createAlert } = useContext(UserMessageContext)
 
     const [games, setGames] = useState([])
 
@@ -33,7 +36,10 @@ const GameList = () => {
     const removeGame = gameId => {
         axios
             .delete(`${API_URL}/games/${gameId}`)
-            .then(() => fetchGames())
+            .then(() => {
+                fetchGames()
+                createAlert('Juego eliminado')
+            })
             .catch(err => console.log(err))
     }
 

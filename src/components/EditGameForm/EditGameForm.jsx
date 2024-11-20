@@ -1,21 +1,21 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
 
 import { Button, Row, Col, Form } from "react-bootstrap"
 import { XLg } from "react-bootstrap-icons"
 
 import Loader from "../Loader/Loader"
+import { UserMessageContext } from "../../contexts/userMessage.context"
 
 
 const API_URL = "http://localhost:5005"
 
-const EditGameForm = ({ gameId }) => {
+const EditGameForm = ({ gameId, setShowOffcanvas }) => {
+
+    const {createAlert} = useContext(UserMessageContext)
 
     const [isLoading, setIsLoading] = useState(true)
     const [validated, setValidated] = useState(false)
-
-    const navigate = useNavigate()
 
     const [gameData, setGameData] = useState({
         title: "",
@@ -206,7 +206,8 @@ const EditGameForm = ({ gameId }) => {
         axios
             .put(`${API_URL}/games/${gameId}`, newGame)
             .then(response => {
-                navigate(`/juegos/detalles/${response.data.id}`)
+                createAlert('Juego editado', `/juegos/detalles/${response.data.id}`)
+                setShowOffcanvas(false)
             })
             .catch(err => console.log(err))
     }

@@ -18,11 +18,8 @@ const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/juegos" element={<GameGalleryPage />} />
-                <Route path="/juegos/nuevo" element={<CreateGamePage />} />
-                <Route path="/juegos/editar/:gameId" element={<EditGamePage />} />
                 <Route path="/juegos/detalles/:gameId" element={<GameDetailsPage />} />
                 <Route path="/planes" element={<EventsGalleryPage />} />
-                <Route path="/planes/editar/:eventId" element={<EditEventPage />} />
                 <Route path="/sobre-nosotros" element={<AboutUsPage />} />
                 <Route path="/contacto" element={<ContactPage />} />
                 <Route path="/iniciar-sesion" element={<LoginPage />} />

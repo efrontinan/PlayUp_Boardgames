@@ -6,13 +6,17 @@ import App from './App.jsx'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 import { AuthorProviderWrapper } from './contexts/auth.context.jsx'
+import { UserMessageProvidedWrapper } from "./contexts/userMessage.context"
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthorProviderWrapper>
-      <Router>
-        <App />
-      </Router>
-    </AuthorProviderWrapper>
-  </StrictMode>,
+    <UserMessageProvidedWrapper>
+      <AuthorProviderWrapper>
+        <Router>
+          <App />
+        </Router>
+      </AuthorProviderWrapper>
+    </UserMessageProvidedWrapper>
+  </StrictMode>
 )
