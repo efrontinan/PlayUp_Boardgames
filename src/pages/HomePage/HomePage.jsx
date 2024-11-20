@@ -5,6 +5,7 @@ import { Col, Container, Row, Carousel, Button, Card } from "react-bootstrap"
 
 import "../HomePage/HomePage.css"
 import Loader from "../../components/Loader/Loader"
+import { MEDIA } from "../../consts/paths.consts"
 
 const API_URL = "http://localhost:5005"
 
@@ -44,11 +45,11 @@ const HomePage = () => {
             <div className="HomePage">
                 <Container className="full-heigth-min">
                     <video autoPlay={true} muted loop={true} className="myVideo"
-                        src="https://res.cloudinary.com/dt9pviq34/video/upload/v1732011024/5151202-hd_1280_720_30fps_qavkza.mp4 " />
+                        src={MEDIA.BACKGROUND}/>
                     <div className="myVideo" id="fade"></div>
 
                     <Row className="p-5 align-items-end">
-                        <Col md="5" className="image" >
+                        <Col md="5" className="image">
                         </Col>
                         <Col md="1" />
                         <Col >

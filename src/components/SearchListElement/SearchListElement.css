@@ -1,0 +1,14 @@
+.SearchListElement a{
+    text-decoration: none;
+    color: #c2c8d6;
+}
+
+.SearchListElement a:first-child {
+    margin-top: 8px;
+}
+
+.SearchListElement a p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

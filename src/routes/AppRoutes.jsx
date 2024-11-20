@@ -8,6 +8,7 @@ import EventsGalleryPage from "../pages/EventsGalleryPage/EventsGalleryPage"
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage"
 import ContactPage from "../pages/ContactPage/ContactPage"
 import LoginPage from "../pages/LoginPage/LoginPage"
+import FormAddress from "../components/00_PruebaDirecciones"
 
 const AppRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
                 <Route path="/sobre-nosotros" element={<AboutUsPage />} />
                 <Route path="/contacto" element={<ContactPage />} />
                 <Route path="/iniciar-sesion" element={<LoginPage />} />
+                <Route path="/prueba" element={<FormAddress />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>
