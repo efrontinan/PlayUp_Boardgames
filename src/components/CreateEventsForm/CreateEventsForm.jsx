@@ -2,14 +2,17 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
-import { Form, Button, Toast } from "react-bootstrap"
+import { Form, Button } from "react-bootstrap"
+import { UserMessageContext } from '../../contexts/userMessage.context'
 
 const API_URL = "http://localhost:5005"
 
 const CreateEventsForm = ({ closeCreateModal }) => {
+
+    const { createAlert } = useContext(UserMessageContext)
 
     const { gameId } = useParams()
 
@@ -108,7 +111,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         axios
             .post(`${API_URL}/events`, newEvent)
             .then(() => {
-                // setShowToast(true)
+                createAlert("Evento creado", `juegos/detalles/${response.data.gameId}`)
                 setValidated(false)
                 closeCreateModal()
             })
@@ -205,22 +208,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                             onChange: setAddressValue
                         }}
                         apiKey="AIzaSyDKOESwdtbPID8SoPVI_cK9Wq7dxPmd3D4"
-                        styles={
-                            {
-                                input: (provided) => ({
-                                    ...provided,
-                                    color: 'red',
-                                }),
-                                option: (provided) => ({
-                                    ...provided,
-                                    color: 'red',
-                                }),
-                                singleValue: (provided) => ({
-                                    ...provided,
-                                    color: 'red',
-                                })
-                            }
-                        }
                     />
                 </Form.Group>
 
@@ -305,11 +292,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                 </Button>
 
             </Form>
-
-            {/* <Toast show={showToast} onClose={() => setShowToast(false)} autohide="true" delay="5000" >
-                <Toast.Header className="justify-content-between">¡Planazo creado!</Toast.Header>
-                <Toast.Body>Muchas gracias por crear un planazo</Toast.Body>
-            </Toast> */}
 
         </div>
     )

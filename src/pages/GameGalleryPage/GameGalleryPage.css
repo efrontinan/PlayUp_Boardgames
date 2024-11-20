@@ -2,8 +2,12 @@
     margin: 0;
 }
 
+.badge:hover {
+    cursor: pointer;
+}
+
 @media (min-width: 1200px) {
-    .container{
+    .container {
         max-width: 100vw;
     }
 }

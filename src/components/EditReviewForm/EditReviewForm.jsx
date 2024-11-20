@@ -8,7 +8,7 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
-const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews }) => {
+const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews, updateRating }) => {
 
     const { createAlert } = useContext(UserMessageContext)
 
@@ -67,6 +67,7 @@ const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews }) => {
                 createAlert('Review editada')
                 setValidated(false)
                 fetchReviews()
+                updateRating()
             })
     }
 

@@ -11,7 +11,7 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
-const GameList = () => {
+const GameList = ({ filterCategories }) => {
 
     const { createAlert } = useContext(UserMessageContext)
 
@@ -21,11 +21,11 @@ const GameList = () => {
 
     useEffect(() => {
         fetchGames()
-    }, [])
+    }, [filterCategories])
 
     const fetchGames = () => {
         axios
-            .get(`${API_URL}/games`)
+            .get(`${API_URL}/games${filterCategories}`)
             .then(response => {
                 setGames(response.data)
                 setIsLoading(false)

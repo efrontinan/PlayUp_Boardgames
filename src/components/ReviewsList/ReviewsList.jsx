@@ -10,7 +10,7 @@ import CreateReviewForm from "../CreateReviewForm/CreateReviewForm"
 
 const API_URL = "http://localhost:5005"
 
-const ReviewsList = () => {
+const ReviewsList = ({ updateRating }) => {
 
     const { gameId } = useParams()
 
@@ -51,11 +51,11 @@ const ReviewsList = () => {
                     </Col>
                 </Row>
                 <Row>
-                    { reviews.length===0? <p className="my-3">Aún no hay reviews. ¡Comparte tu experiencia con otros!</p> :
+                    {reviews.length === 0 ? <p className="my-3">Aún no hay reviews. ¡Comparte tu experiencia con otros!</p> :
                         reviews.map(elm => {
                             return (
                                 <Col lg={reviews.length > 1 ? 6 : 12} key={elm.id}>
-                                    <ReviewCard {...elm} key={elm.id} fetchReviews={fetchReviews} />
+                                    <ReviewCard {...elm} key={elm.id} fetchReviews={fetchReviews} updateRating={updateRating} />
                                 </Col>
                             )
                         })
@@ -67,7 +67,7 @@ const ReviewsList = () => {
                         <Offcanvas.Title>Añadir review</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <CreateReviewForm closeCreateModal={() => { setShowCreateModal(false), fetchReviews() }} />
+                        <CreateReviewForm closeCreateModal={() => { setShowCreateModal(false), fetchReviews() }} updateRating={updateRating} />
                     </Offcanvas.Body>
                 </Offcanvas>
             </div>

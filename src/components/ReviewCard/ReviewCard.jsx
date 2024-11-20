@@ -12,7 +12,7 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
-const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
+const ReviewCard = ({ author, rating, description, id, fetchReviews, updateRating }) => {
 
     const { loggedAdmin } = useContext(AuthContext)
     const { createAlert } = useContext(UserMessageContext)
@@ -78,7 +78,7 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
                     <Offcanvas.Title>Editar review</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <EditReviewForm reviewId={id} setShowEditOffcanvas={setShowEditOffcanvas} fetchReviews={fetchReviews} />
+                    <EditReviewForm reviewId={id} setShowEditOffcanvas={setShowEditOffcanvas} fetchReviews={fetchReviews} updateRating={updateRating} />
                 </Offcanvas.Body>
             </Offcanvas>
 

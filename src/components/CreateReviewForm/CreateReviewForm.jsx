@@ -9,7 +9,7 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
-const CreateReviewForm = ({ closeCreateModal }) => {
+const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
 
     const { createAlert } = useContext(UserMessageContext)
 
@@ -48,6 +48,7 @@ const CreateReviewForm = ({ closeCreateModal }) => {
             .then(() => {
                 setValidated(false)
                 closeCreateModal()
+                updateRating()
                 createAlert('Review creada')
             }
             )

@@ -6,14 +6,30 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 import { Form, Button, Toast } from "react-bootstrap"
 import { formatInputDate } from "../../utils/date-utils"
 import Loader from "../Loader/Loader"
+import { useLocation } from "react-router-dom"
 
 const API_URL = "http://localhost:5005"
 
 const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
 
-    const {createAlert} = useContext(UserMessageContext)
+    const { createAlert } = useContext(UserMessageContext)
 
     const [isLoading, setIsLoading] = useState(true)
+
+    const [gameData, setGameData] = useState([])
+
+    const location = useLocation()
+
+    useEffect(() => {
+        fetchGameDetails()
+    }, [])
+
+    const fetchGameDetails = () => {
+        axios
+            .get(`${API_URL}/games`)
+            .then(response => setGameData(response.data))
+            .catch(err => console.log(err))
+    }
 
     const [eventData, setEventData] = useState({
         author: "",
@@ -111,7 +127,6 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
 
             })
             .catch(err => console.log(err))
-
     }
 
     return (
@@ -119,6 +134,18 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
             <div className="EditEventForm">
 
                 <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="vertical-form p-3">
+
+                    {location.pathname === "/planes" && <Form.Group controlId="gameIdField" className="mb-3">
+                        <Form.Label>Elige el juego</Form.Label>
+                        <Form.Select onChange={handleEventChange} name={"gameId"}>
+                            {gameData.map(elm => {
+                                return (
+                                    <option value={elm.id} key={elm.id} >{elm.title}</option>
+                                )
+                            })}
+                        </Form.Select>
+
+                    </Form.Group>}
 
                     <Form.Group controlId="authorField" className="mb-3">
                         <Form.Label>¿Cómo te llamas?</Form.Label>
