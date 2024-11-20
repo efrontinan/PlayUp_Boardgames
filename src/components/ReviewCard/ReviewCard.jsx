@@ -6,22 +6,27 @@ import { Trash3, Pencil, Star } from 'react-bootstrap-icons'
 
 import EditReviewForm from "../EditReviewForm/EditReviewForm"
 import StarRatingItem from "../StarRatingItem/StarRatingItem"
+
 import { AuthContext } from "../../contexts/auth.context"
+import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
 const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
 
+    const { loggedAdmin } = useContext(AuthContext)
+    const { createAlert } = useContext(UserMessageContext)
+
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
     const [showEditOffcanvas, setShowEditOffcanvas] = useState(false)
 
-    const { loggedAdmin } = useContext(AuthContext)
 
     const deleteReview = e => {
         e.preventDefault()
         axios
             .delete(`${API_URL}/reviews/${id}`)
             .then(() => {
+                createAlert('Review eliminada')
                 fetchReviews()
             })
             .catch(err => console.log(err))
@@ -70,7 +75,7 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews }) => {
             <Offcanvas show={showEditOffcanvas}
                 onHide={() => setShowEditOffcanvas(false)} placement="end" >
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Editar planazo</Offcanvas.Title>
+                    <Offcanvas.Title>Editar review</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <EditReviewForm reviewId={id} setShowEditOffcanvas={setShowEditOffcanvas} fetchReviews={fetchReviews} />

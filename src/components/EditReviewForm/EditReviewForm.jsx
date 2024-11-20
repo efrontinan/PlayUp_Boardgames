@@ -1,12 +1,16 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import Loader from "../Loader/Loader"
 
 import { Form, Button } from "react-bootstrap"
 
+import { UserMessageContext } from "../../contexts/userMessage.context"
+
 const API_URL = "http://localhost:5005"
 
 const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews }) => {
+
+    const { createAlert } = useContext(UserMessageContext)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -60,6 +64,7 @@ const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews }) => {
             .patch(`${API_URL}/reviews/${reviewId}`, editReview)
             .then(reponse => {
                 setShowEditOffcanvas()
+                createAlert('Review editada')
                 setValidated(false)
                 fetchReviews()
             })

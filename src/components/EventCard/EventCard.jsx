@@ -8,10 +8,14 @@ import EditEventForm from "../EditEventForm/EditEventForm"
 import { exitingDateformat } from "../../utils/date-utils"
 import './EventCard.css'
 import { AuthContext } from "../../contexts/auth.context"
+import { UserMessageContext } from "../../contexts/userMessage.context"
+
 
 const API_URL = "http://localhost:5005"
 
 const EventCard = ({ author, address, date, description, players, contact, id, fetchEvents }) => {
+
+    const { createAlert } = useContext(UserMessageContext)
 
     const { min, max } = players
     const { country, city, street, name, zipcode } = address
@@ -26,6 +30,7 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
         axios
             .delete(`${API_URL}/events/${id}`)
             .then(() => {
+                createAlert('Evento eliminado')
                 fetchEvents()
 
             })

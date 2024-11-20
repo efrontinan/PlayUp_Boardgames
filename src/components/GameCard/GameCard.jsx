@@ -60,7 +60,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                     <Offcanvas.Title>Añadir juego </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <EditGameForm gameId={id} />
+                    <EditGameForm gameId={id} setShowOffcanvas={setShowOffcanvas} />
                 </Offcanvas.Body>
             </Offcanvas>
 

@@ -28,7 +28,7 @@ const LoginForm = () => {
 
         if (username === "playupadmin" && password === "mejodieron123") {
             loginUser()
-            navigate("/")
+            navigate("/juegos")
         }
         else {
             alert("datos incorrectos")
