@@ -52,14 +52,14 @@ const GlobalGamesFilter = () => {
                             <Search />
                         </Button >
                     </Col>
-                    <Col className="d-none d-md-flex">
+                    <Col className="d-none d-md-block">
                         <Form.Control
                             type="text"
                             placeholder="Busca tu juego"
                             value={filterValue}
                             onChange={handleFilterChange}
                         />
-                        <ListGroup variant="">
+                        <ListGroup className="mt-2">
                             {filterValue.length > 0 ?
                                 filterResults.map(elm => {
                                     return (

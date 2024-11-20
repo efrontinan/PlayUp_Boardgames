@@ -1,5 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap'
 
+import { MEDIA } from "../../consts/paths.consts"
+
 import './AboutUsPage.css'
 
 const AboutUsPage = () => {
@@ -8,7 +10,7 @@ const AboutUsPage = () => {
         <div className="AboutUsPage m-3 m-md-5">
             <Container className="full-heigth-min">
                 <Row className='gap-2'>
-                    <Col md="5" className='image'>
+                    <Col md="5" className='image' style={{backgroundImage:`url(${MEDIA.ABOUT_US})`}}>
                     </Col>
                     <Col/>
                     <Col Col md="6">
