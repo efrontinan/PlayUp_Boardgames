@@ -51,7 +51,7 @@ const ReviewsList = () => {
                     </Col>
                 </Row>
                 <Row>
-                    {
+                    { reviews.length===0? <p className="my-3">Aún no hay reviews. ¡Comparte tu experiencia con otros!</p> :
                         reviews.map(elm => {
                             return (
                                 <Col lg={reviews.length > 1 ? 6 : 12} key={elm.id}>

@@ -54,7 +54,7 @@ const EventsList = () => {
                     </Col>
                 </Row>
                 <Row>
-                    {
+                    { events.length===0? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
                         events.map(elm => {
 
                             return (

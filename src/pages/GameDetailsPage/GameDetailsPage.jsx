@@ -4,7 +4,8 @@ import axios from "axios"
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import { Stack, Col, Container, Row, Badge, ListGroup, Button, Tabs, Tab } from "react-bootstrap"
+import { Stack, Col, Container, Row, Badge, ListGroup, Button, Tabs, Tab, DropdownButton, Dropdown } from "react-bootstrap"
+import { ChevronLeft } from "react-bootstrap-icons"
 
 import EventsList from "../../components/EventsList/EventsList"
 import Loader from "../../components/Loader/Loader"
@@ -20,6 +21,30 @@ const GameDetailsPage = () => {
   const [game, setGame] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [ratingAverage, setAverageRating] = useState(0)
+  const [activeKey, setActiveKey] = useState('instructionsTab')
+  const [tabTitle, setTabTitle] = useState('')
+
+  useEffect(() => {
+    switch (activeKey) {
+      case 'instructionsTab':
+        setTabTitle('Cómo jugar')
+        break
+      case 'contentTab':
+        setTabTitle('Contenido')
+        break
+      case 'expansionsTab':
+        setTabTitle('Expansiones')
+        break
+      case 'eventsTab':
+        setTabTitle('Planazos')
+        break
+      case 'reviewsTab':
+        setTabTitle('Reviews')
+        break
+      default:
+        setTabTitle('Cómo jugar')
+    }
+  }, [activeKey])
 
   useEffect(() => {
     fetchGameDetails()
@@ -54,42 +79,43 @@ const GameDetailsPage = () => {
     }
   }
 
-  console.log(ratingAverage)
-
   return (
 
     isLoading ? <Loader /> :
       (
         <div className="GameDetailsPage m-3 m-md-5">
-          <Container className="full-height-min">
+          <Container className="full-height-min custom-col">
 
-            <Row >
+            <Row className="mb-2 mb-md-5 w-100" >
               <Col md="3">
+                <Button variant="custom-transparent" size="lg" as={Link} to="/juegos" className="mb-2"><ChevronLeft /> Atrás</Button>
+
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
 
-              <Col md="6">
+              <Col md="6" className="px-0 px-md-5 mt-5">
 
-                <h1>{game.title}</h1>
-                <hr />
-                <StarRatingItem rating={ratingAverage} />
-                <Stack gap={1} className='float-left wrap'>
+                <Row>
+                  <Col > <h1>{game.title}</h1></Col>
+                  <Col className="text-end"><StarRatingItem rating={ratingAverage} /></Col>
+                </Row>
+
+                <Stack gap={2} className='float-left wrap my-3'>
                   {game.categories.map((elm, idx) => {
                     return (
-                      <Badge bg="badge-outline-primary" key={idx}>{elm}</Badge>
+                      <Badge bg="badge-outline-secondary" className="p-2 border-style" key={idx}>{elm}</Badge>
                     )
                   })}
                 </Stack>
 
-                <hr />
+
                 <p>{game.description}</p>
 
-                <Button variant="light" as={Link} to="/juegos">Volver atrás</Button>
               </Col>
 
-              <Col md="3">
-                <ListGroup className="short-specs-chart">
-                  <ListGroup.Item><h5>{game.specs.players.min}-{game.specs.players.max} jugadores</h5>
+              <Col md="3" className="my-3 mt-md-5 p-0">
+                <ListGroup className="short-specs-chart h-100 justify-content-center p-2">
+                  <ListGroup.Item><p>{game.specs.players.min}-{game.specs.players.max} jugadores</p>
                   </ListGroup.Item>
 
                   <ListGroup.Item><p>Duración: {game.specs.duration} minutos</p>
@@ -107,15 +133,25 @@ const GameDetailsPage = () => {
 
               </Col>
             </Row>
+
+            <DropdownButton variant="outline-secondary" title={tabTitle} className="my-3 w-100 d-md-none">
+              <Dropdown.Item eventKey="instructionsTab" onClick={() => setActiveKey('instructionsTab')}>Cómo jugar</Dropdown.Item>
+              <Dropdown.Item eventKey="contentTab" onClick={() => setActiveKey("contentTab")}>Contenido</Dropdown.Item>
+              <Dropdown.Item eventKey="expansionsTab" onClick={() => setActiveKey("expansionsTab")}>Expansiones</Dropdown.Item>
+              <Dropdown.Item eventKey="eventsTab" onClick={() => setActiveKey("eventsTab")}>Planazos</Dropdown.Item>
+              <Dropdown.Item eventKey="reviewsTab" onClick={() => setActiveKey("reviewsTab")}>Reviews</Dropdown.Item>
+            </DropdownButton>
+
             <Tabs
               defaultActiveKey="instructionsTab"
               id="fill-tab-example"
-              className="mb-3 mx-2"
+              className="mb-3 mx-2 d-none d-md-flex"
               fill
+              activeKey={activeKey}
             >
 
-              <Tab eventKey="instructionsTab" title="Cómo jugar">
-                <ul>
+              <Tab eventKey="instructionsTab" title="Cómo jugar" className="w-100">
+                <ul className="my-3 my-md-5">
                   {
                     game.howToPlay.map(elm => {
                       return (
@@ -128,8 +164,8 @@ const GameDetailsPage = () => {
                 </ul>
               </Tab>
 
-              <Tab eventKey="contentTab" title="Contenido">
-                <ul>
+              <Tab eventKey="contentTab" title="Contenido" className="w-100">
+                <ul className="my-3 my-md-5">
                   {
                     game.content.map(elm => {
                       return (
@@ -141,12 +177,12 @@ const GameDetailsPage = () => {
                   }
                 </ul>
               </Tab>
-              <Tab eventKey="expansionsTab" title="Expansiones">
+              <Tab eventKey="expansionsTab" title="Expansiones" className="w-100">
                 {
                   !game.expansions || game.expansions[0] === "" ?
                     "Este juego no tiene expansiones"
                     :
-                    <ul>
+                    <ul className="my-3 my-md-5">
                       {
                         game.expansions.map(elm => {
                           return (
@@ -159,10 +195,10 @@ const GameDetailsPage = () => {
                     </ul>
                 }
               </Tab>
-              <Tab eventKey="eventsTab" title="Planazos">
+              <Tab eventKey="eventsTab" title="Planazos" className="w-100">
                 <EventsList />
               </Tab>
-              <Tab eventKey="reviewsTab" title="Reviews">
+              <Tab eventKey="reviewsTab" title="Reviews" className="w-100" >
                 <ReviewsList />
               </Tab>
             </Tabs>

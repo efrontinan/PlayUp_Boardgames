@@ -1,8 +1,3 @@
-.list-group-item {
-    background-color: #0c0418;
-    color: white
-}
-
 .GameDetailsPage .nav-link {
     color: white;
     border: none;
@@ -16,4 +11,39 @@
 .GameDetailsPage .nav-link.active {
     background-color: #3571fe;
     color: white;
+}
+
+.GameDetailsPage .tab-content{
+    width: 100%;
+}
+
+.dropdown-toggle{
+    width: 100%;
+    background-color: #3571fe;
+    color: white;
+
+}
+
+.dropdown-toggle:focus{
+    width: 100%;
+    background-color: #013ecb;
+    color: white;
+
+}
+
+.dropdown-toggle:hover{
+    width: 100%;
+    background-color: #013ecb;
+    color: white;
+}
+
+.dropdown-menu{
+    width: 100%;
+    background-color: #0c0418;
+  border: 1px solid #3571fe67;
+
+}
+
+.dropdown-item{
+    color: #ffffff;
 }
