@@ -33,15 +33,13 @@ const ContactList = () => {
                 <h1> Mensajes recibidos ({contacts.length})</h1>
             </div>
 
-            {contacts.length === 0 ? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
+            {contacts.length === 0 ? <p className="my-3">
+                Aún no hay planazos. ¡Se el primero en crear uno!</p> :
                 contacts.map(elm => {
-
                     return (
                         <ContactCard key={elm.id} {...elm} />
                     )
-
                 })
-
             }
 
         </div >

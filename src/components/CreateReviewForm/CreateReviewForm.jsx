@@ -56,7 +56,10 @@ const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
 
     return (
         <div className="CreateReviewForm">
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="vertical-form p-3">
+            <Form
+                noValidate validated={validated}
+                onSubmit={handleFormSubmit}
+                className="vertical-form p-3">
 
                 <Form.Group controlId="authorField" className="mb-3">
                     <Form.Label>¿Cómo te llamas?</Form.Label>
@@ -68,10 +71,15 @@ const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
                         onChange={handleReviewChange}
                         name={'author'}
                     />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="descriptionField" className="mb-3">
+                <Form.Group
+                    controlId="descriptionField"
+                    className="mb-3">
                     <Form.Label>Descripción</Form.Label>
                     <Form.Control
                         required
@@ -81,10 +89,15 @@ const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
                         onChange={handleReviewChange}
                         name={'description'}
                     />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="ratingField" className="mb-3">
+                <Form.Group
+                    controlId="ratingField"
+                    className="mb-3">
                     <Form.Label>Valoración</Form.Label>
                     <Form.Control
                         required
@@ -95,7 +108,10 @@ const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
                         value={reviewData.rating}
                         onChange={handleReviewChange}
                         name={'rating'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Button variant="custom-primary" type="submit">

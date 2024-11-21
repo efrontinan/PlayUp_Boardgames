@@ -54,7 +54,10 @@ const ContactForm = () => {
 
     return (
         <div className="ContactForm">
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+            <Form
+                noValidate
+                validated={validated}
+                onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" controlId="EmailField">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -65,7 +68,9 @@ const ContactForm = () => {
                         name={'email'}
                         onChange={handleContactChange}
                     />
-                    <Form.Control.Feedback type="invalid">Introduce un email</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Introduce un email
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="MessageField">
@@ -88,12 +93,20 @@ const ContactForm = () => {
                 <Button variant="custom-primary" type="submit">
                     Enviar email
                 </Button>
-
             </Form>
 
-            <Toast show={showToast} onClose={() => setShowToast(false)} autohide="true" delay="5000" >
-                <Toast.Header className="justify-content-between">¡Mensaje enviado!</Toast.Header>
-                <Toast.Body>Nos pondremos en contacto contigo lo antes posible</Toast.Body>
+            <Toast
+                show={showToast}
+                onClose={() => setShowToast(false)}
+                autohide="true"
+                delay="5000" >
+                <Toast.Header
+                    className="justify-content-between">
+                    ¡Mensaje enviado!
+                </Toast.Header>
+                <Toast.Body>
+                    Nos pondremos en contacto contigo lo antes posible
+                </Toast.Body>
             </Toast>
         </div>
     )
