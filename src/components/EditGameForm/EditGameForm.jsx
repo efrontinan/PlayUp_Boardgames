@@ -10,9 +10,9 @@ import { UserMessageContext } from "../../contexts/userMessage.context"
 
 const API_URL = "http://localhost:5005"
 
-const EditGameForm = ({ gameId, setShowOffcanvas }) => {
+const EditGameForm = ({ gameId, setShowOffcanvas, fetchGames }) => {
 
-    const {createAlert} = useContext(UserMessageContext)
+    const { createAlert } = useContext(UserMessageContext)
 
     const [isLoading, setIsLoading] = useState(true)
     const [validated, setValidated] = useState(false)
@@ -208,6 +208,7 @@ const EditGameForm = ({ gameId, setShowOffcanvas }) => {
             .then(response => {
                 createAlert('Juego editado', `/juegos/detalles/${response.data.id}`)
                 setShowOffcanvas(false)
+                fetchGames()
             })
             .catch(err => console.log(err))
     }

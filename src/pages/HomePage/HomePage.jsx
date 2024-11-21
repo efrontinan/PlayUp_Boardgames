@@ -45,10 +45,10 @@ const HomePage = () => {
             <div className="HomePage">
                 <Container className="full-heigth-min">
                     <video autoPlay={true} muted loop={true} className="myVideo"
-                        src={MEDIA.BACKGROUND}/>
+                        src={MEDIA.BACKGROUND} />
                     <div className="myVideo" id="fade"></div>
 
-                    <Row className="p-5 align-items-end">
+                    <Row className="p-5 align-items-end text-pop-up-top">
                         <Col md="5" className="image">
                         </Col>
                         <Col md="1" />

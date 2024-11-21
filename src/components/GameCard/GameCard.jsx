@@ -8,7 +8,7 @@ import './GameCard.css'
 import EditGameForm from "../../components/EditGameForm/EditGameForm"
 import { AuthContext } from '../../contexts/auth.context'
 
-const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
+const GameCard = ({ image, title, categories, specs, id, removeGame, fetchGames }) => {
 
     const { players } = specs
     const { min, max } = players
@@ -59,7 +59,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                     <Offcanvas.Title>Añadir juego </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <EditGameForm gameId={id} setShowOffcanvas={setShowOffcanvas} />
+                    <EditGameForm gameId={id} setShowOffcanvas={setShowOffcanvas} fetchGames={fetchGames} />
                 </Offcanvas.Body>
             </Offcanvas>
 

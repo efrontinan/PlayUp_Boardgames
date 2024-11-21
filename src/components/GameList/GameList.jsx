@@ -51,7 +51,7 @@ const GameList = ({ filterCategories }) => {
                         games.map(elm => {
                             return (
                                 <Col lg="4" md="6" s="12" key={elm.id} className="my-2 mx-0" >
-                                    <GameCard {...elm} removeGame={removeGame} />
+                                    <GameCard fetchGames={fetchGames} {...elm} removeGame={removeGame} />
                                 </Col>)
                         })
                     }
