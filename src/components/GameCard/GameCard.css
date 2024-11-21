@@ -17,7 +17,7 @@
 
 .GameCard .card:hover img {
     filter: grayscale(100%);
-    scale: 150%;
+    scale: 120%;
 }
 
 .GameCard .card:hover .h5 {

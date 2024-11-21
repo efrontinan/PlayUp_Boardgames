@@ -32,7 +32,9 @@ const ContactForm = () => {
         }
 
         const newContact = {
-            ...contactData
+            ...contactData,
+            date: new Date().toISOString(),
+            isAnswered: false
         }
 
         axios
@@ -41,7 +43,7 @@ const ContactForm = () => {
                 setShowToast(true)
                 setContactData({
                     email: "",
-                    message: ""
+                    message: "",
                 })
                 setValidated(false)
             })

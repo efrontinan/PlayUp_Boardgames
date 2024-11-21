@@ -110,7 +110,7 @@ const CreateEventsForm = ({ closeCreateModal }) => {
 
         axios
             .post(`${API_URL}/events`, newEvent)
-            .then(() => {
+            .then(response => {
                 createAlert("Evento creado", `juegos/detalles/${response.data.gameId}`)
                 setValidated(false)
                 closeCreateModal()
