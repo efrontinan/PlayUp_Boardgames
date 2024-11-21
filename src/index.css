@@ -123,6 +123,14 @@ h6 {
   color: #3571fe;
 }
 
+.btn-custom-text-light {
+  color: #ffffff;
+}
+
+.btn-custom-text-light:hover {
+  color: #6794fe;
+}
+
 .btn-close {
   background-color: #8591ad;
 }
@@ -315,6 +323,7 @@ h6 {
 
 .toast {
   background-color: #3571fe;
+  border-radius: 4px;
   position: fixed;
   bottom: 24px;
   left: 40px;
@@ -334,7 +343,7 @@ h6 {
 }
 
 .toast-body {
-  color: #06020b;
+  color: #ffffff;
   font-size: 1rem;
 }
 
