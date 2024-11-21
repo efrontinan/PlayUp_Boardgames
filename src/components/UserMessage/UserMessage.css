@@ -1,0 +1,10 @@
+.UserMessage .btn-close {
+    background-color: transparent;
+    --bs-btn-close-bg: url('https://res.cloudinary.com/dt9pviq34/image/upload/v1732208113/PlayUp/po5gcm9yrhjoorafpgby.svg')
+}
+
+.UserMessage .btn-close:hover {
+    background-color: transparent;
+    opacity: 1;
+    --bs-btn-close-bg: url('https://res.cloudinary.com/dt9pviq34/image/upload/v1732208113/PlayUp/po5gcm9yrhjoorafpgby.svg')
+}

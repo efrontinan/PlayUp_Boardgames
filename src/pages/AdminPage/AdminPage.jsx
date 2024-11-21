@@ -1,11 +1,21 @@
-import ContactList from '../../components/ContactList/ContactList'
-
+import { useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+
+import ContactList from '../../components/ContactList/ContactList'
 import CalendarChart from '../../components/CalendarChart/CalendarChart'
+
+import { AuthContext } from '../../contexts/auth.context'
+import { Navigate } from 'react-router-dom'
 
 
 
 const AdminPage = () => {
+
+    const { loggedAdmin } = useContext(AuthContext)
+
+    if(!loggedAdmin){
+        return <Navigate to="/" />
+    }
 
     return (
         <div className="AdminPage m-3 m-md-5 ">

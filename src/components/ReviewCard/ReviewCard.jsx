@@ -68,8 +68,6 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews, updateRatin
                     </Row>
                 </Card.Body>
 
-                <Card.Footer>Envíanos tu valoración</Card.Footer>
-
             </Card>
 
             <Offcanvas show={showEditOffcanvas}
