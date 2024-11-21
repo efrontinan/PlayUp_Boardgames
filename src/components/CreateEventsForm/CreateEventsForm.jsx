@@ -61,7 +61,12 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                 return getLatLng(addressDetails)
             })
             .then((coordinates) => {
-                setAddress({ ...addressData, label: addressValue?.label, lat: coordinates.lat, lng: coordinates.lng })
+                setAddress({
+                    ...addressData, label:
+                        addressValue?.label,
+                    lat: coordinates.lat,
+                    lng: coordinates.lng
+                })
             })
             .catch(error => console.error(error))
     }
@@ -72,7 +77,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
     })
 
     const [validated, setValidated] = useState(false)
-    const [showToast, setShowToast] = useState(false)
 
     const handleEventChange = e => {
 
@@ -122,11 +126,17 @@ const CreateEventsForm = ({ closeCreateModal }) => {
     return (
         <div className="CreateEventsForm">
 
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="vertical-form p-3">
+            <Form
+                noValidate
+                validated={validated}
+                onSubmit={handleFormSubmit}
+                className="vertical-form p-3">
 
                 {!gameId && <Form.Group controlId="gameIdField" className="mb-3">
                     <Form.Label>Elige el juego</Form.Label>
-                    <Form.Select onChange={handleEventChange} name={"gameId"}>
+                    <Form.Select
+                        onChange={handleEventChange}
+                        name={"gameId"}>
                         {gameData.map(elm => {
                             return (
                                 <option value={elm.id} key={elm.id} >{elm.title}</option>
@@ -146,7 +156,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         onChange={handleEventChange}
                         name={'author'}
                     />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="contactField" className="mb-3">
@@ -159,7 +172,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         onChange={handleEventChange}
                         name={'contact'}
                     />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="dateField" className="mb-3">
@@ -171,7 +187,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         onChange={handleEventChange}
                         name={'date'}
                     />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="descriptionField" className="mb-3">
@@ -185,7 +204,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={eventData.description}
                         onChange={handleEventChange}
                         name={'description'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <h5 className="my-3 text-primary">Introduce la dirección</h5>
@@ -220,7 +242,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={addressData.street}
                         onChange={handleAddressChange}
                         name={'street'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="cityField" className="mb-3">
@@ -232,7 +257,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={addressData.city}
                         onChange={handleAddressChange}
                         name={'city'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="countryField" className="mb-3">
@@ -244,7 +272,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={addressData.country}
                         onChange={handleAddressChange}
                         name={'country'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="ZIPField" className="mb-3">
@@ -257,7 +288,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={addressData.zipcode}
                         onChange={handleAddressChange}
                         name={'zipcode'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <h5 className="my-3 text-primary">¿Cuántas personas seréis?</h5>
@@ -272,7 +306,10 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         value={playerData.min}
                         onChange={handlePlayerChange}
                         name={'min'} />
-                    <Form.Control.Feedback type="invalid">Este campo es obligatorio</Form.Control.Feedback>
+                    <Form.Control.Feedback
+                        type="invalid">
+                        Este campo es obligatorio
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="maxPlayersFields" className="mb-3">
@@ -286,11 +323,9 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                         name={'max'} />
                 </Form.Group>
 
-
                 <Button variant="custom-primary" type="submit">
                     Crear planazo
                 </Button>
-
             </Form>
 
         </div>

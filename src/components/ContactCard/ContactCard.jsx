@@ -19,7 +19,6 @@ const ContactCard = ({ email, message, date, isAnswered }) => {
                 <Card.Body className="m-2">
                     <Row>
                         <Col className="d-grid">
-
                             <Card.Title className="mb-3">
                                 "{message}"
                             </Card.Title>
@@ -28,7 +27,8 @@ const ContactCard = ({ email, message, date, isAnswered }) => {
                             </Card.Text>
 
                             <Card.Text>
-                                <Calendar className="me-2" /> Recibido hace {getTimePassed(date, 'months')}
+                                <Calendar className="me-2" />
+                                Recibido hace {getTimePassed(date, 'months')}
                             </Card.Text>
 
                             <Button
@@ -36,9 +36,7 @@ const ContactCard = ({ email, message, date, isAnswered }) => {
                                 onClick={() => { setIsAnswered(!answer), createAlert('Respuesta enviada') }}>
                                 {answer ? 'Marcar como no respondido' : 'Marcar como respondido'}
                             </Button>
-
                         </Col>
-
                     </Row>
                 </Card.Body>
             </Card>

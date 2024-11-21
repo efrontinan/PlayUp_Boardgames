@@ -133,19 +133,24 @@ const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
         isLoading ? <Loader /> :
             <div className="EditEventForm">
 
-                <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="vertical-form p-3">
+                <Form
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleFormSubmit}
+                    className="vertical-form p-3">
 
-                    {location.pathname === "/planes" && <Form.Group controlId="gameIdField" className="mb-3">
-                        <Form.Label>Elige el juego</Form.Label>
-                        <Form.Select onChange={handleEventChange} name={"gameId"}>
-                            {gameData.map(elm => {
-                                return (
-                                    <option value={elm.id} key={elm.id} >{elm.title}</option>
-                                )
-                            })}
-                        </Form.Select>
+                    {location.pathname === "/planes" &&
+                        <Form.Group controlId="gameIdField" className="mb-3">
+                            <Form.Label>Elige el juego</Form.Label>
+                            <Form.Select onChange={handleEventChange} name={"gameId"}>
+                                {gameData.map(elm => {
+                                    return (
+                                        <option value={elm.id} key={elm.id} >{elm.title}</option>
+                                    )
+                                })}
+                            </Form.Select>
 
-                    </Form.Group>}
+                        </Form.Group>}
 
                     <Form.Group controlId="authorField" className="mb-3">
                         <Form.Label>¿Cómo te llamas?</Form.Label>

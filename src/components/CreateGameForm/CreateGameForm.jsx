@@ -244,8 +244,11 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                         })
                     }
 
-                    <Button variant="custom-transparent"
-                        onClick={addCategory} size="sm" className="mt-3">
+                    <Button
+                        variant="custom-transparent"
+                        onClick={addCategory}
+                        size="sm"
+                        className="mt-3">
                         Añadir categoría
                     </Button>
                 </Form.Group>
@@ -254,8 +257,14 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                     <Form.Label>Introduce los datos de jugador</Form.Label>
                     <Row>
                         <Col sm="6" md="4">
-                            <Form.Label className="d-none">Número mínimo de jugadores</Form.Label>
-                            <Form.Text className="text-muted"> Número mínimo </Form.Text>
+                            <Form.Label
+                                className="d-none">
+                                Número mínimo de jugadores
+                            </Form.Label>
+                            <Form.Text
+                                className="text-muted">
+                                Número mínimo
+                            </Form.Text>
                             <Form.Control
                                 required
                                 type="number"
@@ -271,8 +280,14 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                         </Col>
 
                         <Col sm="6" md="4">
-                            <Form.Label className="d-none">Número máximo de jugadores</Form.Label>
-                            <Form.Text className="text-muted"> Número máximo </Form.Text>
+                            <Form.Label
+                                className="d-none">
+                                Número máximo de jugadores
+                            </Form.Label>
+                            <Form.Text
+                                className="text-muted">
+                                Número máximo
+                            </Form.Text>
                             <Form.Control
                                 required
                                 type="number"
@@ -287,8 +302,14 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                             </Form.Control.Feedback>
                         </Col>
                         <Col sm="6" md="4">
-                            <Form.Label className="d-none">Edad mínima</Form.Label>
-                            <Form.Text className="text-muted">Edad mínima</Form.Text>
+                            <Form.Label
+                                className="d-none">
+                                Edad mínima
+                            </Form.Label>
+                            <Form.Text
+                                className="text-muted">
+                                Edad mínima
+                            </Form.Text>
                             <Form.Control
                                 required
                                 type="number"
@@ -322,7 +343,9 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formDuration">
+                <Form.Group
+                    className="mb-3"
+                    controlId="formDuration">
                     <Form.Label>Duración aproximada de partida en minutos</Form.Label>
                     <Form.Control
                         required
@@ -375,7 +398,11 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                             )
                         })
                     }
-                    <Button variant="custom-transparent" onClick={addHowToPlay} size="sm" className="mt-3">
+                    <Button
+                        variant="custom-transparent"
+                        onClick={addHowToPlay}
+                        size="sm"
+                        className="mt-3">
                         Añadir regla
                     </Button>
 
@@ -386,7 +413,6 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                     {
                         gameData.expansions.map((elm, idx) => {
                             return (
-
                                 <Row key={idx}>
                                     <Col md="11">
                                         <Form.Control
@@ -412,19 +438,26 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                         })
                     }
 
-                    <Button variant="custom-transparent" onClick={addExpansions} size="sm" className="mt-3">
+                    <Button
+                        variant="custom-transparent"
+                        onClick={addExpansions}
+                        size="sm"
+                        className="mt-3">
                         Añadir expansión
                     </Button>
 
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formCheckOneTime">
+                <Form.Group
+                    className="mb-3"
+                    controlId="formCheckOneTime">
                     <Form.Label>¿Puedes jugarlo sólo una vez?</Form.Label>
                     <Form.Check
                         type="checkbox"
                         label="Sí, su manera de jugar o contenido implica 
                                 una partida única"
-                        checked={gameData.oneTimePlay} onChange={handleGameChange}
+                        checked={gameData.oneTimePlay}
+                        onChange={handleGameChange}
                         name={"oneTimePlay"} />
                 </Form.Group>
 
@@ -433,7 +466,6 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                     {
                         gameData.content.map((elm, idx) => {
                             return (
-
                                 <Row key={idx} >
                                     <Col md="11">
                                         <Form.Control
@@ -459,7 +491,6 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
                                         </Button>
                                     </Col>
                                 </Row>
-
                             )
                         })
                     }
