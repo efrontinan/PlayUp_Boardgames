@@ -84,11 +84,18 @@ const GameDetailsPage = () => {
     isLoading ? <Loader /> :
       (
         <div className="GameDetailsPage m-3 m-md-5 text-pop-up-top">
+
           <Container className="full-height-min custom-col">
 
             <Row className="mb-2 mb-md-5 w-100 " >
               <Col md="3">
-                <Button variant="custom-transparent" size="lg" as={Link} to="/juegos" className="mb-2"><ChevronLeft /> Atrás</Button>
+                <Button
+                  variant="custom-transparent"
+                  size="lg" as={Link}
+                  to="/juegos"
+                  className="mb-2">
+                  <ChevronLeft /> Atrás
+                </Button>
 
                 <img src={game.image} alt="imagen de juego de mesa" />
               </Col>
@@ -107,7 +114,6 @@ const GameDetailsPage = () => {
                     )
                   })}
                 </Stack>
-
 
                 <p>{game.description}</p>
 
@@ -134,19 +140,48 @@ const GameDetailsPage = () => {
               </Col>
             </Row>
             <div className="DropDown d-block d-md-none w-100">
-              <DropdownButton variant="outline-secondary" title={tabTitle} className="my-3 w-100 d-md-none">
-                <Dropdown.Item eventKey="instructionsTab" onClick={() => setActiveKey('instructionsTab')}>Cómo jugar</Dropdown.Item>
-                <Dropdown.Item eventKey="contentTab" onClick={() => setActiveKey("contentTab")}>Contenido</Dropdown.Item>
-                <Dropdown.Item eventKey="expansionsTab" onClick={() => setActiveKey("expansionsTab")}>Expansiones</Dropdown.Item>
-                <Dropdown.Item eventKey="eventsTab" onClick={() => setActiveKey("eventsTab")}>Planazos</Dropdown.Item>
-                <Dropdown.Item eventKey="reviewsTab" onClick={() => setActiveKey("reviewsTab")}>Reviews</Dropdown.Item>
+              <DropdownButton
+                variant="outline-secondary"
+                title={tabTitle}
+                className="my-3 w-100 d-md-none">
+                <Dropdown.Item
+                  eventKey="instructionsTab"
+                  onClick={() => setActiveKey('instructionsTab')}>
+                  Cómo jugar
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="contentTab"
+                  onClick={() => setActiveKey("contentTab")}>
+                  Contenido
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="expansionsTab"
+                  onClick={() => setActiveKey("expansionsTab")}>
+                  Expansiones
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="eventsTab"
+                  onClick={() => setActiveKey("eventsTab")}>
+                  Planazos
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="reviewsTab"
+                  onClick={() => setActiveKey("reviewsTab")}>
+                  Reviews
+                </Dropdown.Item>
 
               </DropdownButton>
               <Tabs id="fill-tab-example"
                 className="d-none d-md-none"
                 fill
                 activeKey={activeKey}>
-                <Tab eventKey="instructionsTab" title="Cómo jugar" className="w-100" onSelect={() => setActiveKey('instructionsTab')}>
+
+                <Tab
+                  eventKey="instructionsTab"
+                  title="Cómo jugar"
+                  className="w-100"
+                  onSelect={() => setActiveKey('instructionsTab')}>
+
                   <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.howToPlay.map(elm => {
@@ -158,9 +193,15 @@ const GameDetailsPage = () => {
                       })
                     }
                   </ul>
+
                 </Tab>
 
-                <Tab eventKey="contentTab" title="Contenido" className="w-100" onSelect={() => setActiveKey('contentTab')}>
+                <Tab
+                  eventKey="contentTab"
+                  title="Contenido"
+                  className="w-100"
+                  onSelect={() => setActiveKey('contentTab')}>
+
                   <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.content.map(elm => {
@@ -172,8 +213,14 @@ const GameDetailsPage = () => {
                       })
                     }
                   </ul>
+
                 </Tab>
-                <Tab eventKey="expansionsTab" title="Expansiones" className="w-100" onSelect={() => setActiveKey('expansionsTab')}>
+
+                <Tab
+                  eventKey="expansionsTab"
+                  title="Expansiones"
+                  className="w-100"
+                  onSelect={() => setActiveKey('expansionsTab')}>
                   {
                     !game.expansions || game.expansions[0] === "" ?
                       "Este juego no tiene expansiones"
@@ -191,13 +238,25 @@ const GameDetailsPage = () => {
                       </ul>
                   }
                 </Tab>
-                <Tab eventKey="eventsTab" title="Planazos" className="w-100" onSelect={() => setActiveKey('eventsTab')}>
+
+                <Tab
+                  eventKey="eventsTab"
+                  title="Planazos"
+                  className="w-100"
+                  onSelect={() => setActiveKey('eventsTab')}>
                   <EventsList />
                 </Tab>
-                <Tab eventKey="reviewsTab" title="Reviews" className="w-100" onSelect={() => setActiveKey('reviewsTab')}>
+
+                <Tab
+                  eventKey="reviewsTab"
+                  title="Reviews"
+                  className="w-100"
+                  onSelect={() => setActiveKey('reviewsTab')}>
                   <ReviewsList />
                 </Tab>
+
               </Tabs>
+
             </div>
 
             <div className="Tabs d-none d-md-block text-pop-up-top">
@@ -208,7 +267,12 @@ const GameDetailsPage = () => {
                 fill
               >
 
-                <Tab eventKey="instructionsTab" title="Cómo jugar" className="w-100" onSelect={() => setActiveKey('instructionsTab')}>
+                <Tab
+                  eventKey="instructionsTab"
+                  title="Cómo jugar"
+                  className="w-100"
+                  onSelect={() => setActiveKey('instructionsTab')}>
+
                   <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.howToPlay.map(elm => {
@@ -220,9 +284,15 @@ const GameDetailsPage = () => {
                       })
                     }
                   </ul>
+
                 </Tab>
 
-                <Tab eventKey="contentTab" title="Contenido" className="w-100" onSelect={() => setActiveKey('contentTab')}>
+                <Tab
+                  eventKey="contentTab"
+                  title="Contenido"
+                  className="w-100"
+                  onSelect={() => setActiveKey('contentTab')}>
+
                   <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.content.map(elm => {
@@ -234,8 +304,14 @@ const GameDetailsPage = () => {
                       })
                     }
                   </ul>
+
                 </Tab>
-                <Tab eventKey="expansionsTab" title="Expansiones" className="w-100" onSelect={() => setActiveKey('expansionsTab')}>
+
+                <Tab
+                  eventKey="expansionsTab"
+                  title="Expansiones"
+                  className="w-100"
+                  onSelect={() => setActiveKey('expansionsTab')}>
                   {
                     !game.expansions || game.expansions[0] === "" ?
                       "Este juego no tiene expansiones"
@@ -253,15 +329,29 @@ const GameDetailsPage = () => {
                       </ul>
                   }
                 </Tab>
-                <Tab eventKey="eventsTab" title="Planazos" className="w-100" onSelect={() => setActiveKey('eventsTab')}>
+
+                <Tab
+                  eventKey="eventsTab"
+                  title="Planazos"
+                  className="w-100"
+                  onSelect={() => setActiveKey('eventsTab')}>
                   <EventsList />
                 </Tab>
-                <Tab eventKey="reviewsTab" title="Reviews" className="w-100" onSelect={() => setActiveKey('reviewsTab')}>
+
+                <Tab
+                  eventKey="reviewsTab"
+                  title="Reviews"
+                  className="w-100"
+                  onSelect={() => setActiveKey('reviewsTab')}>
                   <ReviewsList updateRating={fetchReviewRating} />
                 </Tab>
+
               </Tabs>
+
             </div>
+
           </Container>
+
         </div>
       )
 

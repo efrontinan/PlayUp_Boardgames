@@ -13,13 +13,15 @@ const AdminPage = () => {
 
     const { loggedAdmin } = useContext(AuthContext)
 
-    if(!loggedAdmin){
+    if (!loggedAdmin) {
         return <Navigate to="/" />
     }
 
     return (
         <div className="AdminPage m-3 m-md-5 ">
+
             <Container className="full-heigth-min ">
+
                 <Row className='mw-80-vh'>
                     <Col className='mw-80-vh'>
                         <h2 className='mb-4'>Estadísticas mensajes</h2>
@@ -29,6 +31,7 @@ const AdminPage = () => {
                         <ContactList />
                     </Col>
                 </Row>
+
             </Container>
 
         </div>

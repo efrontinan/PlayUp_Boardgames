@@ -43,6 +43,7 @@ const HomePage = () => {
     return (
         isLoading ? <Loader /> :
             <div className="HomePage">
+
                 <Container className="full-heigth-min">
                     <video autoPlay={true} muted loop={true} className="myVideo"
                         src={MEDIA.BACKGROUND} />
@@ -84,7 +85,9 @@ const HomePage = () => {
                             </Row>
                         </Col>
                     </Row>
+
                 </Container>
+
             </div>
     )
 
