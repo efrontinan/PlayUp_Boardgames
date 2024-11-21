@@ -102,7 +102,6 @@ const CreateEventsForm = ({ closeCreateModal }) => {
         if (form.checkValidity() === false) {
             e.stopPropagation()
             setValidated(true)
-            console.log('No estoy completo')
             return
         }
 

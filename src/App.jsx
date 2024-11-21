@@ -17,8 +17,6 @@ const App = () => {
 
       <UserMessage/>
 
-      <Loader/>
-
       <Footer />
 
 
