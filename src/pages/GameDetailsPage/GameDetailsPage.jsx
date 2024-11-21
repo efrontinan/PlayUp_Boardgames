@@ -83,10 +83,10 @@ const GameDetailsPage = () => {
 
     isLoading ? <Loader /> :
       (
-        <div className="GameDetailsPage m-3 m-md-5">
+        <div className="GameDetailsPage m-3 m-md-5 text-pop-up-top">
           <Container className="full-height-min custom-col">
 
-            <Row className="mb-2 mb-md-5 w-100" >
+            <Row className="mb-2 mb-md-5 w-100 " >
               <Col md="3">
                 <Button variant="custom-transparent" size="lg" as={Link} to="/juegos" className="mb-2"><ChevronLeft /> Atrás</Button>
 
@@ -147,7 +147,7 @@ const GameDetailsPage = () => {
                 fill
                 activeKey={activeKey}>
                 <Tab eventKey="instructionsTab" title="Cómo jugar" className="w-100" onSelect={() => setActiveKey('instructionsTab')}>
-                  <ul className="my-3 my-md-5">
+                  <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.howToPlay.map(elm => {
                         return (
@@ -161,7 +161,7 @@ const GameDetailsPage = () => {
                 </Tab>
 
                 <Tab eventKey="contentTab" title="Contenido" className="w-100" onSelect={() => setActiveKey('contentTab')}>
-                  <ul className="my-3 my-md-5">
+                  <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.content.map(elm => {
                         return (
@@ -178,7 +178,7 @@ const GameDetailsPage = () => {
                     !game.expansions || game.expansions[0] === "" ?
                       "Este juego no tiene expansiones"
                       :
-                      <ul className="my-3 my-md-5">
+                      <ul className="my-3 my-md-5 text-pop-up-top">
                         {
                           game.expansions.map(elm => {
                             return (
@@ -200,7 +200,7 @@ const GameDetailsPage = () => {
               </Tabs>
             </div>
 
-            <div className="Tabs d-none d-md-block">
+            <div className="Tabs d-none d-md-block text-pop-up-top">
               <Tabs
                 defaultActiveKey="instructionsTab"
                 id="fill-tab-example"
@@ -209,7 +209,7 @@ const GameDetailsPage = () => {
               >
 
                 <Tab eventKey="instructionsTab" title="Cómo jugar" className="w-100" onSelect={() => setActiveKey('instructionsTab')}>
-                  <ul className="my-3 my-md-5">
+                  <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.howToPlay.map(elm => {
                         return (
@@ -223,7 +223,7 @@ const GameDetailsPage = () => {
                 </Tab>
 
                 <Tab eventKey="contentTab" title="Contenido" className="w-100" onSelect={() => setActiveKey('contentTab')}>
-                  <ul className="my-3 my-md-5">
+                  <ul className="my-3 my-md-5 text-pop-up-top">
                     {
                       game.content.map(elm => {
                         return (
@@ -240,7 +240,7 @@ const GameDetailsPage = () => {
                     !game.expansions || game.expansions[0] === "" ?
                       "Este juego no tiene expansiones"
                       :
-                      <ul className="my-3 my-md-5">
+                      <ul className="my-3 my-md-5 text-pop-up-top">
                         {
                           game.expansions.map(elm => {
                             return (

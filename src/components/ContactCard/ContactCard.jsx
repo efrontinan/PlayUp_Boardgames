@@ -15,7 +15,7 @@ const ContactCard = ({ email, message, date, isAnswered }) => {
 
     return (
         <div className="ContactCard my-4">
-            <Card>
+            <Card className="text-pop-up-top">
                 <Card.Body className="m-2">
                     <Row>
                         <Col className="d-grid">

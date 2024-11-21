@@ -26,8 +26,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Amatic SC", serif;
-  font-weight: 700;
+  font-family: "Luckiest Guy", serif;
+  font-weight: 250;
   font-style: normal;
   color: #ffffff;
 }
@@ -47,6 +47,10 @@ h6 {
 
 .fit-content {
   width: fit-content;
+}
+
+.mw-80-vh {
+  max-height: 80vh;
 }
 
 .border-style {
@@ -170,10 +174,9 @@ h6 {
   border: none;
   color: #8591ad;
   --bs-form-select-bg-img: url('https://res.cloudinary.com/dt9pviq34/image/upload/v1732182562/PlayUp/o1ayk60lu3zr6z31pgqj.svg')
-
 }
 
-.form-select:focus{
+.form-select:focus {
   color: #ffffff;
   background-color: #292f3d;
   border-color: #9ab8fe;
@@ -307,7 +310,7 @@ h6 {
   .custom-col {
     display: block;
   }
-  
+
 }
 
 .toast {

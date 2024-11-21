@@ -25,15 +25,13 @@ const EventsList = () => {
 
     const fetchEvents = () => {
         axios
-            .get( gameId? `${API_URL}/events/?gameId=${gameId}` : `${API_URL}/events` )
+            .get(gameId ? `${API_URL}/events/?gameId=${gameId}` : `${API_URL}/events`)
             .then(response => {
                 setEvents(response.data)
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
     }
-
-
 
     return (
         isLoading ? <Loader /> :
@@ -51,7 +49,7 @@ const EventsList = () => {
                     </Col>
                 </Row>
                 <Row>
-                    { events.length===0? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
+                    {events.length === 0 ? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
                         events.map(elm => {
 
                             return (
@@ -72,8 +70,6 @@ const EventsList = () => {
                         <CreateEventsForm closeCreateModal={() => { setShowCreateModal(false), fetchEvents() }} />
                     </Offcanvas.Body>
                 </Offcanvas>
-
-
 
             </div>
     )

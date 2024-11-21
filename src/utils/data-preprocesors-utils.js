@@ -17,7 +17,7 @@ export const getCalendarChartData = () => {
         "isAnswered": false
     }]
 
-    for (let i)
+    // for (let i)
 
     const processedData = [{
         "value": '',

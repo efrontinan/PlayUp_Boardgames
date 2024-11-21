@@ -34,7 +34,7 @@ const ReviewCard = ({ author, rating, description, id, fetchReviews, updateRatin
 
     return (
         <div className="ReviewCard">
-            <Card className='p-custom'>
+            <Card className='p-custom text-pop-up-top'>
                 <Card.Body className="m-2">
                     <Row>
                         <Col className="d-grid gap-3">

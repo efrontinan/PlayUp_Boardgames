@@ -4,12 +4,12 @@
 
 .badge {
     margin-bottom: 8px;
+    transition: 0.15s
 }
 
-/* .badgeSelected {
+.badge .selected {
     margin-bottom: 8px;
-    background-color: blue;
-} */
+}
 
 .badge:hover {
     cursor: pointer;
