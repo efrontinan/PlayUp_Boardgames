@@ -39,6 +39,8 @@ const EditReviewForm = ({ reviewId, setShowEditOffcanvas, fetchReviews, updateRa
                     }
                 )
                 setIsLoading(false)
+            .catch(err => console.log(err))
+
             })
     }
 

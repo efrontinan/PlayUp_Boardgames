@@ -35,8 +35,9 @@ const GlobalGamesFilter = () => {
             .get(`${API_URL}/games?title_like=${query}`)
             .then(response => {
                 setFilterResults(response.data)
-            }
-            )
+            })
+            .catch(err => console.log(err))
+
     }
 
     return (
@@ -76,21 +77,21 @@ const GlobalGamesFilter = () => {
             <Offcanvas show={showMenu} onHide={() => setShowMenu(false)} placement='end' className="py-3 px-2" >
                 <Offcanvas.Header closeButton />
                 <Offcanvas.Body >
-                <Form.Control
-                            type="text"
-                            placeholder="Busca tu juego"
-                            value={filterValue}
-                            onChange={handleFilterChange}
-                        />
-                        <ListGroup variant="">
-                            {filterValue.length > 0 ?
-                                filterResults.map(elm => {
-                                    return (
-                                        <SearchListElement {...elm} key={elm.id} setShowMenu={setShowMenu} />
-                                    )
-                                }) : ""
-                            }
-                        </ListGroup>
+                    <Form.Control
+                        type="text"
+                        placeholder="Busca tu juego"
+                        value={filterValue}
+                        onChange={handleFilterChange}
+                    />
+                    <ListGroup variant="">
+                        {filterValue.length > 0 ?
+                            filterResults.map(elm => {
+                                return (
+                                    <SearchListElement {...elm} key={elm.id} setShowMenu={setShowMenu} />
+                                )
+                            }) : ""
+                        }
+                    </ListGroup>
                 </Offcanvas.Body>
             </Offcanvas>
 

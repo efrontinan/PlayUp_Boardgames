@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useContext } from "react"
 import "./Footer.css"
 
-import { Col, Nav, Row, Stack } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth.context";
+import { Col, Row, Stack } from "react-bootstrap"
+import { NavLink } from "react-router-dom"
+import { AuthContext } from "../../contexts/auth.context"
 
 const Footer = () => {
 
@@ -47,7 +47,7 @@ const Footer = () => {
             </Row>
         </div>
 
-    );
+    )
 }
 
-export default Footer;
+export default Footer

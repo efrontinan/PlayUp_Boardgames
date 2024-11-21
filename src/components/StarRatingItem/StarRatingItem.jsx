@@ -1,4 +1,5 @@
-import { Star, StarFill, StarHalf } from "react-bootstrap-icons";
+import { Star, StarFill, StarHalf } from "react-bootstrap-icons"
+
 import "../StarRatingItem/StarRatingItem.css"
 
 const StarRatingItem = ({ rating }) => {
@@ -20,7 +21,7 @@ const StarRatingItem = ({ rating }) => {
                 else {
                     return <Star key={index} />
                 }
-                ;
+                
             })}
         </div>
     )

@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 import { Col, Row, Button, Offcanvas } from "react-bootstrap"
 
 import Loader from "../Loader/Loader"
-import { useParams } from "react-router-dom"
 import ReviewCard from "../ReviewCard/ReviewCard"
 import CreateReviewForm from "../CreateReviewForm/CreateReviewForm"
 
@@ -38,9 +38,11 @@ const ReviewsList = ({ updateRating }) => {
             <div className="ReviewsList">
 
                 <Row >
+
                     <Col xs="6" md="8">
                         <h1>Reviews({reviews.length})</h1>
                     </Col>
+
                     <Col className="d-flex justify-content-end">
                         <Button
                             variant="custom-transparent"
@@ -49,14 +51,18 @@ const ReviewsList = ({ updateRating }) => {
                             Añadir review
                         </Button>
                     </Col>
+
                 </Row>
+
                 <Row>
                     {reviews.length === 0 ? <p className="my-3">Aún no hay reviews. ¡Comparte tu experiencia con otros!</p> :
                         reviews.map(elm => {
                             return (
+
                                 <Col lg={reviews.length > 1 ? 6 : 12} key={elm.id}>
                                     <ReviewCard {...elm} key={elm.id} fetchReviews={fetchReviews} updateRating={updateRating} />
                                 </Col>
+
                             )
                         })
                     }
