@@ -40,7 +40,7 @@ const EventCard = ({ author, address, date, description, players, contact, id, f
     return (
         <div className="EventCard my-3">
 
-            <Card className='p-custom'>
+            <Card className='p-custom text-pop-up-top'>
                 <Card.Body className="m-2">
                     <Row>
                         <Col className="d-grid gap-3">

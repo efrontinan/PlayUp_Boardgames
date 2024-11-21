@@ -22,7 +22,7 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
 
         <div className="GameCard">
 
-            <Card className='p-custom' key={id} >
+            <Card className='p-custom text-pop-up-top' key={id} >
                 <Card.Body>
                     <Row className='mb-4'>
                         <Col sm="10" lg="6">
@@ -37,7 +37,6 @@ const GameCard = ({ image, title, categories, specs, id, removeGame }) => {
                             <Stack gap={1} className='float-left wrap'>
                                 {categories.map((elm, idx) => {
                                     return (
-
                                         <Badge bg="badge-outline-primary" key={idx} className='fit-content'>{elm}</Badge>
                                     )
                                 })}
