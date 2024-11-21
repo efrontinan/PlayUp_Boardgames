@@ -8,16 +8,19 @@ import App from './App.jsx'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { AuthorProviderWrapper } from './contexts/auth.context.jsx'
 import { UserMessageProvidedWrapper } from "./contexts/userMessage.context"
+import { LoaderProvidedWrapper } from './contexts/loader.context.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <UserMessageProvidedWrapper>
-      <AuthorProviderWrapper>
-        <Router>
-          <App />
-        </Router>
-      </AuthorProviderWrapper>
+      <LoaderProvidedWrapper>
+        <AuthorProviderWrapper>
+          <Router>
+            <App />
+          </Router>
+        </AuthorProviderWrapper>
+      </LoaderProvidedWrapper>
     </UserMessageProvidedWrapper>
   </StrictMode>
 )

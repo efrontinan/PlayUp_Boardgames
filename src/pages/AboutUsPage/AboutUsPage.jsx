@@ -8,9 +8,9 @@ const AboutUsPage = () => {
 
     return (
         <div className="AboutUsPage m-3 m-md-5">
-            <Container className="full-heigth-min">
-                <Row className='gap-2'>
-                    <Col md="5" className='image' style={{backgroundImage:`url(${MEDIA.ABOUT_US})`}}>
+            <Container className="full-heigth-min text-pop-up-top">
+                <Row className='gap-2 '>
+                    <Col md="5" sm="12" className='image' style={{backgroundImage:`url(${MEDIA.ABOUT_US})`}}>
                     </Col>
                     <Col/>
                     <Col Col md="6">
