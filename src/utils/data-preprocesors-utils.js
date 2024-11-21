@@ -1,29 +1,29 @@
+import { getYYYYMMDD } from "./date-utils"
 
 
-export const getCalendarChartData = () => {
+export const getCalendarChartData = (rawData) => {
 
-    const rawData = [{
-        "email": "prueba@gmail.com",
-        "message": "¿Tienen plazas disponibles para el torneo de Catan?",
-        "date": "2024-09-24T10:01:47.559494",
-        "id": 1,
-        "isAnswered": false
-    },
-    {
-        "email": "prueba@gmail.com",
-        "message": "¿Cómo puedo participar en las sesiones de prueba de prototipos de juegos de mesa?",
-        "date": "2024-04-03T10:01:47.559519",
-        "id": 2,
-        "isAnswered": false
-    }]
+    const datesArray = rawData.map(elm => {
+        return (getYYYYMMDD(elm.date))
+    })
 
-    for (let i)
+    const frequencyMap = {}
 
-    const processedData = [{
-        "value": '',
-        "day": ""
-    }]
+    datesArray.forEach(date => {
+        frequencyMap[date] = (frequencyMap[date] || 0) + 1
+    })
+    
+    const processedData = []
 
-    return (`Los datos son: ${processedData[0].value}`)
+    for (const property in frequencyMap) {
+        processedData.push({
+            "value": frequencyMap[property],
+            "day" : property 
+        })
+       }
+
+       console.log(processedData)
+
+    return (processedData)
 
 }

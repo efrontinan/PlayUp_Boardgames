@@ -16,6 +16,17 @@ export const exitingDateformat = (dateData) => {
     return (`${day} de ${month} de ${year} a las ${hour}:${minutes}`)
 }
 
+export const getYYYYMMDD = (dateData) => {
+    const date = new Date (dateData)
+
+    const day = date.getDate() +1
+    const month = date.getMonth() +1
+    const year = date.getFullYear() 
+    
+    return ( `${year}-${month.toString().length<2? `0${month}`:`${month}`}-${day.toString().length<2? `0${day}`:`${day}`}` )
+
+}
+
 export const getTimePassed = (dateData, outputFormat) => {
 
     const date = new Date(dateData)
@@ -40,5 +51,4 @@ export const getTimePassed = (dateData, outputFormat) => {
 
     }
 
-    
 }

@@ -1,7 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+
 import Loader from "../Loader/Loader"
 import ContactCard from "../ContactCard/ContactCard"
+import './ContactList.css'
 
 const API_URL = "http://localhost:5005"
 
@@ -27,13 +29,15 @@ const ContactList = () => {
     return (isLoading ? <Loader /> :
         <div className="ContactList">
 
-            <h1>Mensajes recibidos ({contacts.length})</h1>
+            <div className="header sticky-top">
+                <h1> Mensajes recibidos ({contacts.length})</h1>
+            </div>
 
-            { contacts.length===0? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
-                contacts.map (elm => {
+            {contacts.length === 0 ? <p className="my-3">Aún no hay planazos. ¡Se el primero en crear uno!</p> :
+                contacts.map(elm => {
 
                     return (
-                        <ContactCard key={elm.id} {...elm}/>
+                        <ContactCard key={elm.id} {...elm} />
                     )
 
                 })

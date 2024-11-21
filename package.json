@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nivo/calendar": "^0.88.0",
+    "@nivo/core": "^0.88.0",
     "@react-google-maps/api": "^2.20.3",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
