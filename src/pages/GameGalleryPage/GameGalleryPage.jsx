@@ -11,12 +11,14 @@ const GameGalleryPage = () => {
 
     return (
         <div className="GameGalleryPage m-3 m-md-5">
+
             <Container className="full-heigth-min">
 
                 <Stack className="categoriesFilter" direction="horizontal" gap={2}>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Todos" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Todos" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=")
                             setSelectedBadge("Todos")
@@ -25,7 +27,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Juego de cartas" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Juego de cartas" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=juego%20de%20cartas")
                             setSelectedBadge("Juego de cartas")
@@ -34,7 +37,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Rol" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Rol" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=rol")
                             setSelectedBadge("Rol")
@@ -43,7 +47,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Juego de tablero" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Juego de tablero" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=juego%20de%20tablero")
                             setSelectedBadge("Juego de tablero")
@@ -52,7 +57,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Estrategia" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Estrategia" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=estrategia")
                             setSelectedBadge("Estrategia")
@@ -61,7 +67,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Juego cooperativo" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Juego cooperativo" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=juego%20cooperativo")
                             setSelectedBadge("Juego cooperativo")
@@ -69,7 +76,8 @@ const GameGalleryPage = () => {
                         Juego cooperativo
                     </Badge>
                     <Badge className="badge"
-                        pill bg={`${selectedBadge === "Civilización" ? "primary" : "badge-outline-primary"}`}
+                        pill bg={`${selectedBadge === "Civilización" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=civilización")
                             setSelectedBadge("Civilización")
@@ -78,7 +86,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Juego de imaginación" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Juego de imaginación" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=juego%20de%20imaginación")
                             setSelectedBadge("Juego de imaginación")
@@ -87,7 +96,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Comercio" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Comercio" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=comercio")
                             setSelectedBadge("Comercio")
@@ -96,7 +106,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Construcción de territorios" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Construcción de territorios" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=construcción%20de%20territorios")
                             setSelectedBadge("Construcción de territorios")
@@ -105,7 +116,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Ciencia ficción" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Ciencia ficción" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=ciencia%20ficción")
                             setSelectedBadge("Ciencia ficción")
@@ -114,7 +126,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Juego de dados" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Juego de dados" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=juego%20de%20dados")
                             setSelectedBadge("Juego de dados")
@@ -123,7 +136,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Aventura" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Aventura" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=aventura")
                             setSelectedBadge("Aventura")
@@ -132,7 +146,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Party game" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Party game" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=party%20game")
                             setSelectedBadge("Party game")
@@ -141,7 +156,8 @@ const GameGalleryPage = () => {
                     </Badge>
                     <Badge className="badge"
                         pill
-                        bg={`${selectedBadge === "Diseño de patrones" ? "primary" : "badge-outline-primary"}`}
+                        bg={`${selectedBadge === "Diseño de patrones" ?
+                            "primary" : "badge-outline-primary"}`}
                         onClick={() => {
                             setFilterCategories("?categories_like=diseño%de%20patrones")
                             setSelectedBadge("Diseño de patrones")
@@ -151,7 +167,9 @@ const GameGalleryPage = () => {
                 </Stack>
 
                 <GameList filterCategories={filterCategories} />
+
             </Container>
+
         </div>
     )
 }
