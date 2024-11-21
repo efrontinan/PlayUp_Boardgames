@@ -31,6 +31,9 @@ const Navigation = () => {
                     {loggedAdmin && <Nav.Link onClick={() => setShowOffcanvas(true)} >
                         Nuevo juego
                     </Nav.Link>}
+                    {loggedAdmin && <NavLink to="/admin" end className={({ isActive }) => isActive ? "nav-link selected" : "nav-link"} >
+                        Administración
+                    </NavLink>}
                 </Nav>
                 <Form md="2" className='d-flex flex-row align-items-center'>
                     <GlobalGamesFilter />

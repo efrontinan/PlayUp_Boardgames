@@ -111,6 +111,14 @@ h6 {
   color: #ffffff;
 }
 
+.btn-custom-text {
+  color: #6794fe;
+}
+
+.btn-custom-text:hover {
+  color: #3571fe;
+}
+
 .btn-close {
   background-color: #8591ad;
 }
@@ -155,6 +163,22 @@ h6 {
   color: #8591ad;
   font-size: small;
 
+}
+
+.form-select {
+  background-color: #292f3d;
+  border: none;
+  color: #8591ad;
+  --bs-form-select-bg-img: url('https://res.cloudinary.com/dt9pviq34/image/upload/v1732182562/PlayUp/o1ayk60lu3zr6z31pgqj.svg')
+
+}
+
+.form-select:focus{
+  color: #ffffff;
+  background-color: #292f3d;
+  border-color: #9ab8fe;
+  outline: 0;
+  box-shadow: 0 0 0 .05rem #9ab8fe;
 }
 
 .vertical-form {

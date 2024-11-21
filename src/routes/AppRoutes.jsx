@@ -9,6 +9,7 @@ import AboutUsPage from "../pages/AboutUsPage/AboutUsPage"
 import ContactPage from "../pages/ContactPage/ContactPage"
 import LoginPage from "../pages/LoginPage/LoginPage"
 import FormAddress from "../components/00_PruebaDirecciones"
+import AdminPage from "../pages/AdminPage/AdminPage"
 
 const AppRoutes = () => {
     return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
                 <Route path="/contacto" element={<ContactPage />} />
                 <Route path="/iniciar-sesion" element={<LoginPage />} />
                 <Route path="/prueba" element={<FormAddress />} />
+                <Route path="/admin" element={<AdminPage /> } />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>
