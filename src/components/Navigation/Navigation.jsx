@@ -64,9 +64,9 @@ const Navigation = () => {
                     <NavLink to="/planes" onClick={() => setShowMenu(false)} className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"} >
                         Planazos
                     </NavLink>
-                    <Nav.Link onClick={() => { setShowMenu(false), setShowOffcanvas(true) }} className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"} >
+                    {loggedAdmin && <Nav.Link onClick={() => { setShowMenu(false), setShowOffcanvas(true) }} className={({ isActive }) => isActive ? "nav-link selected mb-3" : "nav-link mb-3"} >
                         Nuevo juego
-                    </Nav.Link>
+                    </Nav.Link>}
                 </Offcanvas.Body>
             </Offcanvas>
         </div>

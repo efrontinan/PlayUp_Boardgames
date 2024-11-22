@@ -4,11 +4,11 @@ import { ListGroup, Image, Col, Row } from "react-bootstrap"
 
 import './SearchListElement.css'
 
-const SearchListElement = ({ title, image, id }) => {
+const SearchListElement = ({ title, image, id, setShowMenu }) => {
     return (
         <div className="SearchListElement">
             <ListGroup.Item>
-                <Link to={`/juegos/detalles/${id}`}>
+                <Link to={`/juegos/detalles/${id}`} onClick={() => setShowMenu()}>
                     <Row>
                         <Col sm="3" className="d-none d-md-block">
                             <Image src={image} rounded />
