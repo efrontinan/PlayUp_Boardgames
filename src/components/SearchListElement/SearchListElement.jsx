@@ -8,7 +8,7 @@ const SearchListElement = ({ title, image, id }) => {
     return (
         <div className="SearchListElement">
             <ListGroup.Item>
-                <div as={Link} to={`/juegos/detalles/${id}`}>
+                <Link to={`/juegos/detalles/${id}`}>
                     <Row>
                         <Col sm="3" className="d-none d-md-block">
                             <Image src={image} rounded />
@@ -17,9 +17,9 @@ const SearchListElement = ({ title, image, id }) => {
                             <p>{title}</p>
                         </Col>
                     </Row>
-                </div>
+                </Link>
             </ListGroup.Item>
-        </div>
+        </div >
     )
 }
 
