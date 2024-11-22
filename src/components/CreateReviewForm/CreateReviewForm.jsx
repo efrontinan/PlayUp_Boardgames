@@ -50,6 +50,11 @@ const CreateReviewForm = ({ closeCreateModal, updateRating }) => {
                 closeCreateModal()
                 updateRating()
                 createAlert('Review creada')
+                setReviewData({
+                    author: "",
+                    rating: 0,
+                    description: ""
+                })
             }
             )
     }

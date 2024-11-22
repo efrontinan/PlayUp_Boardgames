@@ -46,6 +46,10 @@ const ContactForm = () => {
                     message: "",
                 })
                 setValidated(false)
+                setContactData({
+                    email: "",
+                    message: ""
+                })
             })
             .catch(err => console.log(err))
 

@@ -163,6 +163,24 @@ const CreateGameForm = ({ setShowOffcanvas }) => {
             .then(response => {
                 createAlert('Nuevo juego añadido', `juegos/detalles/${response.data.id}`)
                 setShowOffcanvas(false)
+                setGameData({
+                    title: "",
+                    image: "",
+                    categories: [""],
+                    description: "",
+                    howToPlay: [""],
+                    expansions: [""],
+                    oneTimePlay: false,
+                    content: [""]
+                })
+                setSpecs({
+                    minimumAge: 0,
+                    duration: 0
+                })
+                setPlayers({
+                    min: 0,
+                    max: 0
+                })
             })
             .catch(err => console.log(err))
 
