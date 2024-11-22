@@ -117,6 +117,23 @@ const CreateEventsForm = ({ closeCreateModal }) => {
                 createAlert("Evento creado", `juegos/detalles/${response.data.gameId}`)
                 setValidated(false)
                 closeCreateModal()
+                setAddress({
+                    country: "",
+                    city: "",
+                    street: "",
+                    name: "",
+                    zipcode: 0,
+                    label: "",
+                    lat: "",
+                    lng: ""
+                })
+                setEventData({
+                    author: "",
+                    contact: "",
+                    date: "",
+                    description: "",
+                    gameId: gameId,
+                })
             })
             .catch(err => console.log(err))
 
