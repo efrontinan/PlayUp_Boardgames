@@ -22,4 +22,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-/00_PruebaDirecciones.jsx
+/src/components/00_PruebaDirecciones.jsx
