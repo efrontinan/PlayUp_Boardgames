@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Loader from '../Loader/Loader'
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const EventsMarkers = () => {
 
@@ -28,15 +28,15 @@ const EventsMarkers = () => {
 
     return (
         isLoading ? <Loader /> :
-        <>
-        {
-            events.map(elm => {
-                return(
-                    <Marker  key={elm.id} position={{ lat: elm.address.lat , lng: elm.address.lng }}/>
-                )
-            })
-        }
-        </>
+            <>
+                {
+                    events.map(elm => {
+                        return (
+                            <Marker key={elm.id} position={{ lat: elm.address.lat, lng: elm.address.lng }} />
+                        )
+                    })
+                }
+            </>
     )
 
 }

@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import { Form, Button, Toast } from "react-bootstrap"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const ContactForm = () => {
 

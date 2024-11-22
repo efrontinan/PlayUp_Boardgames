@@ -12,7 +12,7 @@ import Loader from "../../components/Loader/Loader"
 import ReviewsList from "../../components/ReviewsList/ReviewsList"
 import StarRatingItem from "../../components/StarRatingItem/StarRatingItem"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const GameDetailsPage = () => {
 

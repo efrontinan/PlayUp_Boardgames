@@ -8,7 +8,7 @@ import { formatInputDate } from "../../utils/date-utils"
 import Loader from "../Loader/Loader"
 import { useLocation } from "react-router-dom"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const EditEventForm = ({ eventId, setShowEditOffcanvas, fetchEvents }) => {
 

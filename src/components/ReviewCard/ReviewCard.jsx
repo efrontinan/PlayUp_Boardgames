@@ -10,7 +10,7 @@ import StarRatingItem from "../StarRatingItem/StarRatingItem"
 import { AuthContext } from "../../contexts/auth.context"
 import { UserMessageContext } from "../../contexts/userMessage.context"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const ReviewCard = ({ author, rating, description, id, fetchReviews, updateRating }) => {
 

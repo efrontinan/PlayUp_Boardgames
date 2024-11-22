@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader"
 import CreateEventsForm from "../../components/CreateEventsForm/CreateEventsForm"
 import EventCard from "../EventCard/EventCard"
 
-const API_URL = "http://localhost:5005"
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const EventsList = () => {
 
