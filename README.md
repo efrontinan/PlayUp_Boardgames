@@ -24,4 +24,5 @@ PlayUp es una plataforma diseñada para conectar a amantes de los juegos de mesa
 - **Back-end**: Json Server para la creación de la API personalizada.  
 - **Servicios**: Geocoding para localizar eventos.  
 
-
+## **Créditos**  
+Este es un proyecto realizado durante el bootcamp de Web Development en Ironhack por Iván Blanco Martin & Elena Frontiñán Jareño
